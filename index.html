@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy 24th Birthday, Babui Pakhi 💜</title>
+
+<!--
+  ============================================================
+  HOW TO MAKE THIS PAGE GO LIVE — read me first
+  ============================================================
+  This file expects four media files to sit in the SAME FOLDER
+  as this index.html:
+
+    hero-bg.jpg              → a couple's photo for the hero background
+    Mehrab-and-Ruhana.mp3    → "your" song
+    photo1.jpg ... photo10.jpg → ten photos for the memory gallery
+
+  Nothing will break if a file is missing — the page shows a soft
+  placeholder instead — but add them for the real experience.
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Serif+Bengali:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     TOKENS
+     ============================================================ */
+  :root{
+    --void:        #0b0c10;
+    --deep:        #181126;
+    --purple:      #6B4C9A;
+    --lavender:    #B39CD0;
+    --blush:       #f1c9dc;
+    --cream:       #f6f1fb;
+    --cream-dim:   rgba(246,241,251,0.72);
+
+    --font-display: 'Playfair Display', serif;
+    --font-bn:      'Noto Serif Bengali', serif;
+    --font-body:    'Poppins', sans-serif;
+
+    --container: min(92vw, 760px);
+    --ease: cubic-bezier(.16,.84,.44,1);
+  }
+
+  *,*::before,*::after{ box-sizing: border-box; }
+  html{
+    scroll-behavior: smooth;
+    background: var(--void);
+  }
+  body{
+    margin:0;
+    background: var(--void);
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-weight: 300;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color: inherit; }
+
+  ::selection{ background: var(--purple); color: var(--cream); }
+
+  /* scrollbar, just a touch of polish on desktop */
+  ::-webkit-scrollbar{ width:10px; }
+  ::-webkit-scrollbar-track{ background: var(--void); }
+  ::-webkit-scrollbar-thumb{ background: var(--purple); border-radius: 10px; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  }
+
+  /* ============================================================
+     AMBIENT CANVAS — stars + falling petals, fixed behind everything
+     ============================================================ */
+  #sky{
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ============================================================
+     LAYOUT SHELL
+     ============================================================ */
+  main{ position: relative; z-index: 1; }
+
+  section{
+    position: relative;
+    padding: clamp(5rem, 14vh, 9rem) 1.5rem;
+  }
+
+  .eyebrow{
+    display:block;
+    font-family: var(--font-body);
+    font-size: .72rem;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    opacity: .85;
+    margin-bottom: .9rem;
+    text-align:center;
+  }
+
+  .section-title{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-style: italic;
+    font-size: clamp(1.9rem, 6vw, 2.8rem);
+    text-align:center;
+    margin: 0 0 .6rem;
+    color: var(--cream);
+  }
+
+  .section-sub{
+    text-align:center;
+    max-width: 36ch;
+    margin: 0 auto clamp(2.5rem, 7vh, 4rem);
+    color: var(--cream-dim);
+    font-size: .95rem;
+    line-height:1.7;
+  }
+
+  .reveal{
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .9s var(--ease), transform .9s var(--ease);
+  }
+  .reveal.in-view{ opacity: 1; transform: translateY(0); }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  #hero{
+    min-height: 100svh;
+    min-height: 100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 6rem 1.5rem 4rem;
+    background-image:
+      linear-gradient(180deg, rgba(11,12,16,.55) 0%, rgba(24,17,38,.72) 45%, var(--void) 100%),
+      radial-gradient(120% 90% at 50% 18%, rgba(107,76,154,.55), transparent 60%),
+      url('hero-bg.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    background-blend-mode: soft-light, screen, normal;
+    background-color: var(--void);
+  }
+  /* if hero-bg.jpg is missing, this gradient alone still reads as a starry purple sky */
+
+  .hero-inner{
+    position: relative;
+    z-index: 2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap: clamp(1.4rem, 4vh, 2.2rem);
+  }
+
+  .hero-kicker{
+    font-family: var(--font-bn);
+    font-size: clamp(1.05rem, 3.4vw, 1.3rem);
+    color: var(--blush);
+    opacity:.9;
+    letter-spacing: .02em;
+  }
+
+  .hero-title{
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 8vw, 3.6rem);
+    line-height: 1.22;
+    max-width: 14ch;
+    margin: 0;
+    color: var(--cream);
+    text-shadow:
+      0 0 18px rgba(179,156,208,.55),
+      0 0 46px rgba(107,76,154,.45);
+    animation: glow 4.5s ease-in-out infinite;
+  }
+  @keyframes glow{
+    0%,100%{ text-shadow: 0 0 18px rgba(179,156,208,.5), 0 0 46px rgba(107,76,154,.4); }
+    50%{ text-shadow: 0 0 28px rgba(179,156,208,.85), 0 0 70px rgba(107,76,154,.65); }
+  }
+
+  .hero-line{
+    width: 64px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--lavender), transparent);
+    opacity: .8;
+  }
+
+  /* ----- custom audio player ----- */
+  .player{
+    width: min(88vw, 360px);
+    background: rgba(24,17,38,.55);
+    border: 1px solid rgba(179,156,208,.28);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 1rem 1.15rem 1.1rem;
+    display:flex;
+    flex-direction:column;
+    gap:.7rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,.35);
+  }
+  .player-row{
+    display:flex;
+    align-items:center;
+    gap:.85rem;
+  }
+  .play-btn{
+    flex: 0 0 auto;
+    width: 46px; height:46px;
+    border-radius:50%;
+    border: none;
+    background: linear-gradient(145deg, var(--purple), #4f3578);
+    color: var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    box-shadow: 0 0 0 rgba(107,76,154,0);
+    transition: box-shadow .4s var(--ease), transform .2s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .play-btn:active{ transform: scale(.92); }
+  .play-btn.is-playing{
+    animation: pulseRing 2.2s ease-out infinite;
+  }
+  @keyframes pulseRing{
+    0%{ box-shadow: 0 0 0 0 rgba(179,156,208,.55); }
+    70%{ box-shadow: 0 0 0 14px rgba(179,156,208,0); }
+    100%{ box-shadow: 0 0 0 0 rgba(179,156,208,0); }
+  }
+  .play-btn svg{ width:18px; height:18px; }
+  .play-btn .icon-pause{ display:none; }
+  .play-btn.is-playing .icon-play{ display:none; }
+  .play-btn.is-playing .icon-pause{ display:block; }
+
+  .track-meta{ flex:1; min-width:0; text-align:left; }
+  .track-title{
+    font-size:.82rem;
+    color: var(--cream);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .track-sub{
+    font-size:.68rem;
+    letter-spacing:.06em;
+    color: var(--lavender);
+    text-transform:uppercase;
+    opacity:.8;
+  }
+
+  .progress-wrap{
+    display:flex;
+    align-items:center;
+    gap:.55rem;
+  }
+  .time{ font-size:.65rem; color: var(--cream-dim); width: 34px; flex:0 0 auto; }
+  .time.end{ text-align:right; }
+
+  .progress{
+    position:relative;
+    flex:1;
+    height: 18px;
+    display:flex;
+    align-items:center;
+    cursor:pointer;
+    touch-action: none;
+  }
+  .progress-track{
+    position:absolute; left:0; right:0;
+    height:4px; border-radius:4px;
+    background: rgba(255,255,255,.14);
+  }
+  .progress-fill{
+    position:absolute; left:0;
+    height:4px; border-radius:4px;
+    width:0%;
+    background: linear-gradient(90deg, var(--lavender), var(--blush));
+  }
+  .progress-thumb{
+    position:absolute;
+    left:0%;
+    width:11px; height:11px;
+    border-radius:50%;
+    background: var(--cream);
+    box-shadow: 0 0 8px rgba(179,156,208,.9);
+    transform: translateX(-50%);
+  }
+
+  .tap-hint{
+    font-size:.66rem;
+    color: var(--cream-dim);
+    text-align:center;
+    letter-spacing:.03em;
+    opacity:.85;
+    transition: opacity .5s var(--ease);
+  }
+  .tap-hint.hidden{ opacity:0; height:0; overflow:hidden; }
+
+  /* scroll cue */
+  .scroll-cue{
+    position:absolute;
+    bottom: clamp(1.4rem, 4vh, 2.6rem);
+    left:50%;
+    transform: translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:.4rem;
+    text-decoration:none;
+    z-index:2;
+  }
+  .scroll-cue span{
+    font-size:.62rem;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color: var(--lavender);
+    opacity:.85;
+  }
+  .scroll-cue svg{
+    width:20px; height:20px;
+    color: var(--blush);
+    filter: drop-shadow(0 0 8px rgba(179,156,208,.8));
+    animation: bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{ transform: translateY(0); opacity:.6; }
+    50%{ transform: translateY(9px); opacity:1; }
+  }
+
+  /* ============================================================
+     LETTER SECTION
+     ============================================================ */
+  #letter{ padding-top: clamp(5rem,14vh,8rem); }
+
+  .glass-card{
+    max-width: var(--container);
+    margin: 0 auto;
+    background: linear-gradient(165deg, rgba(107,76,154,.22), rgba(24,17,38,.42));
+    border: 1px solid rgba(179,156,208,.25);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 26px;
+    padding: clamp(2rem, 6vw, 3.4rem);
+    box-shadow: 0 20px 60px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.06);
+  }
+
+  .quote-mark{
+    display:block;
+    text-align:center;
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--lavender);
+    opacity:.55;
+    line-height:1;
+    margin-bottom: -.4rem;
+  }
+
+  .bn-quote{
+    font-family: var(--font-bn);
+    font-weight:600;
+    font-size: clamp(1.25rem, 4.4vw, 1.7rem);
+    line-height: 1.85;
+    text-align:center;
+    background: linear-gradient(135deg, var(--cream) 20%, var(--blush) 55%, var(--lavender) 90%);
+    -webkit-background-clip: text;
+    background-clip:text;
+    color: transparent;
+    margin: 0 auto 2.2rem;
+    max-width: 26ch;
+  }
+
+  .divider{
+    width: 46px; height:1px;
+    margin: 0 auto 2.2rem;
+    background: linear-gradient(90deg, transparent, var(--lavender), transparent);
+    opacity:.7;
+  }
+
+  .letter-body p{
+    font-size: .98rem;
+    line-height: 1.95;
+    color: var(--cream-dim);
+    margin: 0 0 1.3rem;
+  }
+  .letter-body p:last-child{ margin-bottom:0; }
+  .letter-body .pet-name{
+    color: var(--blush);
+    font-style: italic;
+  }
+
+  .letter-sign{
+    margin-top: 2.2rem;
+    text-align:right;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--cream);
+  }
+  .letter-sign small{
+    display:block;
+    font-family: var(--font-body);
+    font-style:normal;
+    font-size:.66rem;
+    letter-spacing:.1em;
+    color: var(--lavender);
+    text-transform:uppercase;
+    margin-top:.3rem;
+  }
+
+  /* ============================================================
+     GALLERY — Polaroid scatter
+     ============================================================ */
+  #gallery{ padding-top: clamp(4rem,12vh,7rem); }
+
+  .gallery-grid{
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.6rem, 4vw, 2.4rem) clamp(.9rem, 3vw, 1.6rem);
+    padding: 0 .25rem;
+  }
+
+  @media (min-width: 620px){
+    .gallery-grid{ grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 920px){
+    .gallery-grid{ grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .polaroid{
+    position: relative;
+    background: #f4f1ee;
+    padding: 10px 10px 34px;
+    border-radius: 4px;
+    box-shadow: 0 10px 26px rgba(0,0,0,.45);
+    transform: rotate(var(--r, 0deg));
+    transition: transform .45s var(--ease), box-shadow .45s var(--ease), z-index 0s;
+    cursor: pointer;
+    will-change: transform;
+  }
+  .polaroid:nth-child(5n+1){ --r: -6deg; align-self: start; }
+  .polaroid:nth-child(5n+2){ --r: 4deg;  align-self: end; margin-top: clamp(1rem,5vw,2.4rem); }
+  .polaroid:nth-child(5n+3){ --r: -3deg; align-self: center; }
+  .polaroid:nth-child(5n+4){ --r: 6deg;  align-self: start; margin-top: clamp(.6rem,3vw,1.4rem); }
+  .polaroid:nth-child(5n+5){ --r: -5deg; align-self: end; }
+
+  .polaroid::before{
+    content:"";
+    position:absolute;
+    top:-12px; left:50%;
+    width: 54px; height: 22px;
+    transform: translateX(-50%) rotate(-3deg);
+    background: linear-gradient(180deg, rgba(241,201,220,.55), rgba(241,201,220,.28));
+    border: 1px solid rgba(255,255,255,.25);
+    box-shadow: 0 4px 8px rgba(0,0,0,.25);
+  }
+
+  .polaroid .frame{
+    position:relative;
+    width:100%;
+    aspect-ratio: 4 / 5;
+    overflow:hidden;
+    background: linear-gradient(150deg, var(--purple), var(--deep));
+  }
+  .polaroid img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit: cover;
+    object-position: center;
+    display:block;
+  }
+  .polaroid .fallback{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: .8rem;
+    text-align:center;
+    color: rgba(246,241,251,.55);
+    padding: .6rem;
+  }
+
+  .polaroid figcaption{
+    position:absolute;
+    bottom: 8px; left:0; right:0;
+    text-align:center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: .72rem;
+    color: #4a3b55;
+  }
+
+  .polaroid:hover,
+  .polaroid.active{
+    transform: rotate(0deg) scale(1.08);
+    z-index: 20;
+    box-shadow: 0 26px 50px rgba(0,0,0,.55), 0 0 0 1px rgba(179,156,208,.4), 0 0 34px rgba(179,156,208,.35);
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer{
+    position:relative;
+    text-align:center;
+    padding: clamp(4rem,10vh,6rem) 1.5rem clamp(3rem,8vh,4rem);
+  }
+  .footer-stars{
+    font-size: .8rem;
+    color: var(--lavender);
+    letter-spacing:.4em;
+    opacity:.7;
+    margin-bottom: 1.4rem;
+  }
+  .footer-title{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight:600;
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+    color: var(--cream);
+    text-shadow: 0 0 24px rgba(179,156,208,.45);
+    margin: 0 0 .6rem;
+  }
+  .footer-sub{
+    font-size: .78rem;
+    color: var(--cream-dim);
+    letter-spacing:.05em;
+  }
+  .back-top{
+    display:inline-block;
+    margin-top: 2rem;
+    font-size:.68rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color: var(--lavender);
+    text-decoration:none;
+    border: 1px solid rgba(179,156,208,.35);
+    padding: .7rem 1.3rem;
+    border-radius: 999px;
+    transition: background .3s var(--ease), color .3s var(--ease);
+  }
+  .back-top:hover{ background: rgba(179,156,208,.15); color: var(--cream); }
+
+  /* ============================================================
+     FLOATING MINI PLAYER (appears once hero scrolls away)
+     ============================================================ */
+  .mini-player{
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 50;
+    width: 50px; height:50px;
+    border-radius:50%;
+    border:none;
+    background: linear-gradient(145deg, var(--purple), #4f3578);
+    color: var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 8px 24px rgba(0,0,0,.5);
+    cursor:pointer;
+    opacity:0;
+    transform: translateY(16px) scale(.9);
+    pointer-events:none;
+    transition: opacity .4s var(--ease), transform .4s var(--ease);
+  }
+  .mini-player.visible{ opacity:1; transform:none; pointer-events:auto; }
+  .mini-player svg{ width:18px; height:18px; }
+  .mini-player .icon-pause{ display:none; }
+  .mini-player.is-playing .icon-play{ display:none; }
+  .mini-player.is-playing .icon-pause{ display:block; }
+  .mini-player.is-playing{ animation: pulseRing 2.2s ease-out infinite; }
+</style>
+</head>
+<body>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<main>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section id="hero">
+    <div class="hero-inner">
+      <span class="hero-kicker">তোমার জন্য, চিরকাল</span>
+      <h1 class="hero-title">Happy 24th Birthday,<br>Babui Pakhi 💜</h1>
+      <div class="hero-line"></div>
+
+      <div class="player">
+        <div class="player-row">
+          <button class="play-btn" id="playBtn" aria-label="Play our song">
+            <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+          </button>
+          <div class="track-meta">
+            <div class="track-title" id="trackTitle">Mehrab &amp; Ruhana</div>
+            <div class="track-sub">our song</div>
+          </div>
+        </div>
+        <div class="progress-wrap">
+          <span class="time" id="timeCur">0:00</span>
+          <div class="progress" id="progress">
+            <div class="progress-track"></div>
+            <div class="progress-fill" id="progressFill"></div>
+            <div class="progress-thumb" id="progressThumb"></div>
+          </div>
+          <span class="time end" id="timeEnd">0:00</span>
+        </div>
+        <div class="tap-hint" id="tapHint">tap the heart to play our song</div>
+        <audio id="audio" preload="auto" loop>
+          <source src="Mehrab-and-Ruhana.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+
+    <a href="#letter" class="scroll-cue" aria-label="Scroll down">
+      <span>keep going</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </a>
+  </section>
+
+  <!-- ============================================================
+       THE CANVAS OF LIFE — letter section
+       ============================================================ -->
+  <section id="letter">
+    <span class="eyebrow reveal">a letter, written slowly</span>
+    <h2 class="section-title reveal">The Canvas of Life</h2>
+    <p class="section-sub reveal">every brushstroke of it, painted with you in mind</p>
+
+    <div class="glass-card reveal">
+      <span class="quote-mark">"</span>
+      <p class="bn-quote">আমার মস্তিষ্কের সবটুকু ডোপামিন আর বেঁচে থাকার একমাত্র কারণ তুমি।</p>
+      <div class="divider"></div>
+
+      <div class="letter-body">
+        <p>My <span class="pet-name">Babui Pakhi</span>, if you ever doubt how much room you take up in my life — it's all of it. The quiet parts, the busy parts, the parts I haven't lived yet. You didn't just enter my world, you became the reason it makes sense.</p>
+
+        <p>I want you to know this, plainly and without conditions: your dignity is something I will protect before I protect my own comfort. Every promise I make to you, I make as someone who has already decided you come first — not loudly, not for show, just quietly, every single day.</p>
+
+        <p>I know waiting isn't easy, and I'm asking you to wait a little longer — through my 4th year, through the long nights and the exams and the in-between — so that what we build afterward stands on something steady. Not a rushed thing, but a <span class="pet-name">shantir ghor</span>, a peaceful home, built on purpose, brick by patient brick.</p>
+
+        <p>So here's to 24 — to the girl who made an ordinary life feel like it was always meant to be a love story. Happy birthday. I'm not going anywhere.</p>
+      </div>
+
+      <div class="letter-sign">
+        Always & only yours
+        <small>Mehrab · your Pitun</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       INFINITE MEMORIES — gallery
+       ============================================================ -->
+  <section id="gallery">
+    <span class="eyebrow reveal">infinite memories</span>
+    <h2 class="section-title reveal">A Gallery of Us</h2>
+    <p class="section-sub reveal">tap a memory to bring it closer</p>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- 10 polaroid items, generated below by template but written out for clarity -->
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer>
+    <div class="footer-stars reveal">✦ ✧ ✦</div>
+    <p class="footer-title reveal">Forever your Pitun.</p>
+    <p class="footer-sub reveal">See you at the finish line.</p>
+    <a href="#hero" class="back-top reveal">back to the top</a>
+  </footer>
+
+</main>
+
+<button class="mini-player" id="miniPlayer" aria-label="Play or pause our song">
+  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+</button>
+
+<script>
+(() => {
+  "use strict";
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ============================================================
+     1. GALLERY — build 10 polaroids with graceful fallbacks
+     ============================================================ */
+  const captions = [
+    "us, mid-laugh", "a quiet evening", "your favourite smile",
+    "somewhere we got lost", "before the rain", "the good kind of tired",
+    "matching chaos", "golden hour, you", "a Tuesday worth keeping",
+    "always, this"
+  ];
+
+  const grid = document.getElementById('galleryGrid');
+  for (let i = 1; i <= 10; i++){
+    const fig = document.createElement('figure');
+    fig.className = 'polaroid';
+    fig.tabIndex = 0;
+
+    const frame = document.createElement('div');
+    frame.className = 'frame';
+
+    const img = document.createElement('img');
+    img.src = `photo${i}.jpg`;
+    img.alt = `Mehrab and Ruhana — ${captions[i-1]}`;
+    img.loading = i <= 4 ? 'eager' : 'lazy';
+    img.onerror = function(){
+      this.remove();
+      const fb = document.createElement('div');
+      fb.className = 'fallback';
+      fb.textContent = `photo${i}.jpg`;
+      frame.appendChild(fb);
+    };
+
+    const cap = document.createElement('figcaption');
+    cap.textContent = captions[i-1];
+
+    frame.appendChild(img);
+    fig.appendChild(frame);
+    fig.appendChild(cap);
+    grid.appendChild(fig);
+
+    // tap-to-focus for touch devices (hover doesn't exist there)
+    fig.addEventListener('click', () => {
+      document.querySelectorAll('.polaroid.active').forEach(el => {
+        if (el !== fig) el.classList.remove('active');
+      });
+      fig.classList.toggle('active');
+    });
+  }
+
+  /* ============================================================
+     2. SCROLL REVEAL
+     ============================================================ */
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduceMotion){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .15, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
+
+  /* ============================================================
+     3. AUDIO PLAYER — custom controls, autoplay attempt + fallback
+     ============================================================ */
+  const audio        = document.getElementById('audio');
+  const playBtn       = document.getElementById('playBtn');
+  const miniPlayer     = document.getElementById('miniPlayer');
+  const progress       = document.getElementById('progress');
+  const progressFill   = document.getElementById('progressFill');
+  const progressThumb  = document.getElementById('progressThumb');
+  const timeCur        = document.getElementById('timeCur');
+  const timeEnd        = document.getElementById('timeEnd');
+  const tapHint        = document.getElementById('tapHint');
+  const trackTitle     = document.getElementById('trackTitle');
+
+  function fmt(t){
+    if (!isFinite(t)) return '0:00';
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
+
+  function setPlayingUI(isPlaying){
+    playBtn.classList.toggle('is-playing', isPlaying);
+    miniPlayer.classList.toggle('is-playing', isPlaying);
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause our song' : 'Play our song');
+    if (isPlaying) tapHint.classList.add('hidden');
+  }
+
+  function togglePlay(){
+    if (audio.paused){
+      audio.play().catch(() => { /* still blocked, ignore */ });
+    } else {
+      audio.pause();
+    }
+  }
+
+  playBtn.addEventListener('click', togglePlay);
+  miniPlayer.addEventListener('click', togglePlay);
+
+  audio.addEventListener('play',  () => setPlayingUI(true));
+  audio.addEventListener('pause', () => setPlayingUI(false));
+
+  audio.addEventListener('loadedmetadata', () => {
+    timeEnd.textContent = fmt(audio.duration);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+    progressFill.style.width = pct + '%';
+    progressThumb.style.left = pct + '%';
+    timeCur.textContent = fmt(audio.currentTime);
+  });
+
+  audio.addEventListener('error', () => {
+    trackTitle.textContent = 'Mehrab & Ruhana';
+    tapHint.textContent = 'add Mehrab-and-Ruhana.mp3 to hear our song';
+  });
+
+  // seeking — works for mouse + touch
+  let seeking = false;
+  function seekTo(clientX){
+    const rect = progress.getBoundingClientRect();
+    const pct = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    if (audio.duration) audio.currentTime = pct * audio.duration;
+    progressFill.style.width = (pct * 100) + '%';
+    progressThumb.style.left = (pct * 100) + '%';
+  }
+  progress.addEventListener('pointerdown', (e) => {
+    seeking = true;
+    progress.setPointerCapture(e.pointerId);
+    seekTo(e.clientX);
+  });
+  progress.addEventListener('pointermove', (e) => { if (seeking) seekTo(e.clientX); });
+  progress.addEventListener('pointerup',   () => { seeking = false; });
+
+  // try a gentle autoplay; browsers will likely block it until she taps —
+  // that's expected mobile behaviour, the tap-hint covers it gracefully
+  audio.muted = false;
+  const tryAutoplay = () => {
+    const p = audio.play();
+    if (p && p.catch){
+      p.then(() => { tapHint.classList.add('hidden'); })
+       .catch(() => { tapHint.classList.remove('hidden'); });
+    }
+  };
+  window.addEventListener('load', tryAutoplay);
+
+  // reveal the floating mini player once the hero is out of view
+  const hero = document.getElementById('hero');
+  if ('IntersectionObserver' in window){
+    const heroIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        miniPlayer.classList.toggle('visible', !entry.isIntersecting);
+      });
+    }, { threshold: 0 });
+    heroIO.observe(hero);
+  }
+
+  /* ============================================================
+     4. AMBIENT SKY — twinkling stars + falling cherry blossoms
+     ============================================================ */
+  const canvas = document.getElementById('sky');
+  const ctx = canvas.getContext('2d');
+  let W, H, DPR;
+
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const isSmall = () => window.innerWidth < 600;
+
+  // ---- stars ----
+  let stars = [];
+  function makeStars(){
+    const count = isSmall() ? 60 : 110;
+    stars = Array.from({ length: count }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.3 + .3,
+      phase: Math.random() * Math.PI * 2,
+      speed: Math.random() * .015 + .006
+    }));
+  }
+  makeStars();
+  window.addEventListener('resize', makeStars);
+
+  // ---- petals ----
+  const PETAL_COLORS = [
+    'rgba(241,201,220,OPA)',
+    'rgba(179,156,208,OPA)',
+    'rgba(246,241,251,OPA)'
+  ];
+  let petals = [];
+  function makePetal(initial){
+    return {
+      x: Math.random() * W,
+      y: initial ? Math.random() * H : -20 - Math.random() * 80,
+      size: Math.random() * 8 + 7,
+      speedY: Math.random() * .55 + .35,
+      speedX: Math.random() * .4 - .2,
+      sway: Math.random() * Math.PI * 2,
+      swaySpeed: Math.random() * .015 + .008,
+      rotation: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - .5) * .02,
+      opacity: Math.random() * .35 + .45,
+      color: PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)]
+    };
+  }
+  function makePetals(){
+    const count = isSmall() ? 14 : 24;
+    petals = Array.from({ length: count }, () => makePetal(true));
+  }
+  makePetals();
+  window.addEventListener('resize', makePetals);
+
+  function drawPetal(p){
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rotation);
+    ctx.globalAlpha = p.opacity;
+    ctx.fillStyle = p.color.replace('OPA', p.opacity.toFixed(2));
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo(p.size * .55, -p.size * .55, p.size, p.size * .25, 0, p.size);
+    ctx.bezierCurveTo(-p.size, p.size * .25, -p.size * .55, -p.size * .55, 0, 0);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  let lastT = performance.now();
+  function tick(t){
+    const dt = Math.min(32, t - lastT);
+    lastT = t;
+    ctx.clearRect(0, 0, W, H);
+
+    // stars
+    for (const s of stars){
+      s.phase += s.speed * (dt / 16.6);
+      const tw = (Math.sin(s.phase) + 1) / 2;
+      ctx.globalAlpha = .25 + tw * .65;
+      ctx.fillStyle = '#f6f1fb';
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    // petals
+    if (!reduceMotion){
+      for (const p of petals){
+        p.sway += p.swaySpeed * (dt / 16.6);
+        p.y += p.speedY * (dt / 16.6);
+        p.x += p.speedX * (dt / 16.6) + Math.sin(p.sway) * .5;
+        p.rotation += p.rotSpeed * (dt / 16.6);
+        if (p.y > H + 20 || p.x < -30 || p.x > W + 30){
+          Object.assign(p, makePetal(false));
+        }
+        drawPetal(p);
+      }
+    } else {
+      for (const p of petals) drawPetal(p);
+    }
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+})();
+</script>
+</body>
+</html>
