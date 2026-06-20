@@ -9,11 +9,13 @@
   ============================================================
   HOW TO MAKE THIS PAGE GO LIVE — read me first
   ============================================================
-  This file expects four media files to sit in the SAME FOLDER
+  This file expects media files to sit in the SAME FOLDER
   as this index.html:
 
     hero-bg.jpg              → a couple's photo for the hero background
-    Mehrab-and-Ruhana.mp3    → "your" song
+    Mehrab-and-Ruhana.mp3    → "your" song, the main background track
+    voice-message.mp3        → a short voice note, played from the
+                                "Tap when you miss my voice..." card
     photo1.jpg ... photo10.jpg → ten photos for the memory gallery
 
   Nothing will break if a file is missing — the page shows a soft
@@ -579,19 +581,16 @@
   #openwhen{ padding-top: clamp(4rem,12vh,7rem); }
 
   .openwhen-grid{
-    max-width: 980px;
+    max-width: 640px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
-  }
-  @media (min-width: 780px){
-    .openwhen-grid{ grid-template-columns: repeat(3, 1fr); }
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(.8rem, 4vw, 1.6rem);
   }
 
   .ow-card{
     perspective: 1300px;
-    min-height: 250px;
+    min-height: clamp(225px, 52vw, 280px);
     cursor: pointer;
     transition: transform .35s var(--ease);
   }
@@ -602,7 +601,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    min-height: 250px;
+    min-height: clamp(225px, 52vw, 280px);
     transition: transform .75s var(--ease);
     transform-style: preserve-3d;
   }
@@ -613,8 +612,8 @@
     inset: 0;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    border-radius: 22px;
-    padding: 1.8rem 1.5rem;
+    border-radius: 20px;
+    padding: clamp(1rem, 5vw, 1.8rem) clamp(.85rem, 4vw, 1.5rem);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -628,22 +627,22 @@
   }
 
   .ow-seal{
-    font-size: 1.9rem;
-    margin-bottom: .8rem;
+    font-size: clamp(1.4rem, 6vw, 1.9rem);
+    margin-bottom: .6rem;
     filter: drop-shadow(0 0 10px rgba(179,156,208,.7));
   }
   .ow-front p{
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 1.05rem;
-    line-height: 1.5;
+    font-size: clamp(.8rem, 3.7vw, 1.05rem);
+    line-height: 1.45;
     color: var(--cream);
     margin: 0;
   }
   .ow-front span.ow-hint{
     display:block;
-    margin-top: .9rem;
-    font-size: .65rem;
+    margin-top: .7rem;
+    font-size: clamp(.55rem, 2.3vw, .65rem);
     letter-spacing: .15em;
     text-transform: uppercase;
     color: var(--lavender);
@@ -655,10 +654,71 @@
     background: linear-gradient(165deg, rgba(179,156,208,.3), rgba(107,76,154,.4));
   }
   .ow-back p{
-    font-size: .9rem;
-    line-height: 1.85;
+    font-size: clamp(.72rem, 3.3vw, .9rem);
+    line-height: 1.65;
     color: var(--cream);
     margin: 0;
+  }
+
+  /* ----- card 4: voice note player ----- */
+  .ow-voice-back{ gap: .7rem; }
+  .ow-voice-back .ow-voice-line{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.74rem, 3.3vw, .88rem);
+    line-height: 1.5;
+    color: var(--cream);
+    margin: 0;
+  }
+  .voice-btn{
+    flex: 0 0 auto;
+    width: clamp(40px, 11vw, 48px);
+    height: clamp(40px, 11vw, 48px);
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(145deg, var(--blush), var(--purple));
+    color: var(--void);
+    display:flex; align-items:center; justify-content:center;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0,0,0,.35);
+    transition: transform .2s var(--ease), box-shadow .3s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .voice-btn:active{ transform: scale(.92); }
+  .voice-btn.is-playing{ animation: pulseRing 2.2s ease-out infinite; }
+  .voice-btn svg{ width: 16px; height: 16px; }
+  .voice-btn .icon-pause{ display:none; }
+  .voice-btn.is-playing .icon-play{ display:none; }
+  .voice-btn.is-playing .icon-pause{ display:block; }
+
+  .voice-eq{
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    gap: 3px;
+    height: 16px;
+  }
+  .voice-eq span{
+    display:block;
+    width: 3px;
+    height: 5px;
+    border-radius: 2px;
+    background: var(--lavender);
+    opacity: .55;
+  }
+  .voice-eq.playing span{ animation: eqBounce 1s ease-in-out infinite; }
+  .voice-eq.playing span:nth-child(1){ animation-delay: 0s; }
+  .voice-eq.playing span:nth-child(2){ animation-delay: .18s; }
+  .voice-eq.playing span:nth-child(3){ animation-delay: .36s; }
+  @keyframes eqBounce{
+    0%,100%{ height: 4px; opacity:.5; }
+    50%{ height: 15px; opacity: 1; }
+  }
+
+  .voice-time{
+    font-size: clamp(.58rem, 2.6vw, .66rem);
+    letter-spacing: .04em;
+    color: var(--cream-dim);
   }
 
   /* ============================================================
@@ -753,81 +813,119 @@
   }
 
   /* ============================================================
-     TIMELINE — road to Shantir Ghor
+     A SKY FULL OF REASONS — the wishing moon
      ============================================================ */
-  #timeline{ padding-top: clamp(4rem,12vh,7rem); }
+  #reasons{ padding-top: clamp(4rem,12vh,7rem); }
 
-  .tl{
+  .moon-wrap{
     position: relative;
-    max-width: 540px;
-    margin: 0 auto;
-    list-style: none;
-    padding: 0;
-  }
-  .tl::before{
-    content: "";
-    position: absolute;
-    left: 7px;
-    top: 6px;
-    bottom: 6px;
-    width: 2px;
-    background: linear-gradient(180deg, var(--purple), var(--lavender) 50%, var(--purple));
-    box-shadow: 0 0 14px rgba(179,156,208,.55);
-  }
-
-  .tl-item{
-    position: relative;
-    padding: 0 0 clamp(2.2rem, 7vh, 3rem) 2.6rem;
-  }
-  .tl-item:last-child{ padding-bottom: 0; }
-
-  .tl-dot{
-    position: absolute;
-    left: 0; top: .15rem;
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    background: var(--deep);
-    border: 2px solid var(--lavender);
-    box-shadow: 0 0 10px rgba(179,156,208,.5);
-  }
-
-  .tl-dot-pulse{
-    background: var(--lavender);
-    animation: tlPulse 2.2s ease-out infinite;
-  }
-  @keyframes tlPulse{
-    0%{ box-shadow: 0 0 0 0 rgba(179,156,208,.65); }
-    70%{ box-shadow: 0 0 0 16px rgba(179,156,208,0); }
-    100%{ box-shadow: 0 0 0 0 rgba(179,156,208,0); }
-  }
-
-  .tl-dot-lock{
-    width: 24px; height: 24px;
-    left: -4px; top: -.1rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    font-size: .7rem;
-    background: linear-gradient(145deg, var(--purple), #4f3578);
-    border-color: var(--blush);
+    gap: 1.5rem;
+    padding: 1.2rem 0 .4rem;
   }
 
-  .tl-label{
-    display: inline-block;
+  .moon-halo{
+    position: absolute;
+    top: 50%; left: 50%;
+    width: clamp(190px, 50vw, 260px);
+    height: clamp(190px, 50vw, 260px);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(179,156,208,.4), transparent 70%);
+    filter: blur(4px);
+    animation: haloPulse 4.5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes haloPulse{
+    0%,100%{ opacity:.55; transform: translate(-50%,-50%) scale(1); }
+    50%{ opacity:1; transform: translate(-50%,-50%) scale(1.12); }
+  }
+
+  .moon-orb{
+    position: relative;
+    z-index: 1;
+    width: clamp(130px, 34vw, 180px);
+    height: clamp(130px, 34vw, 180px);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: radial-gradient(circle at 34% 30%, #fff8f2 0%, var(--blush) 32%, var(--lavender) 64%, var(--purple) 100%);
+    box-shadow:
+      0 0 40px rgba(179,156,208,.5),
+      0 0 90px rgba(107,76,154,.4),
+      inset -14px -14px 30px rgba(11,12,16,.4);
+    animation: moonPulse 4.5s ease-in-out infinite;
+    -webkit-tap-highlight-color: transparent;
+  }
+  @keyframes moonPulse{
+    0%,100%{ box-shadow: 0 0 40px rgba(179,156,208,.5), 0 0 90px rgba(107,76,154,.4), inset -14px -14px 30px rgba(11,12,16,.4); transform: scale(1); }
+    50%{ box-shadow: 0 0 62px rgba(179,156,208,.85), 0 0 130px rgba(107,76,154,.65), inset -14px -14px 30px rgba(11,12,16,.4); transform: scale(1.035); }
+  }
+  .moon-orb:active{ transform: scale(.95); }
+  .moon-orb:focus-visible{ outline: 2px solid var(--cream); outline-offset: 8px; }
+
+  .moon-sparkle{
+    position: absolute;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--cream);
+    opacity: .3;
+    animation: sparkleTwinkle 2.4s ease-in-out infinite;
+  }
+  .moon-sparkle.s1{ top: 14%; left: 70%; animation-delay: 0s; }
+  .moon-sparkle.s2{ top: 65%; left: 18%; animation-delay: .8s; }
+  .moon-sparkle.s3{ top: 30%; left: 12%; animation-delay: 1.5s; }
+  @keyframes sparkleTwinkle{
+    0%,100%{ opacity: .2; transform: scale(.6); }
+    50%{ opacity: 1; transform: scale(1.2); }
+  }
+
+  .moon-hint{
+    font-size: .68rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    animation: hintPulse 2.6s ease-in-out infinite;
+  }
+  @keyframes hintPulse{
+    0%,100%{ opacity: .45; }
+    50%{ opacity: .85; }
+  }
+
+  /* floating wish bubbles, spawned by JS */
+  .wish-bubble{
+    position: fixed;
+    left: 0; top: 0;
+    z-index: 9999;
+    pointer-events: none;
+    transform: translate(-50%, -100%);
+    max-width: min(78vw, 280px);
+    padding: .65rem 1.1rem;
+    border-radius: 18px;
+    background: linear-gradient(165deg, rgba(107,76,154,.4), rgba(24,17,38,.6));
+    border: 1px solid rgba(179,156,208,.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
     font-family: var(--font-display);
     font-style: italic;
-    font-size: clamp(.95rem, 3.6vw, 1.1rem);
-    color: var(--cream-dim);
-    line-height: 1.6;
+    font-size: clamp(.8rem, 3.6vw, .95rem);
+    line-height: 1.5;
+    color: var(--cream);
+    text-align: center;
+    text-shadow: 0 0 14px rgba(179,156,208,.4);
+    animation: wishFloat 3.6s var(--ease) forwards;
+    will-change: transform, opacity;
   }
-
-  .tl-now .tl-label{
-    color: var(--blush);
-    font-weight: 600;
-    text-shadow: 0 0 16px rgba(179,156,208,.75);
+  @keyframes wishFloat{
+    0%{   opacity: 0; transform: translate(-50%,-100%) translateY(0) scale(.85); }
+    12%{  opacity: 1; transform: translate(-50%,-100%) translateY(-14px) scale(1); }
+    80%{  opacity: 1; }
+    100%{ opacity: 0; transform: translate(calc(-50% + var(--wdrift,0px)), -100%) translateY(-190px) scale(1.03); }
   }
-
-  .tl-lock-item .tl-label{ color: var(--cream); }
 
   /* ============================================================
      FOOTER
@@ -1043,12 +1141,34 @@
       <div class="ow-card" tabindex="0" role="button" aria-pressed="false">
         <div class="ow-inner">
           <div class="ow-front">
-            <span class="ow-seal">👑</span>
-            <p>Tap when you want to give up...</p>
+            <span class="ow-seal">✨</span>
+            <p>Tap when you need a smile...</p>
             <span class="ow-hint">tap to open</span>
           </div>
           <div class="ow-back">
-            <p>Look at me. Look at how hard I am fighting at BUET just to build our "Shantir Ghor" (peaceful home). Wait for my 4th-year graduation. You are my queen, and I will never let you be anyone's servant.</p>
+            <p>Remember how I looked at you at Gollamari? Like a kid staring at his favorite Vitamin A capsule! You make my dopamine and serotonin levels go absolutely crazy. You are my ultimate peace.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ow-card" tabindex="0" role="button" aria-pressed="false">
+        <div class="ow-inner">
+          <div class="ow-front">
+            <span class="ow-seal">🎧</span>
+            <p>Tap when you miss my voice...</p>
+            <span class="ow-hint">tap to open</span>
+          </div>
+          <div class="ow-back ow-voice-back">
+            <p class="ow-voice-line">Close your eyes and listen, my Babui Pakhi.</p>
+            <button type="button" class="voice-btn" id="voiceBtn" aria-label="Play voice note">
+              <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+            </button>
+            <div class="voice-eq" id="voiceEq" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span class="voice-time" id="voiceTime">0:00 / 0:00</span>
+            <audio id="voiceAudio" preload="none">
+              <source src="voice-message.mp3" type="audio/mpeg">
+            </audio>
           </div>
         </div>
       </div>
@@ -1070,31 +1190,22 @@
   </section>
 
   <!-- ============================================================
-       TIMELINE — road to Shantir Ghor
+       A SKY FULL OF REASONS — the wishing moon
        ============================================================ -->
-  <section id="timeline">
-    <span class="eyebrow reveal">our story so far</span>
-    <h2 class="section-title reveal">The Road to Shantir Ghor</h2>
-    <p class="section-sub reveal">every step has been worth it</p>
+  <section id="reasons">
+    <span class="eyebrow reveal">a sky full of reasons</span>
+    <h2 class="section-title reveal">A Sky Full of Reasons</h2>
+    <p class="section-sub reveal">tap the moon, whenever you need one</p>
 
-    <ol class="tl">
-      <li class="tl-item reveal">
-        <span class="tl-dot"></span>
-        <span class="tl-label">The beginning of Us</span>
-      </li>
-      <li class="tl-item reveal">
-        <span class="tl-dot"></span>
-        <span class="tl-label">That day at Gollamari &amp; Shat Gombuj</span>
-      </li>
-      <li class="tl-item tl-now reveal">
-        <span class="tl-dot tl-dot-pulse"></span>
-        <span class="tl-label">Today: Happy 24th Birthday</span>
-      </li>
-      <li class="tl-item tl-lock-item reveal">
-        <span class="tl-dot tl-dot-lock">🔒</span>
-        <span class="tl-label">My 4th Year Graduation &amp; Our Peaceful Home</span>
-      </li>
-    </ol>
+    <div class="moon-wrap reveal">
+      <div class="moon-halo" aria-hidden="true"></div>
+      <button type="button" class="moon-orb" id="moonOrb" aria-label="Tap the moon for a reason I love you">
+        <span class="moon-sparkle s1" aria-hidden="true"></span>
+        <span class="moon-sparkle s2" aria-hidden="true"></span>
+        <span class="moon-sparkle s3" aria-hidden="true"></span>
+      </button>
+      <span class="moon-hint">tap the moon</span>
+    </div>
   </section>
 
   <!-- ============================================================
@@ -1252,6 +1363,92 @@
   });
 
   /* ============================================================
+     3b. VOICE NOTE CARD — separate clip, never overlaps the main song
+     ============================================================ */
+  const voiceAudio = document.getElementById('voiceAudio');
+  const voiceBtn    = document.getElementById('voiceBtn');
+  const voiceEq     = document.getElementById('voiceEq');
+  const voiceTime   = document.getElementById('voiceTime');
+
+  function fmtVoice(t){
+    if (!isFinite(t)) return '0:00';
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
+  function refreshVoiceTime(){
+    voiceTime.textContent = `${fmtVoice(voiceAudio.currentTime)} / ${fmtVoice(voiceAudio.duration)}`;
+  }
+
+  voiceBtn.addEventListener('click', (e) => {
+    // keep this tap from also flipping the card back to its front
+    e.stopPropagation();
+    if (voiceAudio.paused){
+      voiceAudio.play().catch(() => { /* file likely missing, ignore */ });
+    } else {
+      voiceAudio.pause();
+    }
+  });
+
+  voiceAudio.addEventListener('play', () => {
+    voiceBtn.classList.add('is-playing');
+    voiceEq.classList.add('playing');
+    // never let the voice note and the main song overlap
+    if (!audio.paused) audio.pause();
+  });
+  voiceAudio.addEventListener('pause', () => {
+    voiceBtn.classList.remove('is-playing');
+    voiceEq.classList.remove('playing');
+  });
+  voiceAudio.addEventListener('ended', () => {
+    voiceBtn.classList.remove('is-playing');
+    voiceEq.classList.remove('playing');
+  });
+  voiceAudio.addEventListener('loadedmetadata', refreshVoiceTime);
+  voiceAudio.addEventListener('timeupdate', refreshVoiceTime);
+  voiceAudio.addEventListener('error', () => {
+    voiceTime.textContent = 'add voice-message.mp3';
+  });
+
+  /* ============================================================
+     3c. A SKY FULL OF REASONS — the wishing moon
+     ============================================================ */
+  const moonOrb = document.getElementById('moonOrb');
+  const WISHES = [
+    'I love your gentle, stubborn hold.',
+    'You are my highest prayer.',
+    'I see galaxies in your eyes.',
+    'Forever your Pitu.',
+    'My home is in your arms.',
+    'You make me a better man, piece by piece.',
+    'Your smile is my favorite K-drama.',
+    'I will always protect your dignity.',
+    'You are the only queen of my kingdom.',
+    'Waiting for you is the easiest thing I will ever do.'
+  ];
+  let lastWishIdx = -1;
+  function pickWish(){
+    if (WISHES.length === 1) return WISHES[0];
+    let idx;
+    do { idx = Math.floor(Math.random() * WISHES.length); } while (idx === lastWishIdx);
+    lastWishIdx = idx;
+    return WISHES[idx];
+  }
+  function spawnWish(){
+    const rect = moonOrb.getBoundingClientRect();
+    const bubble = document.createElement('div');
+    bubble.className = 'wish-bubble';
+    bubble.textContent = pickWish();
+    bubble.style.left = (rect.left + rect.width / 2) + 'px';
+    bubble.style.top = rect.top + 'px';
+    bubble.style.setProperty('--wdrift', ((Math.random() - .5) * 60) + 'px');
+    document.body.appendChild(bubble);
+    bubble.addEventListener('animationend', () => bubble.remove(), { once: true });
+    setTimeout(() => bubble.remove(), 4200); // safety net
+  }
+  moonOrb.addEventListener('click', spawnWish);
+
+  /* ============================================================
      4. SCROLL REVEAL
      ============================================================ */
   const revealEls = document.querySelectorAll('.reveal');
@@ -1308,7 +1505,10 @@
   playBtn.addEventListener('click', togglePlay);
   miniPlayer.addEventListener('click', togglePlay);
 
-  audio.addEventListener('play',  () => setPlayingUI(true));
+  audio.addEventListener('play',  () => {
+    setPlayingUI(true);
+    if (voiceAudio && !voiceAudio.paused) voiceAudio.pause();
+  });
   audio.addEventListener('pause', () => setPlayingUI(false));
 
   audio.addEventListener('loadedmetadata', () => {
