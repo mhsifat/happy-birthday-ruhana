@@ -1455,6 +1455,312 @@
   .hug-close:active{ transform: scale(.95); }
 
   /* ============================================================
+     THE GRADUATION TIME CAPSULE — A Promise for the Future
+     ============================================================ */
+  #capsule{ padding-top: clamp(4rem,12vh,7rem); }
+
+  .capsule-wrap{
+    max-width: 420px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .capsule-card{
+    width: 100%;
+    background: linear-gradient(165deg, rgba(74,59,85,.44), rgba(11,12,16,.7));
+    border: 1px solid rgba(179,156,208,.22);
+    border-radius: 24px;
+    padding: clamp(2rem, 6vw, 2.8rem) clamp(1.4rem, 5vw, 2.2rem);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .75rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow:
+      0 20px 60px rgba(0,0,0,.52),
+      0 0 0 1px rgba(179,156,208,.09),
+      inset 0 1px 0 rgba(255,255,255,.04);
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+
+  /* subtle diagonal hatch — makes it feel like aged paper / sealed envelope */
+  .capsule-card::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 18px,
+      rgba(179,156,208,.028) 18px,
+      rgba(179,156,208,.028) 19px
+    );
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  /* glowing wax-seal stripe at the bottom */
+  .capsule-card::after{
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(179,156,208,.5),
+      rgba(241,201,220,.65),
+      rgba(179,156,208,.5),
+      transparent
+    );
+    border-radius: 0 0 24px 24px;
+  }
+
+  .capsule-card:hover{
+    transform: translateY(-3px);
+    box-shadow:
+      0 28px 70px rgba(0,0,0,.56),
+      0 0 0 1px rgba(179,156,208,.22),
+      inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  .capsule-card:active{ transform: scale(.97); }
+  .capsule-card:focus-visible{
+    outline: 2px solid var(--lavender);
+    outline-offset: 6px;
+    border-radius: 24px;
+  }
+
+  .capsule-icon{
+    font-size: clamp(2.6rem, 9vw, 3.4rem);
+    line-height: 1;
+    filter: drop-shadow(0 0 12px rgba(179,156,208,.5));
+    animation: lockPulse 3.8s ease-in-out infinite;
+  }
+  @keyframes lockPulse{
+    0%,100%{ filter: drop-shadow(0 0 10px rgba(179,156,208,.38)); transform: scale(1);    }
+    50%    { filter: drop-shadow(0 0 26px rgba(179,156,208,.88)); transform: scale(1.07); }
+  }
+
+  .capsule-card-title{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-style: italic;
+    font-size: clamp(1.1rem, 4.5vw, 1.4rem);
+    color: var(--cream);
+    margin: 0;
+  }
+
+  .capsule-card-sub{
+    font-size: clamp(.7rem, 2.8vw, .82rem);
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    opacity: .72;
+    margin: 0;
+  }
+
+  .capsule-tap-hint{
+    display: block;
+    margin-top: .4rem;
+    font-size: .58rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    opacity: .5;
+  }
+
+  /* shake — added via JS on rejected tap, removed on animationend */
+  .capsule-card.capsule-shake{
+    animation: capsuleShake .55s cubic-bezier(.36,.07,.19,.97) forwards;
+  }
+  @keyframes capsuleShake{
+    0%,100%{ transform: translateX(0)    rotate(0);       }
+    15%    { transform: translateX(-8px) rotate(-.8deg);  }
+    30%    { transform: translateX( 7px) rotate( .6deg);  }
+    45%    { transform: translateX(-6px) rotate(-.5deg);  }
+    60%    { transform: translateX( 5px) rotate( .4deg);  }
+    75%    { transform: translateX(-3px) rotate(-.2deg);  }
+    90%    { transform: translateX( 2px) rotate( .1deg);  }
+  }
+
+  /* the "not yet" / "it's time" message that fades in below the card */
+  .capsule-msg{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.9rem, 3.8vw, 1.08rem);
+    line-height: 1.75;
+    text-align: center;
+    color: var(--cream);
+    max-width: 28ch;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .75s var(--ease), transform .75s var(--ease);
+    pointer-events: none;
+    text-shadow:
+      0 0 16px rgba(179,156,208,.55),
+      0 0 38px rgba(107,76,154,.4);
+  }
+  .capsule-msg.visible{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* ============================================================
+     THE GRADUATION TIME CAPSULE — A Promise for the Future
+     ============================================================ */
+  #capsule{ padding-top: clamp(4rem,12vh,7rem); }
+
+  .capsule-wrap{
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .capsule-card{
+    width: 100%;
+    background: linear-gradient(165deg, rgba(107,76,154,.22), rgba(24,17,38,.48));
+    border: 1px solid rgba(179,156,208,.28);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 26px;
+    padding: clamp(2rem, 7vw, 2.8rem) clamp(1.5rem, 6vw, 2.2rem);
+    box-shadow: 0 20px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow .4s var(--ease), transform .3s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .capsule-card:hover{
+    box-shadow: 0 24px 70px rgba(0,0,0,.55), 0 0 0 1px rgba(179,156,208,.38);
+  }
+  .capsule-card:focus-visible{
+    outline: 2px solid var(--lavender);
+    outline-offset: 6px;
+  }
+
+  /* shimmer overlay — purely decorative */
+  .capsule-card::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      transparent 30%,
+      rgba(179,156,208,.08) 50%,
+      transparent 70%
+    );
+    background-size: 200% 100%;
+    animation: capsuleShimmer 4.2s ease-in-out infinite;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+  @keyframes capsuleShimmer{
+    0%,100%{ background-position: 200% 0; }
+    50%{ background-position: -200% 0; }
+  }
+
+  .capsule-lock{
+    font-size: clamp(2.2rem, 9vw, 3rem);
+    line-height: 1;
+    margin-bottom: .6rem;
+    display: block;
+    animation: lockFloat 3.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px rgba(179,156,208,.6));
+  }
+  @keyframes lockFloat{
+    0%,100%{ transform: translateY(0) rotate(-3deg); }
+    50%{ transform: translateY(-6px) rotate(3deg); }
+  }
+
+  .capsule-card-title{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-style: italic;
+    font-size: clamp(1.25rem, 5vw, 1.65rem);
+    color: var(--cream);
+    margin: 0 0 .5rem;
+    text-shadow: 0 0 20px rgba(179,156,208,.4);
+  }
+
+  .capsule-card-sub{
+    font-size: clamp(.74rem, 3vw, .88rem);
+    color: var(--cream-dim);
+    line-height: 1.6;
+    margin: 0 0 .9rem;
+    max-width: 30ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .capsule-seal{
+    display: inline-block;
+    font-size: .62rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    border: 1px solid rgba(179,156,208,.32);
+    border-radius: 999px;
+    padding: .4rem 1rem;
+    opacity: .85;
+  }
+
+  /* shake animation triggered by JS */
+  .capsule-card.shake{
+    animation: capsuleShake .55s var(--ease) both;
+  }
+  @keyframes capsuleShake{
+    0%,100%{ transform: translateX(0) rotate(0deg); }
+    15%{ transform: translateX(-8px) rotate(-1.5deg); }
+    30%{ transform: translateX(8px) rotate(1.5deg); }
+    45%{ transform: translateX(-6px) rotate(-1deg); }
+    60%{ transform: translateX(6px) rotate(1deg); }
+    75%{ transform: translateX(-3px) rotate(-.5deg); }
+    90%{ transform: translateX(3px) rotate(.5deg); }
+  }
+
+  /* the "Not yet" message that fades in below the card */
+  .capsule-msg{
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.88rem, 3.8vw, 1.05rem);
+    line-height: 1.75;
+    color: var(--blush);
+    max-width: 32ch;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity .7s var(--ease), transform .7s var(--ease);
+    text-shadow:
+      0 0 16px rgba(241,201,220,.55),
+      0 0 38px rgba(107,76,154,.45);
+  }
+  .capsule-msg.visible{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* ============================================================
      FOOTER
      ============================================================ */
   footer{
@@ -1820,6 +2126,34 @@
           <p class="secret-text">তোমার ওই মায়াবী চোখদুটো যেন পৃথিবীর সবচেয়ে নিরাপদ আশ্রয়, যেখানে তাকালে আমি দুনিয়ার সব কিছু ভুলে যাই। পৃথিবীর সবচেয়ে সুন্দর মেয়েটাকে শুভ জন্মদিন!</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THE GRADUATION TIME CAPSULE — A Promise for the Future
+       ============================================================ -->
+  <section id="capsule">
+    <span class="eyebrow reveal">a promise for the future</span>
+    <h2 class="section-title reveal">A Promise for the Future</h2>
+    <p class="section-sub reveal">sealed with love, waiting for the right moment</p>
+
+    <div class="capsule-wrap">
+      <div
+        class="capsule-card reveal"
+        id="capsuleCard"
+        tabindex="0"
+        role="button"
+        aria-label="Tap to try opening the time capsule"
+      >
+        <span class="capsule-lock" aria-hidden="true">🔒</span>
+        <h3 class="capsule-card-title">A Promise for the Future</h3>
+        <p class="capsule-card-sub">Something beautiful is sealed inside, waiting just for you.</p>
+        <span class="capsule-seal">tap to open</span>
+      </div>
+
+      <p class="capsule-msg" id="capsuleMsg" aria-live="polite" aria-atomic="true">
+        Not yet, Babui Pakhi. Wait for me.<br>This opens on Graduation Day.
+      </p>
     </div>
   </section>
 
@@ -2392,6 +2726,42 @@
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && hugOverlay.classList.contains('open')) hugCloseModal();
+  });
+
+  /* ============================================================
+     4e. THE GRADUATION TIME CAPSULE — sealed vault interaction
+     ============================================================ */
+  const capsuleCard = document.getElementById('capsuleCard');
+  const capsuleMsg  = document.getElementById('capsuleMsg');
+
+  // Graduation unlock date: May 1, 2027  (month index 4 = May)
+  const GRAD_DATE = new Date(2027, 4, 1, 0, 0, 0);
+
+  function handleCapsuleTap(){
+    const now = new Date();
+    if (now < GRAD_DATE){
+      // Too early — shake the card and show the "not yet" message
+      // Remove the class first (in case they tap repeatedly) so the
+      // animation re-triggers from the beginning each time
+      capsuleCard.classList.remove('shake');
+      // Force a reflow so the class removal registers before re-adding
+      void capsuleCard.offsetWidth;
+      capsuleCard.classList.add('shake');
+      capsuleCard.addEventListener('animationend', () => {
+        capsuleCard.classList.remove('shake');
+      }, { once: true });
+
+      capsuleMsg.classList.add('visible');
+    }
+    // (Future: if now >= GRAD_DATE, reveal the real message here)
+  }
+
+  capsuleCard.addEventListener('click', handleCapsuleTap);
+  capsuleCard.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      handleCapsuleTap();
+    }
   });
 
   /* ============================================================
