@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Happy 24th Birthday, Babui Pakhi 💜</title>
+<title>Our Shantir Ghor 💜</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💜</text></svg>">
 
 <!--
@@ -20,6 +20,7 @@
     hug.gif                  → a cute hugging GIF shown inside the
                                 "Hold for a Hug" modal
     photo1.jpg ... photo10.jpg → ten photos for the memory gallery
+    ring-moment.jpg          → the golden polaroid (first in the gallery)
 
   Nothing will break if a file is missing — the page shows a soft
   placeholder instead — but add them for the real experience.
@@ -727,6 +728,110 @@
   }
 
   /* ============================================================
+     THE MILESTONE CARD — The Promise (Chapter 3)
+     ============================================================ */
+  #milestone{ padding-top: clamp(4rem,12vh,7rem); }
+
+  .milestone-wrap{
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  .milestone-card{
+    perspective: 1300px;
+    min-height: clamp(238px, 58vw, 296px);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform .3s var(--ease);
+  }
+  .milestone-card:hover{ transform: translateY(-4px); }
+  .milestone-card:focus-visible{ outline: 2px solid #d4a843; outline-offset: 6px; border-radius: 22px; }
+
+  .milestone-inner{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: clamp(238px, 58vw, 296px);
+    transition: transform .8s var(--ease);
+    transform-style: preserve-3d;
+  }
+  .milestone-card.flipped .milestone-inner{ transform: rotateY(180deg); }
+
+  .milestone-front,
+  .milestone-back{
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 22px;
+    padding: clamp(1.4rem, 6vw, 2.2rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(165deg, rgba(107,76,154,.2), rgba(24,17,38,.55));
+    border: 1px solid rgba(212,168,67,.5);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow:
+      0 16px 44px rgba(0,0,0,.45),
+      0 0 32px rgba(212,168,67,.22),
+      0 0 72px rgba(212,168,67,.1);
+  }
+
+  .milestone-ring-emoji{
+    font-size: clamp(2.2rem, 9vw, 3rem);
+    line-height: 1;
+    margin-bottom: .7rem;
+    display: block;
+    filter: drop-shadow(0 0 14px rgba(212,168,67,.75));
+    animation: ringFloat 3.8s ease-in-out infinite;
+  }
+  @keyframes ringFloat{
+    0%,100%{ transform: translateY(0) rotate(-4deg);  filter: drop-shadow(0 0 10px rgba(212,168,67,.65)); }
+    50%{     transform: translateY(-8px) rotate(4deg); filter: drop-shadow(0 0 24px rgba(212,168,67,1)); }
+  }
+
+  .milestone-date{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.15rem, 5vw, 1.55rem);
+    color: #f0d080;
+    letter-spacing: .04em;
+    margin: 0 0 .5rem;
+    animation: goldenGlow 4.2s ease-in-out infinite;
+  }
+  @keyframes goldenGlow{
+    0%,100%{ text-shadow: 0 0 12px rgba(212,168,67,.45); }
+    50%{     text-shadow: 0 0 28px rgba(212,168,67,.9), 0 0 56px rgba(212,168,67,.35); }
+  }
+
+  .milestone-hint{
+    font-size: .6rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(240,208,128,.6);
+    margin-top: .5rem;
+  }
+
+  .milestone-back{
+    transform: rotateY(180deg);
+    background: linear-gradient(165deg, rgba(140,105,30,.25), rgba(24,17,38,.62));
+    border-color: rgba(212,168,67,.4);
+  }
+
+  .milestone-back-text{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.88rem, 3.8vw, 1.08rem);
+    line-height: 1.85;
+    color: var(--cream);
+    margin: 0;
+    text-shadow: 0 0 16px rgba(212,168,67,.28);
+  }
+
+  /* ============================================================
      GALLERY — Polaroid scatter
      ============================================================ */
   #gallery{ padding-top: clamp(4rem,12vh,7rem); }
@@ -763,6 +868,40 @@
   .polaroid:nth-child(5n+3){ --r: -3deg; align-self: center; }
   .polaroid:nth-child(5n+4){ --r: 6deg;  align-self: start; margin-top: clamp(.6rem,3vw,1.4rem); }
   .polaroid:nth-child(5n+5){ --r: -5deg; align-self: end; }
+
+  /* golden ring-moment polaroid — permanently glowing */
+  .polaroid.ring-moment{
+    box-shadow:
+      0 10px 26px rgba(0,0,0,.45),
+      0 0 0 1.5px rgba(212,168,67,.75),
+      0 0 28px rgba(212,168,67,.45),
+      0 0 62px rgba(212,168,67,.18);
+    animation: ringPolaroidPulse 4.2s ease-in-out infinite;
+  }
+  @keyframes ringPolaroidPulse{
+    0%,100%{
+      box-shadow:
+        0 10px 26px rgba(0,0,0,.45),
+        0 0 0 1.5px rgba(212,168,67,.65),
+        0 0 22px rgba(212,168,67,.38),
+        0 0 50px rgba(212,168,67,.14);
+    }
+    50%{
+      box-shadow:
+        0 10px 26px rgba(0,0,0,.45),
+        0 0 0 2px rgba(212,168,67,1),
+        0 0 38px rgba(212,168,67,.65),
+        0 0 82px rgba(212,168,67,.28);
+    }
+  }
+  .polaroid.ring-moment:hover,
+  .polaroid.ring-moment.active{
+    box-shadow:
+      0 26px 50px rgba(0,0,0,.55),
+      0 0 0 2px rgba(212,168,67,1),
+      0 0 52px rgba(212,168,67,.75),
+      0 0 100px rgba(212,168,67,.32);
+  }
 
   .polaroid::before{
     content:"";
@@ -1999,7 +2138,7 @@
   <section id="hero">
     <div class="hero-inner">
       <span class="hero-kicker">তোমার জন্য, চিরকাল</span>
-      <h1 class="hero-title">Happy 24th Birthday,<br>Babui Pakhi 💜</h1>
+      <h1 class="hero-title">Welcome Home,<br>Babui Pakhi 💜</h1>
       <div class="hero-line"></div>
 
       <div class="player">
@@ -2237,6 +2376,37 @@
   </section>
 
   <!-- ============================================================
+       THE MILESTONE CARD — Chapter 3: The Promise
+       ============================================================ -->
+  <section id="milestone">
+    <span class="eyebrow reveal">chapter 3</span>
+    <h2 class="section-title reveal">The Promise</h2>
+    <p class="section-sub reveal">a chapter I will never forget</p>
+
+    <div class="milestone-wrap">
+      <div
+        class="milestone-card reveal"
+        id="milestoneCard"
+        tabindex="0"
+        role="button"
+        aria-pressed="false"
+        aria-label="Tap to remember the promise"
+      >
+        <div class="milestone-inner">
+          <div class="milestone-front">
+            <span class="milestone-ring-emoji" aria-hidden="true">✨💍✨</span>
+            <p class="milestone-date">June 25, 2026</p>
+            <span class="milestone-hint">tap to remember</span>
+          </div>
+          <div class="milestone-back">
+            <p class="milestone-back-text">The day I traveled through the dark to put a ring on your finger. The final countdown begins.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
        INFINITE MEMORIES — gallery
        ============================================================ -->
   <section id="gallery">
@@ -2436,7 +2606,7 @@
   });
 
   /* ============================================================
-     2. GALLERY — build 10 polaroids with graceful fallbacks
+     2. GALLERY — build 11 polaroids: ring-moment first, then photo1–10
      ============================================================ */
   const captions = [
     "us, mid-laugh", "a quiet evening", "your favourite smile",
@@ -2446,6 +2616,49 @@
   ];
 
   const grid = document.getElementById('galleryGrid');
+
+  // helper to wire the tap-to-focus interaction onto any polaroid
+  function addPolaroidClick(fig){
+    fig.addEventListener('click', () => {
+      document.querySelectorAll('.polaroid.active').forEach(el => {
+        if (el !== fig) el.classList.remove('active');
+      });
+      fig.classList.toggle('active');
+    });
+  }
+
+  // --- the golden ring-moment polaroid (first / top-left) ---
+  (function(){
+    const fig = document.createElement('figure');
+    fig.className = 'polaroid ring-moment';
+    fig.tabIndex = 0;
+
+    const frame = document.createElement('div');
+    frame.className = 'frame';
+
+    const img = document.createElement('img');
+    img.src = 'ring-moment.jpg';
+    img.alt = 'Mehrab and Ruhana — The Promise, 25.06.2026';
+    img.loading = 'eager';
+    img.onerror = function(){
+      this.remove();
+      const fb = document.createElement('div');
+      fb.className = 'fallback';
+      fb.textContent = 'ring-moment.jpg';
+      frame.appendChild(fb);
+    };
+
+    const cap = document.createElement('figcaption');
+    cap.textContent = 'The Promise — 25.06.2026';
+
+    frame.appendChild(img);
+    fig.appendChild(frame);
+    fig.appendChild(cap);
+    grid.appendChild(fig);
+    addPolaroidClick(fig);
+  })();
+
+  // --- regular photo1.jpg → photo10.jpg polaroids ---
   for (let i = 1; i <= 10; i++){
     const fig = document.createElement('figure');
     fig.className = 'polaroid';
@@ -2457,7 +2670,7 @@
     const img = document.createElement('img');
     img.src = `photo${i}.jpg`;
     img.alt = `Mehrab and Ruhana — ${captions[i-1]}`;
-    img.loading = i <= 4 ? 'eager' : 'lazy';
+    img.loading = i <= 3 ? 'eager' : 'lazy';
     img.onerror = function(){
       this.remove();
       const fb = document.createElement('div');
@@ -2473,14 +2686,22 @@
     fig.appendChild(frame);
     fig.appendChild(cap);
     grid.appendChild(fig);
-
-    fig.addEventListener('click', () => {
-      document.querySelectorAll('.polaroid.active').forEach(el => {
-        if (el !== fig) el.classList.remove('active');
-      });
-      fig.classList.toggle('active');
-    });
+    addPolaroidClick(fig);
   }
+
+  // --- milestone card flip (Chapter 3: The Promise) ---
+  const milestoneCard = document.getElementById('milestoneCard');
+  milestoneCard.addEventListener('click', () => {
+    const flipped = milestoneCard.classList.toggle('flipped');
+    milestoneCard.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+  });
+  milestoneCard.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      const flipped = milestoneCard.classList.toggle('flipped');
+      milestoneCard.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+    }
+  });
 
   /* ============================================================
      3. OPEN WHEN — flip cards
