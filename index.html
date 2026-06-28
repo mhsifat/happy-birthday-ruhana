@@ -2254,7 +2254,7 @@
        ============================================================ -->
   <section id="daily">
     <span class="eyebrow reveal">a reason to smile</span>
-    <h2 class="section-title reveal">Good Morning, Babui Pakhi</h2>
+    <h2 class="section-title reveal" id="dailyGreeting">Good Morning, Babui Pakhi 💜</h2>
     <p class="section-sub reveal">a message from Pitu, just for today</p>
 
     <div class="daily-card reveal">
@@ -2712,7 +2712,7 @@
      1. DAILY PITU BOX — day-of-month message
      ============================================================ */
   const DAILY_MSGS = [
-    'Good morning, my Babui Pakhi. Look at your hand today and remember—that ring is my promise. We are almost there.',
+    'Look at your hand today and remember—that ring is my promise. We are almost there.',
     'No matter how hard today gets, remember I am fighting here in Dhaka just to bring you home.',
     'You are the queen of my kingdom. Today, tomorrow, and every day after.',
     'I might be buried in my 4-1 books today, but you are the only thing on my mind.',
@@ -2746,199 +2746,309 @@
   ];
 
   (function initDailyPitu(){
-    const dayIdx  = new Date().getDate() - 1;           // 0-based, 0=1st, 30=31st
+    const now     = new Date();
+    const dayIdx  = now.getDate() - 1;            // 0-based (0 = 1st, 30 = 31st)
     const safeIdx = Math.min(dayIdx, DAILY_MSGS.length - 1);
     const dayNum  = dayIdx + 1;
+    const hour    = now.getHours();
 
-    document.getElementById('dailyMsg').textContent   = DAILY_MSGS[safeIdx];
-    document.getElementById('dailyBadge').textContent = `Day ${dayNum} of 31`;
+    const greeting = hour < 12  ? 'Good morning, Babui Pakhi 💜'
+                   : hour < 17  ? 'Good afternoon, Babui Pakhi 💜'
+                                 : 'Good evening, Babui Pakhi 💜';
+
+    document.getElementById('dailyGreeting').textContent = greeting;
+    document.getElementById('dailyMsg').textContent      = DAILY_MSGS[safeIdx];
+    document.getElementById('dailyBadge').textContent    = `Day ${dayNum} of 31`;
   })();
 
   /* ============================================================
-     1b. OUR NIGHT SKY — animated heart constellation
+     1b. OUR NIGHT SKY — realistic twinkling sky, tap-to-draw heart
      ============================================================ */
   (function initConstellation(){
     const cvs = document.getElementById('constellationCanvas');
     const ctx = cvs.getContext('2d');
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
 
-    // logical size — canvas fills its CSS container but renders crisp
-    const W_LOGICAL = 620;
-    const H_LOGICAL = 400;
-    cvs.width  = W_LOGICAL * DPR;
-    cvs.height = H_LOGICAL * DPR;
+    const W = 620, H = 400;
+    cvs.width  = W * DPR;
+    cvs.height = H * DPR;
     ctx.scale(DPR, DPR);
+    const CX = W / 2, CY = H / 2 - 10;
 
-    /* ── ambient background stars ── */
-    const BG_STAR_COUNT = 110;
-    const bgStars = Array.from({ length: BG_STAR_COUNT }, () => ({
-      x:     Math.random() * W_LOGICAL,
-      y:     Math.random() * H_LOGICAL,
-      r:     Math.random() * 1.1 + .25,
-      phase: Math.random() * Math.PI * 2,
-      speed: Math.random() * .012 + .005
-    }));
-
-    /* ── heart constellation star positions ──
-       Parametric heart:  x = 16·sin³(t),  y = 13·cos(t) − 5·cos(2t) − 2·cos(3t) − cos(4t)
-       We sample 14 evenly-spaced t values to get the main stars, then scale + centre them.    */
-    const HEART_STEPS = 14;
-    const RAW = Array.from({ length: HEART_STEPS }, (_, k) => {
-      const t = (k / HEART_STEPS) * Math.PI * 2;
+    /* ── realistic background stars — varied sizes, natural colours ── */
+    const STAR_PALETTE = [
+      '#f0f2ff','#f0f2ff','#f0f2ff','#f0f2ff', // cool white (dominant)
+      '#e8f0ff','#e8f0ff',                       // blue-white
+      '#d8e8ff',                                 // pale blue
+      '#faf8f0',                                 // warm white
+      '#f8f4d8',                                 // pale gold
+      '#f0e8b8'                                  // subtle amber gold
+    ];
+    const BG_STARS = Array.from({ length: 170 }, () => {
+      const tier = Math.random();  // controls size class
       return {
-        rx:  16 * Math.sin(t) ** 3,
-        ry: -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t))
+        x:     Math.random() * W,
+        y:     Math.random() * H,
+        r:     tier < .65  ? Math.random() * .5  + .22    // tiny
+             : tier < .88  ? Math.random() * .55 + .72    // small
+             : tier < .97  ? Math.random() * .6  + 1.25   // medium
+                           : Math.random() * .55 + 1.85,  // rare bright
+        phase: Math.random() * Math.PI * 2,
+        speed: Math.random() * .018 + .004,
+        color: STAR_PALETTE[Math.floor(Math.random() * STAR_PALETTE.length)],
+        minA:  .1 + Math.random() * .18,
+        maxA:  .55 + Math.random() * .42
       };
     });
 
-    // scale to fit nicely inside the canvas
-    const SC   = 10.5;
-    const CX   = W_LOGICAL / 2;
-    const CY   = H_LOGICAL / 2 - 12;
-    const STARS = RAW.map(({ rx, ry }) => ({
-      x: CX + rx * SC,
-      y: CY + ry * SC
-    }));
+    /* ── heart constellation star positions ──
+       Parametric: x = 16 sin³t,  y = 13 cos t − 5 cos 2t − 2 cos 3t − cos 4t  */
+    const HEART_STEPS = 14;
+    const STARS = Array.from({ length: HEART_STEPS }, (_, k) => {
+      const t  = (k / HEART_STEPS) * Math.PI * 2;
+      const rx = 16  * Math.sin(t) ** 3;
+      const ry = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+      return { x: CX + rx * 10.5, y: CY + ry * 10.5 };
+    });
 
     /* ── animation state ── */
-    const DRAW_DURATION  = 3800;   // ms to fully draw the connecting line
-    const PULSE_DURATION = 2600;   // ms of one pulse cycle after complete
-    let startTime   = null;
-    let phase       = 'drawing';   // 'drawing' | 'pulsing'
-    let bgPhase     = 0;
-    let rafId       = null;
+    const FADE_DURATION = 700;   // ms for prompt text to fade out
+    const DRAW_DURATION = 5200;  // ms to draw the full heart
+    const PULSE_MS      = 2800;  // ms per pulse cycle
 
-    function drawBgStars(t){
-      for (const s of bgStars){
+    let phase      = 'idle';   // 'idle' | 'fading' | 'drawing' | 'pulsing'
+    let phaseStart = 0;
+    let promptAlpha = 1;
+    let rafId      = null;
+    let globalTs   = 0;
+
+    /* ── draw the deep night sky background ── */
+    function drawSky(){
+      // base dark fill
+      ctx.fillStyle = '#09080f';
+      ctx.fillRect(0, 0, W, H);
+
+      // large purple nebula cloud — upper right
+      const n1 = ctx.createRadialGradient(W*.72, H*.28, 10, W*.72, H*.28, W*.55);
+      n1.addColorStop(0,   'rgba(62,34,90,.28)');
+      n1.addColorStop(.45, 'rgba(42,20,68,.12)');
+      n1.addColorStop(1,   'rgba(0,0,0,0)');
+      ctx.fillStyle = n1;
+      ctx.fillRect(0, 0, W, H);
+
+      // cool blue nebula — lower left
+      const n2 = ctx.createRadialGradient(W*.22, H*.72, 5, W*.22, H*.72, W*.4);
+      n2.addColorStop(0,   'rgba(22,30,70,.22)');
+      n2.addColorStop(.5,  'rgba(14,18,50,.1)');
+      n2.addColorStop(1,   'rgba(0,0,0,0)');
+      ctx.fillStyle = n2;
+      ctx.fillRect(0, 0, W, H);
+
+      // faint warm glow near center-right — gives depth
+      const n3 = ctx.createRadialGradient(W*.62, H*.45, 5, W*.62, H*.45, W*.28);
+      n3.addColorStop(0,   'rgba(55,30,18,.12)');
+      n3.addColorStop(1,   'rgba(0,0,0,0)');
+      ctx.fillStyle = n3;
+      ctx.fillRect(0, 0, W, H);
+
+      // subtle vignette to frame the canvas
+      const vig = ctx.createRadialGradient(CX, CY, W*.25, CX, CY, W*.78);
+      vig.addColorStop(0,   'rgba(0,0,0,0)');
+      vig.addColorStop(1,   'rgba(0,0,0,.55)');
+      ctx.fillStyle = vig;
+      ctx.fillRect(0, 0, W, H);
+    }
+
+    /* ── twinkling background stars ── */
+    function drawBgStars(){
+      for (const s of BG_STARS){
         s.phase += s.speed;
-        const tw  = (Math.sin(s.phase) + 1) / 2;
-        ctx.globalAlpha = .18 + tw * .55;
-        ctx.fillStyle = '#f6f1fb';
+        const tw = (Math.sin(s.phase) + 1) / 2;
+        ctx.globalAlpha = s.minA + tw * (s.maxA - s.minA);
+        ctx.fillStyle   = s.color;
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
+        // add tiny cross-flare on the brighter rare stars
+        if (s.r > 1.8 && tw > .7){
+          ctx.globalAlpha *= .45;
+          ctx.strokeStyle = s.color;
+          ctx.lineWidth   = .4;
+          ctx.shadowColor = s.color;
+          ctx.shadowBlur  = 4;
+          ctx.beginPath();
+          ctx.moveTo(s.x - s.r*2.5, s.y); ctx.lineTo(s.x + s.r*2.5, s.y);
+          ctx.moveTo(s.x, s.y - s.r*2.5); ctx.lineTo(s.x, s.y + s.r*2.5);
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+        }
       }
       ctx.globalAlpha = 1;
     }
 
-    function drawMainStar(x, y, brightness){
-      // glow halo
-      const grad = ctx.createRadialGradient(x, y, 0, x, y, 14);
-      grad.addColorStop(0,   `rgba(179,156,208,${(brightness * .7).toFixed(2)})`);
-      grad.addColorStop(.45, `rgba(107,76,154,${(brightness * .35).toFixed(2)})`);
-      grad.addColorStop(1,   'rgba(107,76,154,0)');
-      ctx.fillStyle = grad;
+    /* ── glowing main constellation star ── */
+    function drawMainStar(x, y, alpha, scale){
+      scale = scale || 1;
+      // outer diffuse halo
+      const g = ctx.createRadialGradient(x, y, 0, x, y, 18 * scale);
+      g.addColorStop(0,   `rgba(200,180,240,${(.55*alpha).toFixed(2)})`);
+      g.addColorStop(.3,  `rgba(140,100,200,${(.28*alpha).toFixed(2)})`);
+      g.addColorStop(1,   'rgba(100,60,160,0)');
+      ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(x, y, 14, 0, Math.PI * 2);
+      ctx.arc(x, y, 18 * scale, 0, Math.PI * 2);
       ctx.fill();
 
-      // bright core
-      ctx.globalAlpha = brightness;
-      ctx.fillStyle = '#f6f1fb';
+      // crisp bright core
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle   = '#f6f3ff';
+      ctx.shadowColor = '#c8b4f0';
+      ctx.shadowBlur  = 8 * scale;
       ctx.beginPath();
-      ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+      ctx.arc(x, y, 2.2 * scale, 0, Math.PI * 2);
       ctx.fill();
+      ctx.shadowBlur  = 0;
       ctx.globalAlpha = 1;
     }
 
+    /* ── stardust connection lines ── */
     function drawConnections(progress, pulse){
-      // How many segments to draw (fractional)
-      const totalSegs  = STARS.length;            // closes back to index 0
+      const totalSegs  = STARS.length;
       const segsDone   = progress * totalSegs;
       const fullSegs   = Math.floor(segsDone);
       const partialPct = segsDone - fullSegs;
 
-      // line style — alpha pulses gently once drawing is complete
-      const alpha = phase === 'pulsing'
-        ? .55 + pulse * .35
-        : .72;
-      ctx.strokeStyle = `rgba(179,156,208,${alpha.toFixed(2)})`;
-      ctx.lineWidth   = phase === 'pulsing' ? 1.5 + pulse * .8 : 1.4;
-      ctx.lineCap     = 'round';
-      ctx.lineJoin    = 'round';
-      ctx.shadowColor = '#B39CD0';
-      ctx.shadowBlur  = phase === 'pulsing' ? 8 + pulse * 10 : 8;
+      const lineAlpha = phase === 'pulsing'
+        ? .30 + pulse * .28
+        : .42;
+      const blur = phase === 'pulsing'
+        ? 10 + pulse * 12
+        : 9;
 
-      ctx.beginPath();
-      ctx.moveTo(STARS[0].x, STARS[0].y);
+      // draw twice: once faint+wide for the glow, once fine+bright for the line
+      [
+        { lw: 3.5, a: lineAlpha * .22, blur: blur * 1.8 },
+        { lw: .85, a: lineAlpha,       blur: blur * .7  }
+      ].forEach(({ lw, a, blur: b }) => {
+        ctx.strokeStyle = `rgba(185,162,225,${a.toFixed(2)})`;
+        ctx.lineWidth   = lw;
+        ctx.lineCap     = 'round';
+        ctx.lineJoin    = 'round';
+        ctx.shadowColor = '#b39cd0';
+        ctx.shadowBlur  = b;
 
-      for (let i = 1; i <= fullSegs; i++){
-        const si = i % STARS.length;
-        ctx.lineTo(STARS[si].x, STARS[si].y);
-      }
-
-      // partial last segment
-      if (fullSegs < totalSegs){
-        const fromStar = STARS[fullSegs % STARS.length];
-        const toStar   = STARS[(fullSegs + 1) % STARS.length];
-        ctx.lineTo(
-          fromStar.x + (toStar.x - fromStar.x) * partialPct,
-          fromStar.y + (toStar.y - fromStar.y) * partialPct
-        );
-      }
-
-      ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(STARS[0].x, STARS[0].y);
+        for (let i = 1; i <= fullSegs; i++){
+          ctx.lineTo(STARS[i % STARS.length].x, STARS[i % STARS.length].y);
+        }
+        if (fullSegs < totalSegs){
+          const f = STARS[fullSegs % STARS.length];
+          const t = STARS[(fullSegs + 1) % STARS.length];
+          ctx.lineTo(f.x + (t.x - f.x) * partialPct, f.y + (t.y - f.y) * partialPct);
+        }
+        ctx.stroke();
+      });
       ctx.shadowBlur = 0;
     }
 
+    /* ── "tap the sky" prompt text ── */
+    function drawPrompt(alpha){
+      if (alpha <= 0) return;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.font        = `${Math.round(W * .034)}px 'Playfair Display', serif`;
+      ctx.textAlign   = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.shadowColor = '#b39cd0';
+      ctx.shadowBlur  = 18;
+      ctx.fillStyle   = '#e8dff8';
+      ctx.fillText('Tap the sky to connect us', CX, H - 44);
+      ctx.restore();
+    }
+
+    /* ── main render loop ── */
     function frame(ts){
-      if (!startTime) startTime = ts;
-      const elapsed = ts - startTime;
+      globalTs = ts;
+      const elapsed = ts - phaseStart;
 
-      ctx.clearRect(0, 0, W_LOGICAL, H_LOGICAL);
+      ctx.clearRect(0, 0, W, H);
+      drawSky();
+      drawBgStars();
 
-      // deep-space background gradient
-      const bg = ctx.createRadialGradient(CX, CY, 40, CX, CY, Math.max(W_LOGICAL, H_LOGICAL));
-      bg.addColorStop(0,   '#1a1230');
-      bg.addColorStop(.55, '#110c1e');
-      bg.addColorStop(1,   '#0b0c10');
-      ctx.fillStyle = bg;
-      ctx.fillRect(0, 0, W_LOGICAL, H_LOGICAL);
+      if (phase === 'idle'){
+        // pulse the prompt
+        const promptPulse = (Math.sin(ts / 1100) + 1) / 2;
+        drawPrompt(.55 + promptPulse * .35);
 
-      drawBgStars(elapsed);
-
-      let progress, pulse = 0;
-      if (phase === 'drawing'){
-        progress = Math.min(1, elapsed / DRAW_DURATION);
-        if (progress >= 1){
-          phase     = 'pulsing';
-          startTime = ts;
+      } else if (phase === 'fading'){
+        promptAlpha = Math.max(0, 1 - elapsed / FADE_DURATION);
+        drawPrompt(promptAlpha);
+        if (elapsed >= FADE_DURATION){
+          phase      = 'drawing';
+          phaseStart = ts;
         }
-      } else {
-        progress = 1;
-        const pElapsed = ts - startTime;
-        pulse = (Math.sin((pElapsed / PULSE_DURATION) * Math.PI * 2) + 1) / 2;
-      }
 
-      if (progress > 0) drawConnections(progress, pulse);
+      } else if (phase === 'drawing'){
+        const progress = Math.min(1, elapsed / DRAW_DURATION);
+        drawConnections(progress, 0);
 
-      // draw main stars — brighten leading star during drawing, all bright after
-      const litCount = phase === 'pulsing'
-        ? STARS.length
-        : Math.min(STARS.length, Math.floor(progress * STARS.length) + 1);
+        // how many stars to show
+        const litCount = Math.min(STARS.length, Math.floor(progress * STARS.length) + 1);
+        for (let i = 0; i < litCount; i++){
+          const isLead = (i === litCount - 1 && progress < 1);
+          drawMainStar(STARS[i].x, STARS[i].y, isLead ? .5 : 1, isLead ? .75 : 1);
+        }
 
-      for (let i = 0; i < litCount; i++){
-        const isLeading  = (phase === 'drawing' && i === litCount - 1);
-        const brightness = isLeading ? .65 + pulse * .35 : 1;
-        drawMainStar(STARS[i].x, STARS[i].y, brightness);
+        if (progress >= 1){
+          phase      = 'pulsing';
+          phaseStart = ts;
+        }
+
+      } else if (phase === 'pulsing'){
+        const pulse = (Math.sin((elapsed / PULSE_MS) * Math.PI * 2) + 1) / 2;
+        drawConnections(1, pulse);
+        for (let i = 0; i < STARS.length; i++){
+          const starPulse = (Math.sin(((elapsed / PULSE_MS) + i * .15) * Math.PI * 2) + 1) / 2;
+          drawMainStar(STARS[i].x, STARS[i].y, .75 + starPulse * .25, .9 + starPulse * .2);
+        }
       }
 
       rafId = requestAnimationFrame(frame);
     }
 
-    // only animate while canvas is on screen — saves battery
+    /* ── tap / click handler ── */
+    function handleTap(){
+      if (phase !== 'idle') return;   // only works from idle state
+      phaseStart  = globalTs;
+      phase       = 'fading';
+      promptAlpha = 1;
+    }
+    cvs.addEventListener('click',      handleTap);
+    cvs.addEventListener('touchstart', handleTap, { passive: true });
+    cvs.style.cursor = 'pointer';
+
+    /* ── start/stop RAF on scroll visibility — saves battery ── */
     if ('IntersectionObserver' in window){
       const io = new IntersectionObserver(entries => {
         entries.forEach(e => {
           if (e.isIntersecting){
-            if (!rafId) rafId = requestAnimationFrame(frame);
+            if (!rafId){
+              phaseStart = 0;
+              rafId = requestAnimationFrame(ts => {
+                phaseStart = ts;
+                globalTs   = ts;
+                rafId = requestAnimationFrame(frame);
+              });
+            }
           } else {
             if (rafId){ cancelAnimationFrame(rafId); rafId = null; }
           }
         });
-      }, { threshold: .15 });
+      }, { threshold: .12 });
       io.observe(cvs);
     } else {
+      phaseStart = performance.now();
       rafId = requestAnimationFrame(frame);
     }
   })();
