@@ -2074,6 +2074,81 @@
   .back-top:hover{ background: rgba(179,156,208,.15); color: var(--cream); }
 
   /* ============================================================
+     DAILY PITU BOX — Good Morning, Babui Pakhi
+     ============================================================ */
+  #daily{ padding-top: clamp(4rem,12vh,7rem); }
+
+  .daily-card{
+    max-width: var(--container);
+    margin: 0 auto;
+    background: linear-gradient(165deg, rgba(107,76,154,.22), rgba(24,17,38,.44));
+    border: 1px solid rgba(179,156,208,.28);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 26px;
+    padding: clamp(2rem,6vw,3.2rem) clamp(1.4rem,5vw,2.6rem);
+    box-shadow: 0 20px 60px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.06);
+    text-align: center;
+  }
+
+  .daily-day-badge{
+    display: inline-block;
+    font-size: .6rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    border: 1px solid rgba(179,156,208,.32);
+    border-radius: 999px;
+    padding: .38rem 1rem;
+    margin-bottom: 1.4rem;
+    opacity: .85;
+  }
+
+  .daily-msg{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.05rem, 4.2vw, 1.3rem);
+    line-height: 1.85;
+    color: var(--cream);
+    margin: 0;
+    animation: dailyMsgGlow 4s ease-in-out infinite;
+  }
+  @keyframes dailyMsgGlow{
+    0%,100%{ text-shadow: 0 0 14px rgba(179,156,208,.3), 0 0 40px rgba(107,76,154,.2); }
+    50%{     text-shadow: 0 0 28px rgba(179,156,208,.7), 0 0 70px rgba(107,76,154,.5); }
+  }
+
+  .daily-heart{
+    display: block;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    opacity: .55;
+    animation: dailyMsgGlow 4s ease-in-out infinite reverse;
+  }
+
+  /* ============================================================
+     OUR NIGHT SKY — constellation canvas
+     ============================================================ */
+  #nightsky{ padding-top: clamp(4rem,12vh,7rem); }
+
+  .nightsky-canvas-wrap{
+    max-width: min(92vw, 620px);
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+      0 20px 60px rgba(0,0,0,.55),
+      0 0 0 1px rgba(179,156,208,.18);
+  }
+
+  #constellationCanvas{
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+  }
+
+  /* ============================================================
      FLOATING MINI PLAYER
      ============================================================ */
   .mini-player{
@@ -2172,6 +2247,34 @@
       <span>keep going</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
     </a>
+  </section>
+
+  <!-- ============================================================
+       DAILY PITU BOX — Good Morning, Babui Pakhi
+       ============================================================ -->
+  <section id="daily">
+    <span class="eyebrow reveal">a reason to smile</span>
+    <h2 class="section-title reveal">Good Morning, Babui Pakhi</h2>
+    <p class="section-sub reveal">a message from Pitu, just for today</p>
+
+    <div class="daily-card reveal">
+      <span class="daily-day-badge" id="dailyBadge">Day 1 of 31</span>
+      <p class="daily-msg" id="dailyMsg"></p>
+      <span class="daily-heart" aria-hidden="true">💜</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       OUR NIGHT SKY — constellation canvas
+       ============================================================ -->
+  <section id="nightsky">
+    <span class="eyebrow reveal">under the same sky</span>
+    <h2 class="section-title reveal">Our Constellation</h2>
+    <p class="section-sub reveal">a heart drawn in stars, just for you</p>
+
+    <div class="nightsky-canvas-wrap reveal">
+      <canvas id="constellationCanvas" aria-label="An animated heart constellation in a night sky"></canvas>
+    </div>
   </section>
 
   <!-- ============================================================
@@ -2604,6 +2707,241 @@
   window.addEventListener('load', () => {
     setTimeout(() => gateInput.focus({ preventScroll: true }), 400);
   });
+
+  /* ============================================================
+     1. DAILY PITU BOX — day-of-month message
+     ============================================================ */
+  const DAILY_MSGS = [
+    'Good morning, my Babui Pakhi. Look at your hand today and remember—that ring is my promise. We are almost there.',
+    'No matter how hard today gets, remember I am fighting here in Dhaka just to bring you home.',
+    'You are the queen of my kingdom. Today, tomorrow, and every day after.',
+    'I might be buried in my 4-1 books today, but you are the only thing on my mind.',
+    'Take a deep breath. You are safe with me, even from miles away.',
+    'Every sunrise brings us one day closer to graduation. Hold on tight.',
+    'You are my ultimate peace. Never forget how much room you take up in my heart.',
+    'The distance between Khulna and Dhaka is nothing compared to how close our souls are.',
+    'When things get heavy at home, remember that your real home is waiting for you with me.',
+    'I love your gentle, stubborn hold. Have a beautiful day, my LOML.',
+    'Smile for me today. That smile is my favorite thing in the world.',
+    'You make this ordinary life feel like a cinematic love story.',
+    'I am so incredibly proud of you for being so strong. Keep going, my love.',
+    'Just a reminder: My dopamine and serotonin levels skyrocket just thinking about you.',
+    'You are not alone today. I am standing right beside you, holding your hand.',
+    'I would travel across the country in the dark a million times just to see you smile.',
+    'Your dignity and respect will always be my highest priority. I\'ve got you.',
+    'Don\'t let anyone dim your light today. You are my shining star.',
+    'Look at the ring. That\'s not just gold; that\'s my entire heart wrapped around your finger.',
+    'I am building our Shantir Ghor brick by patient brick. Have a peaceful day.',
+    'Every time I look at my textbooks, I just see the future I am building for us.',
+    'You are my highest prayer. May your day be as beautiful as your soul.',
+    'I don\'t just love you; I respect you, I cherish you, and I choose you every single day.',
+    'Remember Gollamari? Remember how I looked at you? I am looking at you like that right now.',
+    'No matter what happens today, my heart beats only for you.',
+    'You are the most beautiful girl in the world, inside and out.',
+    'Whenever you feel anxious, open the Breathe section. I am right there with you.',
+    'Our story is just beginning. The best chapters are yet to be written.',
+    'You are my favorite thought to wake up to, and my favorite thought to fall asleep to.',
+    'Keep fighting, my Babui Pakhi. The finish line is closer than you think.',
+    'I love you. More than words, more than distance, more than time.'
+  ];
+
+  (function initDailyPitu(){
+    const dayIdx  = new Date().getDate() - 1;           // 0-based, 0=1st, 30=31st
+    const safeIdx = Math.min(dayIdx, DAILY_MSGS.length - 1);
+    const dayNum  = dayIdx + 1;
+
+    document.getElementById('dailyMsg').textContent   = DAILY_MSGS[safeIdx];
+    document.getElementById('dailyBadge').textContent = `Day ${dayNum} of 31`;
+  })();
+
+  /* ============================================================
+     1b. OUR NIGHT SKY — animated heart constellation
+     ============================================================ */
+  (function initConstellation(){
+    const cvs = document.getElementById('constellationCanvas');
+    const ctx = cvs.getContext('2d');
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+    // logical size — canvas fills its CSS container but renders crisp
+    const W_LOGICAL = 620;
+    const H_LOGICAL = 400;
+    cvs.width  = W_LOGICAL * DPR;
+    cvs.height = H_LOGICAL * DPR;
+    ctx.scale(DPR, DPR);
+
+    /* ── ambient background stars ── */
+    const BG_STAR_COUNT = 110;
+    const bgStars = Array.from({ length: BG_STAR_COUNT }, () => ({
+      x:     Math.random() * W_LOGICAL,
+      y:     Math.random() * H_LOGICAL,
+      r:     Math.random() * 1.1 + .25,
+      phase: Math.random() * Math.PI * 2,
+      speed: Math.random() * .012 + .005
+    }));
+
+    /* ── heart constellation star positions ──
+       Parametric heart:  x = 16·sin³(t),  y = 13·cos(t) − 5·cos(2t) − 2·cos(3t) − cos(4t)
+       We sample 14 evenly-spaced t values to get the main stars, then scale + centre them.    */
+    const HEART_STEPS = 14;
+    const RAW = Array.from({ length: HEART_STEPS }, (_, k) => {
+      const t = (k / HEART_STEPS) * Math.PI * 2;
+      return {
+        rx:  16 * Math.sin(t) ** 3,
+        ry: -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t))
+      };
+    });
+
+    // scale to fit nicely inside the canvas
+    const SC   = 10.5;
+    const CX   = W_LOGICAL / 2;
+    const CY   = H_LOGICAL / 2 - 12;
+    const STARS = RAW.map(({ rx, ry }) => ({
+      x: CX + rx * SC,
+      y: CY + ry * SC
+    }));
+
+    /* ── animation state ── */
+    const DRAW_DURATION  = 3800;   // ms to fully draw the connecting line
+    const PULSE_DURATION = 2600;   // ms of one pulse cycle after complete
+    let startTime   = null;
+    let phase       = 'drawing';   // 'drawing' | 'pulsing'
+    let bgPhase     = 0;
+    let rafId       = null;
+
+    function drawBgStars(t){
+      for (const s of bgStars){
+        s.phase += s.speed;
+        const tw  = (Math.sin(s.phase) + 1) / 2;
+        ctx.globalAlpha = .18 + tw * .55;
+        ctx.fillStyle = '#f6f1fb';
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function drawMainStar(x, y, brightness){
+      // glow halo
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, 14);
+      grad.addColorStop(0,   `rgba(179,156,208,${(brightness * .7).toFixed(2)})`);
+      grad.addColorStop(.45, `rgba(107,76,154,${(brightness * .35).toFixed(2)})`);
+      grad.addColorStop(1,   'rgba(107,76,154,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(x, y, 14, 0, Math.PI * 2);
+      ctx.fill();
+
+      // bright core
+      ctx.globalAlpha = brightness;
+      ctx.fillStyle = '#f6f1fb';
+      ctx.beginPath();
+      ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    function drawConnections(progress, pulse){
+      // How many segments to draw (fractional)
+      const totalSegs  = STARS.length;            // closes back to index 0
+      const segsDone   = progress * totalSegs;
+      const fullSegs   = Math.floor(segsDone);
+      const partialPct = segsDone - fullSegs;
+
+      // line style — alpha pulses gently once drawing is complete
+      const alpha = phase === 'pulsing'
+        ? .55 + pulse * .35
+        : .72;
+      ctx.strokeStyle = `rgba(179,156,208,${alpha.toFixed(2)})`;
+      ctx.lineWidth   = phase === 'pulsing' ? 1.5 + pulse * .8 : 1.4;
+      ctx.lineCap     = 'round';
+      ctx.lineJoin    = 'round';
+      ctx.shadowColor = '#B39CD0';
+      ctx.shadowBlur  = phase === 'pulsing' ? 8 + pulse * 10 : 8;
+
+      ctx.beginPath();
+      ctx.moveTo(STARS[0].x, STARS[0].y);
+
+      for (let i = 1; i <= fullSegs; i++){
+        const si = i % STARS.length;
+        ctx.lineTo(STARS[si].x, STARS[si].y);
+      }
+
+      // partial last segment
+      if (fullSegs < totalSegs){
+        const fromStar = STARS[fullSegs % STARS.length];
+        const toStar   = STARS[(fullSegs + 1) % STARS.length];
+        ctx.lineTo(
+          fromStar.x + (toStar.x - fromStar.x) * partialPct,
+          fromStar.y + (toStar.y - fromStar.y) * partialPct
+        );
+      }
+
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+
+    function frame(ts){
+      if (!startTime) startTime = ts;
+      const elapsed = ts - startTime;
+
+      ctx.clearRect(0, 0, W_LOGICAL, H_LOGICAL);
+
+      // deep-space background gradient
+      const bg = ctx.createRadialGradient(CX, CY, 40, CX, CY, Math.max(W_LOGICAL, H_LOGICAL));
+      bg.addColorStop(0,   '#1a1230');
+      bg.addColorStop(.55, '#110c1e');
+      bg.addColorStop(1,   '#0b0c10');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, W_LOGICAL, H_LOGICAL);
+
+      drawBgStars(elapsed);
+
+      let progress, pulse = 0;
+      if (phase === 'drawing'){
+        progress = Math.min(1, elapsed / DRAW_DURATION);
+        if (progress >= 1){
+          phase     = 'pulsing';
+          startTime = ts;
+        }
+      } else {
+        progress = 1;
+        const pElapsed = ts - startTime;
+        pulse = (Math.sin((pElapsed / PULSE_DURATION) * Math.PI * 2) + 1) / 2;
+      }
+
+      if (progress > 0) drawConnections(progress, pulse);
+
+      // draw main stars — brighten leading star during drawing, all bright after
+      const litCount = phase === 'pulsing'
+        ? STARS.length
+        : Math.min(STARS.length, Math.floor(progress * STARS.length) + 1);
+
+      for (let i = 0; i < litCount; i++){
+        const isLeading  = (phase === 'drawing' && i === litCount - 1);
+        const brightness = isLeading ? .65 + pulse * .35 : 1;
+        drawMainStar(STARS[i].x, STARS[i].y, brightness);
+      }
+
+      rafId = requestAnimationFrame(frame);
+    }
+
+    // only animate while canvas is on screen — saves battery
+    if ('IntersectionObserver' in window){
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting){
+            if (!rafId) rafId = requestAnimationFrame(frame);
+          } else {
+            if (rafId){ cancelAnimationFrame(rafId); rafId = null; }
+          }
+        });
+      }, { threshold: .15 });
+      io.observe(cvs);
+    } else {
+      rafId = requestAnimationFrame(frame);
+    }
+  })();
 
   /* ============================================================
      2. GALLERY — build 11 polaroids: ring-moment first, then photo1–10
