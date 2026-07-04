@@ -2030,6 +2030,122 @@
   }
 
   /* ============================================================
+     YA'ABURNEE — my final wish
+     ============================================================ */
+  #yaaburnee{ padding-top: clamp(4rem,12vh,7rem); }
+
+  .yaaburnee-card{
+    max-width: min(90vw, 560px);
+    margin: 0 auto;
+    background: linear-gradient(165deg, rgba(24,17,38,.7), rgba(11,12,16,.9));
+    border: 1px solid rgba(179,156,208,.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 26px;
+    padding: clamp(2.4rem,7vw,3.8rem) clamp(1.6rem,6vw,2.8rem);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(1.1rem,4vh,1.7rem);
+    /* heartbeat pulse on the card shadow */
+    animation: heartbeatPulse 2.6s ease-in-out infinite;
+    box-shadow:
+      0 24px 70px rgba(0,0,0,.6),
+      0 0 0 1px rgba(179,156,208,.12),
+      0 0 60px rgba(107,76,154,.25);
+  }
+  @keyframes heartbeatPulse{
+    0%,100%{
+      box-shadow:
+        0 24px 70px rgba(0,0,0,.6),
+        0 0 0 1px rgba(179,156,208,.12),
+        0 0 60px rgba(107,76,154,.25);
+    }
+    /* first beat */
+    14%{
+      box-shadow:
+        0 28px 80px rgba(0,0,0,.65),
+        0 0 0 1px rgba(179,156,208,.32),
+        0 0 90px rgba(107,76,154,.55),
+        0 0 140px rgba(107,76,154,.2);
+    }
+    28%{
+      box-shadow:
+        0 24px 70px rgba(0,0,0,.6),
+        0 0 0 1px rgba(179,156,208,.15),
+        0 0 60px rgba(107,76,154,.28);
+    }
+    /* second beat */
+    42%{
+      box-shadow:
+        0 26px 75px rgba(0,0,0,.62),
+        0 0 0 1px rgba(179,156,208,.25),
+        0 0 80px rgba(107,76,154,.44),
+        0 0 120px rgba(107,76,154,.16);
+    }
+    /* settle */
+    58%{
+      box-shadow:
+        0 24px 70px rgba(0,0,0,.6),
+        0 0 0 1px rgba(179,156,208,.12),
+        0 0 60px rgba(107,76,154,.25);
+    }
+  }
+
+  .arabic-text{
+    display: block;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: clamp(3rem, 10vw, 4.5rem);
+    line-height: 1.3;
+    letter-spacing: .04em;
+    background: linear-gradient(145deg, #f0d080, #f5e4a0, #d4a843, #f0d080);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: arabicGlow 5s ease-in-out infinite, arabicShimmer 6s linear infinite;
+  }
+  @keyframes arabicGlow{
+    0%,100%{ filter: drop-shadow(0 0 12px rgba(212,168,67,.45)); }
+    50%{     filter: drop-shadow(0 0 32px rgba(212,168,67,.85)) drop-shadow(0 0 60px rgba(212,168,67,.35)); }
+  }
+  @keyframes arabicShimmer{
+    0%{ background-position: 0% center; }
+    100%{ background-position: 200% center; }
+  }
+
+  .bengali-meaning{
+    font-family: var(--font-bn);
+    font-size: clamp(1.1rem, 4.5vw, 1.4rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--cream);
+    margin: 0;
+    letter-spacing: .01em;
+    text-shadow: 0 0 20px rgba(246,241,251,.18);
+  }
+
+  .yaaburnee-divider{
+    width: 52px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212,168,67,.5), rgba(179,156,208,.5), transparent);
+    opacity: .85;
+  }
+
+  .yaaburnee-desc{
+    font-family: var(--font-bn);
+    font-size: clamp(.92rem, 4vw, 1.1rem);
+    font-weight: 500;
+    line-height: 2.1;
+    color: var(--cream-dim);
+    margin: 0;
+    max-width: 38ch;
+    text-align: center;
+  }
+
+  /* ============================================================
      FOOTER
      ============================================================ */
   footer{
@@ -2588,6 +2704,27 @@
       <p class="capsule-msg" id="capsuleMsg" aria-live="polite" aria-atomic="true">
         Not yet, Babui Pakhi. Wait for me.<br>This opens on Graduation Day.
       </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       YA'ABURNEE — my final wish
+       ============================================================ -->
+  <section id="yaaburnee">
+    <span class="eyebrow reveal">my final wish</span>
+    <h2 class="section-title reveal">Ya'aburnee</h2>
+    <p class="section-sub reveal">يَقْبُرْنِي &thinsp;—&thinsp; may you bury me</p>
+
+    <div class="yaaburnee-card reveal">
+
+      <span class="arabic-text" aria-hidden="true" dir="rtl" lang="ar">يَقْبُرْنِي</span>
+
+      <h3 class="bengali-meaning">"তুমি আমাকে কবর দিও..."</h3>
+
+      <div class="yaaburnee-divider" aria-hidden="true"></div>
+
+      <p class="yaaburnee-desc">কারণ তোমাকে ছাড়া এই পৃথিবীতে বেঁচে থাকার কথা আমি কল্পনাও করতে পারি না। আমার জীবনের প্রথম থেকে শেষ নিঃশ্বাস পর্যন্ত শুধু তুমি।</p>
+
     </div>
   </section>
 
