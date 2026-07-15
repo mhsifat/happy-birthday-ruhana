@@ -1189,131 +1189,91 @@
   }
 
   /* ============================================================
-     HER MASTERPIECE — Your Words, My Peace (poem section)
+     REASONS TO MARRY — Why October 16th?
      ============================================================ */
-  #poem{ padding-top: clamp(4rem,12vh,7rem); }
+  #reasons-to-marry{ padding-top: clamp(4rem,12vh,7rem); }
 
-  .poem-card{
+  .reasons-card{
     max-width: var(--container);
     margin: 0 auto;
-    background: linear-gradient(165deg, rgba(107,76,154,.19), rgba(24,17,38,.48));
-    border: 1px solid transparent;
-    background-clip: padding-box;
-    border-radius: 26px;
-    position: relative;
-    isolation: isolate;
-    box-shadow:
-      0 20px 64px rgba(0,0,0,.45),
-      0  0  60px rgba(241,201,220,.06),
-      inset 0 1px 0 rgba(255,255,255,.07);
-    padding: clamp(2.2rem,7vw,3.4rem) clamp(1.6rem,6vw,3rem);
+    background: linear-gradient(165deg, rgba(107,76,154,.2), rgba(24,17,38,.48));
+    border: 1px solid rgba(241,201,220,.3);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
+    border-radius: 26px;
+    padding: clamp(2rem,6vw,3.2rem) clamp(1.5rem,5vw,2.6rem);
+    box-shadow:
+      0 20px 60px rgba(0,0,0,.42),
+      0 0 0 1px rgba(241,201,220,.08),
+      0 0 48px rgba(179,156,208,.1),
+      inset 0 1px 0 rgba(255,255,255,.06);
+    text-align: center;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
-  }
-
-  /* glowing blush-gold gradient border via ::before pseudo-element */
-  .poem-card::before{
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1.5px;
-    background: linear-gradient(
-      145deg,
-      rgba(241,201,220,.7)   0%,
-      rgba(218,165,105,.55) 35%,
-      rgba(179,156,208,.5)  65%,
-      rgba(241,201,220,.6)  100%
-    );
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    animation: poemBorderGlow 5s ease-in-out infinite;
-  }
-  @keyframes poemBorderGlow{
-    0%,100%{ opacity: .7; }
-    50%{ opacity: 1; }
-  }
-
-  /* attribution line above couplet */
-  .poem-byline{
-    font-size: .68rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--blush);
-    opacity: .85;
-    text-align: center;
-    margin: 0 0 1.6rem;
-  }
-
-  /* verse body — fixed height so the card never jumps */
-  .poem-body{
-    font-family: var(--font-bn);
-    font-size: clamp(1.02rem, 4.2vw, 1.22rem);
-    font-weight: 500;
-    line-height: 2.05;
-    color: var(--cream);
-    text-align: center;
-    margin: 0 auto;
-    min-height: 5.5em;        /* fits the tallest two-line couplet comfortably */
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: .2em;
-    transition: opacity .38s ease;
+    gap: clamp(.8rem,3vh,1.2rem);
   }
-  .poem-body.fade{ opacity: 0; }
-
-  .poem-line{
-    display: block;
-    line-height: 1.95;
+  .reasons-card:hover{
+    box-shadow:
+      0 26px 70px rgba(0,0,0,.52),
+      0 0 0 1px rgba(241,201,220,.22),
+      0 0 64px rgba(179,156,208,.22);
   }
+  .reasons-card:active{ transform: scale(.97); }
+  .reasons-card:focus-visible{ outline: 2px solid var(--lavender); outline-offset: 6px; }
 
-  /* the stanza divider */
-  .poem-divider{
-    width: 56px;
-    height: 1px;
-    margin: 1.5rem auto;
-    background: linear-gradient(90deg, transparent, rgba(218,165,105,.55), rgba(241,201,220,.55), transparent);
-    opacity: .8;
-  }
-
-  /* poet attribution */
-  .poem-attribution{
-    text-align: right;
+  .reasons-card .quote-mark{
     font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(.88rem, 3.8vw, 1.05rem);
-    color: var(--blush);
-    text-shadow: 0 0 18px rgba(241,201,220,.45);
-    margin: 0;
+    font-size: clamp(2.4rem,9vw,3.6rem);
+    line-height: .8;
+    color: var(--lavender);
+    opacity: .38;
+    display: block;
+    margin-bottom: -.2rem;
   }
 
-  /* tap hint / counter */
-  .poem-hint{
-    display: block;
+  .reasons-body{
+    min-height: 6.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    transition: opacity .4s ease;
+  }
+  .reasons-body.fade{ opacity: 0; }
+
+  .reason-text{
+    font-family: var(--font-bn);
+    font-size: clamp(1.1rem, 4.5vw, 1.35rem);
+    font-weight: 500;
+    line-height: 2;
+    color: var(--cream);
     text-align: center;
-    margin-top: 1.3rem;
-    font-size: .64rem;
-    letter-spacing: .2em;
+    margin: 0;
+    padding: 0 .25rem;
+  }
+
+  .reasons-divider{
+    width: 52px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(241,201,220,.5), rgba(179,156,208,.45), transparent);
+    opacity: .85;
+  }
+
+  .reasons-hint{
+    display: block;
+    font-size: .61rem;
+    letter-spacing: .22em;
     text-transform: uppercase;
     color: var(--lavender);
-    opacity: .7;
-    transition: opacity .3s ease;
-    pointer-events: none;
+    opacity: .65;
+    transition: opacity .3s var(--ease);
   }
-  .poem-card:hover .poem-hint,
-  .poem-card:active .poem-hint{ opacity: 1; }
+  .reasons-card:hover .reasons-hint{ opacity: 1; }
 
   /* ============================================================
      THE FOREVER CLOCK — Since Our Promise
@@ -2291,33 +2251,20 @@
   </section>
 
   <!-- ============================================================
-       HER MASTERPIECE — Your Words, My Peace (Ruhana's poem)
+       REASONS TO MARRY — Why October 16th?
        ============================================================ -->
-  <section id="poem">
-    <span class="eyebrow reveal">her masterpiece</span>
-    <h2 class="section-title reveal">Your Words, My Peace</h2>
-    <p class="section-sub reveal">written by the girl who holds my entire world</p>
+  <section id="reasons-to-marry">
+    <span class="eyebrow reveal">my greatest victory</span>
+    <h2 class="section-title reveal">Why October 16th?</h2>
+    <p class="section-sub reveal">tap the card to see why my heart chose you</p>
 
-    <div
-      class="poem-card reveal"
-      id="poemCard"
-      lang="bn"
-      role="button"
-      tabindex="0"
-      aria-label="Tap to read the next couplet"
-    >
-      <p class="poem-byline">— a poem by Ruhana —</p>
-
-      <div class="poem-body" id="poemBody" aria-live="polite" aria-atomic="true">
-        <span class="poem-line" id="poemLine1"></span>
-        <span class="poem-line" id="poemLine2"></span>
+    <div class="reasons-card reveal" id="reasonsCard" role="button" tabindex="0" aria-label="Tap to read another reason">
+      <div class="quote-mark">"</div>
+      <div class="reasons-body" id="reasonsBody" aria-live="polite">
+        <p class="reason-text" id="reasonText"></p>
       </div>
-
-      <div class="poem-divider" aria-hidden="true"></div>
-
-      <p class="poem-attribution">— Ruhana</p>
-
-      <span class="poem-hint" id="poemHint">tap to read next ✧ 1/9</span>
+      <div class="reasons-divider" aria-hidden="true"></div>
+      <span class="reasons-hint" id="reasonsHint">tap for another reason ✧</span>
     </div>
   </section>
 
@@ -2555,7 +2502,7 @@
     <p class="section-sub reveal">the day you become mine forever</p>
 
     <div class="countdown-card reveal" id="quboolCard" role="button" tabindex="0" aria-label="Tap to reveal a message">
-      <p class="countdown-title-inner" aria-hidden="true">October 16, 2026 &nbsp;💍&nbsp; Qubool</p>
+      <p class="countdown-title-inner" aria-hidden="true">October 16, 2026 &nbsp;💍&nbsp; Qubool Hai</p>
 
       <div class="countdown-units" aria-live="polite" aria-label="Wedding countdown">
         <div class="countdown-unit">
@@ -3381,62 +3328,57 @@
   }
 
   /* ============================================================
-     4a. HER MASTERPIECE — interactive couplet reader
+     4a. REASONS TO MARRY — Why October 16th?
      ============================================================ */
-  const COUPLETS = [
-    ['মজার ছলে পিতা বলে ডাকতাম যারে,',          'ভাবিনি একদিন মনটা আমার দিয়ে দিব তারে।'],
-    ['ভাবিনি একদিন আপনি হবেন শুধুই আমার,',       'যার উপরে আছে আমার সম্পূর্ণ অধিকার।'],
-    ['দূরে থেকেও কতখানি আপন করে রাখেন,',         'সবসময়ই যেন আমার বুকের মাঝে থাকেন!'],
-    ['আমায় গুড নাইট না বলে কখনো ঘুমান না,',      'ছোট ছোট মান অভিমানও ভুলে যান না।'],
-    ['সবাইকে যে বলতে পারে আমার ভালোবাসে,',       'মনের মাঝে হঠাৎ হঠাৎ তার ছবিটাই ভাসে।'],
-    ['মাঝে মাঝে নিজেকে খুব ছোট মনে হয়,',         'হীনমন্যতায় জন্ম নেয় অদ্ভুত কিছু ভয়।'],
-    ['আপনি তখন স্পর্শ না করেও আমার পাশে থাকেন,', 'ভালোবাসা দিয়ে আমার দুঃখ কষ্ট ঢাকেন।'],
-    ['এই জীবনে আমার শুধু একটুখানিই প্রার্থনা,',   'সারাজীবন থাকুক এই ভালোবাসার ঠিকানা।'],
-    ['শেষ নিঃশ্বাস পর্যন্ত শুধু আপনাকেই চাই,',    'আপনি ছাড়া কোথায় বলেন এমন শান্তি পাই?']
+  const MARRIAGE_REASONS = [
+    'কারণ তোমার ওই চশমা পরা শান্ত মুখটা আমার সব ক্লান্তি দূর করে দেয়।',
+    'কারণ তুমি আমার অন্ধকারের একমাত্র আলো, আমার বেঁচে থাকার ডোপামিন।',
+    'কারণ পিটিআই মোড়ের ওই প্রথম আলিঙ্গনে আমি আমার পুরো পৃথিবী খুঁজে পেয়েছিলাম।',
+    'কারণ আমি চাই আমাদের নিজস্ব একটা শান্তির ঘর থাকুক, যেখানে আমরা ফোন বন্ধ করে একসাথে ডোরেমন দেখবো।',
+    'কারণ দুনিয়ার সব নিয়ম ভুলে আমি শুধু তোমাকেই আমার রাজ্যের একমাত্র রানি করে রাখতে চাই।',
+    'কারণ তোমার ওই মিষ্টি হাসিটা আমার বুয়েটের সব প্রেশার এসিটোনের মতো উড়িয়ে দেয়।',
+    'কারণ আমি আমার জীবনের শেষ নিঃশ্বাস পর্যন্ত তোমার সম্মান আর অধিকার রক্ষা করতে চাই।',
+    'কারণ দূরত্বের এই দেয়াল ভেঙে আমি তোমাকে চিরকালের জন্য আমার করে নিতে চাই।',
+    'কারণ তুমি আমাকে একজন ভালো মানুষ হতে শিখিয়েছো, তিল তিল করে আমাকে গড়েছো।',
+    'কারণ তোমাকে ছাড়া এই পৃথিবীতে আমার আর কোনো happily ever after নেই।'
   ];
 
-  const poemCard  = document.getElementById('poemCard');
-  const poemBody  = document.getElementById('poemBody');
-  const poemLine1 = document.getElementById('poemLine1');
-  const poemLine2 = document.getElementById('poemLine2');
-  const poemHint  = document.getElementById('poemHint');
+  const reasonsCard = document.getElementById('reasonsCard');
+  const reasonsBody = document.getElementById('reasonsBody');
+  const reasonText  = document.getElementById('reasonText');
+  const reasonsHint = document.getElementById('reasonsHint');
 
-  let poemIdx = 0;
-  let poemBusy = false;   // guard: ignore taps while crossfade is in progress
+  let reasonIdx  = 0;
+  let reasonBusy = false;
 
-  function renderCouplet(idx, animate){
-    const [l1, l2] = COUPLETS[idx];
+  function showReason(idx, animate){
+    const text = MARRIAGE_REASONS[idx];
+    reasonsHint.textContent = `tap for another reason ✧`;
     if (!animate){
-      poemLine1.textContent = l1;
-      poemLine2.textContent = l2;
-      poemHint.textContent  = `tap to read next ✧ ${idx + 1}/${COUPLETS.length}`;
+      reasonText.textContent = text;
       return;
     }
-    // fade out
-    poemBusy = true;
-    poemBody.classList.add('fade');
+    reasonBusy = true;
+    reasonsBody.classList.add('fade');
     setTimeout(() => {
-      poemLine1.textContent = l1;
-      poemLine2.textContent = l2;
-      poemHint.textContent  = `tap to read next ✧ ${idx + 1}/${COUPLETS.length}`;
-      poemBody.classList.remove('fade');
-      // keep busy locked for the full fade-in duration too
-      setTimeout(() => { poemBusy = false; }, 400);
-    }, 400);   // matches the .38s CSS opacity transition
+      reasonText.textContent = text;
+      reasonsBody.classList.remove('fade');
+      setTimeout(() => { reasonBusy = false; }, 420);
+    }, 400);
   }
 
-  // seed the first couplet without animation
-  renderCouplet(0, false);
+  // seed with the first reason (no animation)
+  showReason(0, false);
 
-  function advanceCouplet(){
-    if (poemBusy) return;
-    poemIdx = (poemIdx + 1) % COUPLETS.length;
-    renderCouplet(poemIdx, true);
+  function advanceReason(){
+    if (reasonBusy) return;
+    reasonIdx = (reasonIdx + 1) % MARRIAGE_REASONS.length;
+    showReason(reasonIdx, true);
   }
 
-  poemCard.addEventListener('click', advanceCouplet);
-  poemCard.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); advanceCouplet(); }
+  reasonsCard.addEventListener('click', advanceReason);
+  reasonsCard.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); advanceReason(); }
   });
 
   /* ============================================================
