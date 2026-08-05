@@ -2092,6 +2092,71 @@
   }
 
   /* ============================================================
+     SECRET EASTER EGG OVERLAY — triple-tap heroTitle
+     ============================================================ */
+  .secret-egg-overlay{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(11,12,16,.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .8s ease, visibility .8s ease;
+  }
+  .secret-egg-overlay.is-visible{
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .secret-egg-content{
+    text-align: center;
+    padding: 2rem;
+    max-width: 90vw;
+    width: min(580px, 90vw);
+  }
+
+  #secretEggText{
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    font-style: italic;
+    color: var(--lavender);
+    line-height: 1.8;
+    text-shadow: 0 0 15px rgba(179,156,208,.5);
+    margin: 0 0 2rem;
+    min-height: 1em;
+  }
+
+  .secret-egg-close{
+    border: 1px solid rgba(179,156,208,.35);
+    border-radius: 999px;
+    padding: .7rem 1.8rem;
+    font-family: var(--font-body);
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    background: rgba(179,156,208,.08);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .6s ease, transform .6s ease, background .3s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .secret-egg-close.show{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .secret-egg-close:hover{
+    background: rgba(179,156,208,.18);
+    color: var(--cream);
+  }
+
+  /* ============================================================
      FLOATING MINI PLAYER
      ============================================================ */
   .mini-player{
@@ -2156,7 +2221,7 @@
   <section id="hero">
     <div class="hero-inner">
       <span class="hero-kicker">তোমার জন্য, চিরকাল</span>
-      <h1 class="hero-title">Welcome Home,<br>Babui Pakhi 💜</h1>
+      <h1 class="hero-title" id="heroTitle">Welcome Home,<br>Babui Pakhi 💜</h1>
       <div class="hero-line"></div>
 
       <div class="player">
@@ -2234,13 +2299,13 @@
       <div class="divider"></div>
 
       <div class="letter-body">
-        <p>My <span class="pet-name">Babui Pakhi</span>, if you ever doubt how much room you take up in my life, it's all of it. The quiet parts, the busy parts, the parts I haven't lived yet. You didn't just enter my world; you became the reason it makes sense.</p>
+        <p>My <span class="pet-name">Babui Pakhi</span>, if you ever doubt how much room you take up in my life — it's all of it. The quiet parts, the busy parts, the parts I haven't lived yet. You didn't just enter my world, you became the reason it makes sense.</p>
 
-        <p>I want you to know this, plainly and without conditions: your dignity is something I will protect before I protect my own comfort. Every promise I make to you, I make as someone who has already decided you come first, not loudly, not for show, just quietly, every single day.</p>
+        <p>I want you to know this, plainly and without conditions: your dignity is something I will protect before I protect my own comfort. Every promise I make to you, I make as someone who has already decided you come first — not loudly, not for show, just quietly, every single day.</p>
 
-        <p>I know waiting isn't easy, and I'm asking you to wait a little longer, through my 4th year, through the long nights and the exams and the in-between so that what we build afterward stands on something steady. Not a rushed thing, but a <span class="pet-name">shantir ghor</span>, a peaceful home, built on purpose, brick by patient brick.</p>
+        <p>I know waiting isn't easy, and I'm asking you to wait a little longer — through my 4th year, through the long nights and the exams and the in-between — so that what we build afterward stands on something steady. Not a rushed thing, but a <span class="pet-name">shantir ghor</span>, a peaceful home, built on purpose, brick by patient brick.</p>
 
-        <p>So here's to 24 to the girl who made an ordinary life feel like it was always meant to be a love story. Happy birthday. I'm not going anywhere.</p>
+        <p>So here's to 24 — to the girl who made an ordinary life feel like it was always meant to be a love story. Happy birthday. I'm not going anywhere.</p>
       </div>
 
       <div class="letter-sign">
@@ -2502,7 +2567,7 @@
     <p class="section-sub reveal">the day you become mine forever</p>
 
     <div class="countdown-card reveal" id="quboolCard" role="button" tabindex="0" aria-label="Tap to reveal a message">
-      <p class="countdown-title-inner" aria-hidden="true">October 16, 2026 &nbsp;💍&nbsp; Qubool</p>
+      <p class="countdown-title-inner" aria-hidden="true">October 16, 2026 &nbsp;💍&nbsp; Qubool Hai</p>
 
       <div class="countdown-units" aria-live="polite" aria-label="Wedding countdown">
         <div class="countdown-unit">
@@ -2565,6 +2630,16 @@
     <p class="footer-sub reveal">See you at the finish line.</p>
     <a href="#hero" class="back-top reveal">back to the top</a>
   </footer>
+
+  <!-- ============================================================
+       SECRET EASTER EGG OVERLAY — revealed by triple-tapping the title
+       ============================================================ -->
+  <div class="secret-egg-overlay" id="secretEggOverlay" aria-hidden="true">
+    <div class="secret-egg-content">
+      <p id="secretEggText"></p>
+      <button type="button" class="secret-egg-close" id="secretEggClose" aria-label="Close secret message">close</button>
+    </div>
+  </div>
 
 </main>
 
@@ -3671,6 +3746,103 @@
     card.addEventListener('click',   handleQuboolTap);
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); handleQuboolTap(); }
+    });
+  })();
+
+  /* ============================================================
+     4f. SECRET EASTER EGG — triple-tap hero title within 2 seconds
+     ============================================================ */
+  (function initEasterEgg(){
+    const heroTitle = document.getElementById('heroTitle');
+    const overlay   = document.getElementById('secretEggOverlay');
+    const textEl    = document.getElementById('secretEggText');
+    const closeBtn  = document.getElementById('secretEggClose');
+
+    const EGG_MSG =
+      'You told the world you were lucky. But the truth is, all the 10²⁸ electrons in my body know that I am the luckiest man alive. I just secured the Queen of my kingdom. See you on October 16th, Mrs. Mehrab.';
+
+    const TRIPLE_TAP_THRESHOLD = 3;   // taps needed
+    const TAP_WINDOW_MS        = 2000; // within this many ms
+    const CHAR_DELAY_MS        = 40;   // ms per character
+
+    let tapCount  = 0;
+    let tapTimer  = null;
+    let typeTimer = null;
+    let isOpen    = false;
+
+    function resetTapCount(){
+      tapCount = 0;
+      clearTimeout(tapTimer);
+      tapTimer = null;
+    }
+
+    function typewriterWrite(str, onComplete){
+      textEl.textContent = '';
+      let i = 0;
+      function tick(){
+        if (i < str.length){
+          textEl.textContent += str[i];
+          i++;
+          typeTimer = setTimeout(tick, CHAR_DELAY_MS);
+        } else {
+          // typing done — fade in the close button
+          closeBtn.classList.add('show');
+          if (onComplete) onComplete();
+        }
+      }
+      tick();
+    }
+
+    function openEgg(){
+      if (isOpen) return;
+      isOpen = true;
+      overlay.setAttribute('aria-hidden', 'false');
+      overlay.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+      closeBtn.classList.remove('show');
+      // small delay so the overlay fade-in starts before typing begins
+      setTimeout(() => typewriterWrite(EGG_MSG), 500);
+    }
+
+    function closeEgg(){
+      overlay.classList.remove('is-visible');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      clearTimeout(typeTimer);
+      // wait for fade-out to finish, then clear text
+      setTimeout(() => {
+        textEl.textContent = '';
+        closeBtn.classList.remove('show');
+        isOpen = false;
+      }, 850);
+    }
+
+    // ── triple-tap detection ──
+    heroTitle.addEventListener('click', () => {
+      if (isOpen) return;
+      tapCount++;
+      if (tapCount === 1){
+        // start the window timer on the first tap
+        tapTimer = setTimeout(resetTapCount, TAP_WINDOW_MS);
+      }
+      if (tapCount >= TRIPLE_TAP_THRESHOLD){
+        resetTapCount();
+        openEgg();
+      }
+    });
+    heroTitle.style.cursor = 'pointer';
+
+    // ── close button ──
+    closeBtn.addEventListener('click', closeEgg);
+
+    // ── tap backdrop to close ──
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeEgg();
+    });
+
+    // ── Escape key ──
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) closeEgg();
     });
   })();
 
