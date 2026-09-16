@@ -8,6 +8,9 @@
 
 <!--
   ============================================================
+  OUR SHANTIR GHOR — MARRIAGE EDITION · CHAPTER II
+  Married on 11 September 2026. This is our home now.
+  ============================================================
   HOW TO MAKE THIS PAGE GO LIVE — read me first
   ============================================================
   This file expects media files to sit in the SAME FOLDER
@@ -25,10 +28,14 @@
   Nothing will break if a file is missing — the page shows a soft
   placeholder instead — but add them for the real experience.
 
-  The site now opens behind a private passcode gate. Accepted
+  The site opens behind a private passcode gate. Accepted
   answers (case-insensitive) live in the ANSWERS array near the
   top of the script — edit them there if you ever want to change
   the password.
+
+  CHAPTER II — OUR MARRIED LIFE grows over time: add new memories
+  to the MARRIED_MEMORIES array in the script (an image is
+  optional; a missing image shows a soft placeholder).
   ============================================================
 -->
 
@@ -48,6 +55,11 @@
     --blush:       #f1c9dc;
     --cream:       #f6f1fb;
     --cream-dim:   rgba(246,241,251,0.72);
+
+    /* gold = marriage */
+    --gold:        #d4a843;
+    --gold-soft:   #f0d080;
+    --gold-pale:   #f8e88a;
 
     --font-display: 'Playfair Display', serif;
     --font-bn:      'Noto Serif Bengali', serif;
@@ -330,12 +342,32 @@
     gap: clamp(1.4rem, 4vh, 2.2rem);
   }
 
+  /* a very soft golden warmth behind the title — the marriage glow */
+  .hero-inner::before{
+    content:'';
+    position:absolute;
+    left:50%;
+    top: 26%;
+    width: min(100vw, 640px);
+    height: min(90vw, 440px);
+    transform: translate(-50%, -50%);
+    background: radial-gradient(closest-side, rgba(212,168,67,.16), rgba(212,168,67,.055) 55%, rgba(212,168,67,0));
+    z-index: -1;
+    pointer-events: none;
+    animation: heroWarmth 8s ease-in-out infinite;
+  }
+  @keyframes heroWarmth{
+    0%,100%{ opacity: .7; }
+    50%{ opacity: 1; }
+  }
+
   .hero-kicker{
     font-family: var(--font-bn);
     font-size: clamp(1.05rem, 3.4vw, 1.3rem);
-    color: var(--blush);
+    color: #f2dcae;
     opacity:.9;
     letter-spacing: .02em;
+    text-shadow: 0 0 18px rgba(212,168,67,.25);
   }
 
   .hero-title{
@@ -360,7 +392,7 @@
   .hero-line{
     width: 64px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--lavender), transparent);
+    background: linear-gradient(90deg, transparent, var(--gold-soft), var(--lavender), transparent);
     opacity: .8;
   }
 
@@ -729,16 +761,58 @@
   }
 
   /* ============================================================
-     THE MILESTONE CARD — The Promise (Chapter 3)
+     THE ULTIMATE MILESTONE — September 11, 2026: The Kolma
      ============================================================ */
   #milestone{ padding-top: clamp(4rem,12vh,7rem); }
 
   .milestone-wrap{
+    position: relative;
     max-width: 380px;
     margin: 0 auto;
   }
 
+  /* the wedding-ring halo that sits behind the card */
+  .milestone-halo{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .milestone-halo::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    border: 1px solid rgba(212,168,67,.3);
+    box-shadow: 0 0 44px rgba(212,168,67,.16), inset 0 0 44px rgba(212,168,67,.09);
+    animation: haloBreath 6s ease-in-out infinite;
+  }
+  .milestone-halo::after{
+    content:'';
+    position:absolute;
+    inset:-1px;
+    border-radius:50%;
+    background: conic-gradient(from 0deg, rgba(248,232,138,0) 0 68%, rgba(248,232,138,.6) 82%, rgba(248,232,138,0) 93%);
+    -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
+            mask: radial-gradient(closest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
+    animation: ringSpin 16s linear infinite;
+  }
+  @keyframes haloBreath{
+    0%,100%{ opacity: .6; transform: scale(1); }
+    50%{     opacity: 1;  transform: scale(1.03); }
+  }
+  @keyframes ringSpin{
+    to{ transform: rotate(360deg); }
+  }
+
   .milestone-card{
+    position: relative;
+    z-index: 1;
     perspective: 1300px;
     min-height: clamp(238px, 58vw, 296px);
     cursor: pointer;
@@ -772,13 +846,14 @@
     justify-content: center;
     text-align: center;
     background: linear-gradient(165deg, rgba(107,76,154,.2), rgba(24,17,38,.55));
-    border: 1px solid rgba(212,168,67,.58);
+    border: 1px solid rgba(212,168,67,.62);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow:
       0 16px 44px rgba(0,0,0,.45),
-      0 0 32px rgba(212,168,67,.3),
-      0 0 76px rgba(212,168,67,.16);
+      0 0 32px rgba(212,168,67,.32),
+      0 0 76px rgba(212,168,67,.18),
+      inset 0 0 0 1px rgba(248,232,138,.06);
   }
 
   .milestone-ring-emoji{
@@ -803,6 +878,13 @@
     margin: 0 0 .5rem;
     animation: goldenGlow 4.2s ease-in-out infinite;
   }
+  .milestone-date .milestone-title{
+    display: block;
+    margin-top: .25rem;
+    font-style: italic;
+    font-size: 1.3em;
+    color: var(--gold-pale);
+  }
   @keyframes goldenGlow{
     0%,100%{ text-shadow: 0 0 12px rgba(212,168,67,.45); }
     50%{     text-shadow: 0 0 28px rgba(212,168,67,.9), 0 0 56px rgba(212,168,67,.35); }
@@ -819,17 +901,17 @@
   .milestone-back{
     transform: rotateY(180deg);
     background: linear-gradient(165deg, rgba(140,105,30,.25), rgba(24,17,38,.62));
-    border-color: rgba(212,168,67,.46);
+    border-color: rgba(212,168,67,.5);
   }
 
   .milestone-back-text{
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(.88rem, 3.8vw, 1.08rem);
-    line-height: 1.85;
+    font-family: var(--font-bn);
+    font-weight: 500;
+    font-size: clamp(.98rem, 4.2vw, 1.18rem);
+    line-height: 1.95;
     color: var(--cream);
     margin: 0;
-    text-shadow: 0 0 16px rgba(212,168,67,.28);
+    text-shadow: 0 0 16px rgba(212,168,67,.3);
   }
 
   /* ============================================================
@@ -863,6 +945,10 @@
     transition: transform .45s var(--ease), box-shadow .45s var(--ease), z-index 0s;
     cursor: pointer;
     will-change: transform;
+  }
+  /* small phones: let each polaroid use its column instead of the default figure margins */
+  @media (max-width: 619px){
+    .polaroid{ margin-left: .35rem; margin-right: .35rem; }
   }
   .polaroid:nth-child(5n+1){ --r: -6deg; align-self: start; }
   .polaroid:nth-child(5n+2){ --r: 4deg;  align-self: end; margin-top: clamp(1rem,5vw,2.4rem); }
@@ -1199,16 +1285,16 @@
     max-width: var(--container);
     margin: 0 auto;
     background: linear-gradient(165deg, rgba(107,76,154,.2), rgba(24,17,38,.48));
-    border: 1px solid rgba(241,201,220,.3);
+    border: 1px solid rgba(212,168,67,.32);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border-radius: 26px;
     padding: clamp(2rem,6vw,3.2rem) clamp(1.5rem,5vw,2.6rem);
     box-shadow:
       0 20px 60px rgba(0,0,0,.42),
-      0 0 0 1px rgba(241,201,220,.08),
+      0 0 0 1px rgba(241,201,220,.06),
       0 0 48px rgba(179,156,208,.1),
-      0 0 40px rgba(212,168,67,.08),
+      0 0 44px rgba(212,168,67,.1),
       inset 0 1px 0 rgba(255,255,255,.06);
     text-align: center;
     cursor: pointer;
@@ -1223,25 +1309,33 @@
   .reasons-card:hover{
     box-shadow:
       0 26px 70px rgba(0,0,0,.52),
-      0 0 0 1px rgba(241,201,220,.22),
-      0 0 64px rgba(179,156,208,.22),
-      0 0 54px rgba(212,168,67,.13);
+      0 0 0 1px rgba(212,168,67,.22),
+      0 0 64px rgba(179,156,208,.2),
+      0 0 58px rgba(212,168,67,.16);
   }
   .reasons-card:active{ transform: scale(.97); }
-  .reasons-card:focus-visible{ outline: 2px solid var(--lavender); outline-offset: 6px; }
+  .reasons-card:focus-visible{ outline: 2px solid var(--gold-soft); outline-offset: 6px; }
 
   .reasons-card .quote-mark{
     font-family: var(--font-display);
     font-size: clamp(2.4rem,9vw,3.6rem);
     line-height: .8;
-    color: var(--lavender);
-    opacity: .38;
+    color: var(--gold-soft);
+    opacity: .42;
     display: block;
     margin-bottom: -.2rem;
   }
 
+  .vow-count{
+    display: block;
+    font-size: .6rem;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: rgba(240,208,128,.78);
+  }
+
   .reasons-body{
-    min-height: 6.5em;
+    min-height: 8em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1252,19 +1346,20 @@
 
   .reason-text{
     font-family: var(--font-bn);
-    font-size: clamp(1.1rem, 4.5vw, 1.35rem);
+    font-size: clamp(1.08rem, 4.4vw, 1.35rem);
     font-weight: 500;
     line-height: 2;
     color: var(--cream);
     text-align: center;
     margin: 0;
     padding: 0 .25rem;
+    max-width: 34ch;
   }
 
   .reasons-divider{
     width: 52px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(241,201,220,.5), rgba(179,156,208,.45), transparent);
+    background: linear-gradient(90deg, transparent, rgba(212,168,67,.55), rgba(179,156,208,.45), transparent);
     opacity: .85;
   }
 
@@ -1715,6 +1810,7 @@
     position: relative;
     overflow: hidden;
   }
+  .countdown-card:focus-visible{ outline: 2px solid var(--gold-soft); outline-offset: 6px; }
 
   /* bridal shimmer sweep */
   .countdown-card::before{
@@ -1766,6 +1862,7 @@
     font-weight: 700;
     font-size: clamp(2rem,8.5vw,3.4rem);
     line-height: 1.05;
+    font-variant-numeric: tabular-nums;
     background: linear-gradient(160deg, #f8e88a 0%, #f0d080 40%, #d4a843 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -1775,8 +1872,8 @@
     animation: countdownGlow 3.5s ease-in-out infinite;
   }
   @keyframes countdownGlow{
-    0%,100%{ filter: drop-shadow(0 0 10px rgba(212,168,67,.5)); }
-    50%{     filter: drop-shadow(0 0 24px rgba(212,168,67,.95)); }
+    0%,100%{ filter: drop-shadow(0 0 8px rgba(212,168,67,.45)); }
+    50%{     filter: drop-shadow(0 0 20px rgba(212,168,67,.85)); }
   }
 
   .countdown-label{
@@ -1796,6 +1893,19 @@
     line-height: 1.2;
     padding-top: .05em;
     user-select: none;
+  }
+
+  /* small phones: a calm four-column grid so nothing overflows */
+  @media (max-width: 520px){
+    .countdown-units{
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: .3rem;
+    }
+    .countdown-sep{ display: none; }
+    .countdown-unit{ min-width: 0; }
+    .countdown-number{ font-size: clamp(1.45rem, 7.4vw, 2.2rem); }
+    .countdown-label{ letter-spacing: .1em; }
   }
 
   .countdown-divider{
@@ -1979,12 +2089,24 @@
   }
 
   /* ============================================================
-     FOOTER
+     FOOTER — the quiet end of our first married chapter
      ============================================================ */
   footer{
     position:relative;
     text-align:center;
     padding: clamp(4rem,10vh,6rem) 1.5rem clamp(3rem,8vh,4rem);
+  }
+  footer::before{
+    content:'';
+    position:absolute;
+    left:50%;
+    top: clamp(2rem,6vh,3.5rem);
+    width: min(88vw, 460px);
+    height: 260px;
+    transform: translateX(-50%);
+    background: radial-gradient(closest-side, rgba(212,168,67,.11), rgba(212,168,67,0));
+    pointer-events:none;
+    z-index: -1;
   }
   .footer-stars{
     font-size: .8rem;
@@ -1999,7 +2121,7 @@
     font-weight:600;
     font-size: clamp(1.3rem, 5vw, 1.8rem);
     color: var(--cream);
-    text-shadow: 0 0 24px rgba(179,156,208,.45);
+    text-shadow: 0 0 24px rgba(179,156,208,.45), 0 0 36px rgba(212,168,67,.22);
     margin: 0 0 .6rem;
   }
   .footer-sub{
@@ -2189,9 +2311,693 @@
   .mini-player.is-playing .icon-play{ display:none; }
   .mini-player.is-playing .icon-pause{ display:block; }
   .mini-player.is-playing{ animation: pulseRing 2.2s ease-out infinite; }
+
+  /* ============================================================
+     ============================================================
+     MARRIAGE EDITION · CHAPTER II
+     Gold is the marriage. Purple is still us.
+     ============================================================
+     ============================================================ */
+
+  /* ---- hidden SVG sprite for the Shantir Ghor home motif ---- */
+  .sprite{
+    position: absolute;
+    width: 0; height: 0;
+    overflow: hidden;
+  }
+
+  .home-motif{
+    display: block;
+    width: 28px; height: 28px;
+    color: var(--gold-soft);
+    filter: drop-shadow(0 0 6px rgba(212,168,67,.55));
+    flex: 0 0 auto;
+  }
+
+  .home-divider{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .9rem;
+    margin: 0 auto;
+  }
+  .home-divider::before,
+  .home-divider::after{
+    content:'';
+    width: clamp(36px, 12vw, 70px);
+    height: 1px;
+    background: linear-gradient(90deg, rgba(212,168,67,0), rgba(212,168,67,.55));
+  }
+  .home-divider::after{
+    background: linear-gradient(90deg, rgba(212,168,67,.55), rgba(212,168,67,0));
+  }
+
+  /* ---- the golden marriage thread that ties the new chapter together ---- */
+  section.thread::before,
+  section.thread::after{
+    content:'';
+    position: absolute;
+    left: 50%;
+    width: 1px;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  section.thread::before{
+    top: 0;
+    height: clamp(2.2rem, 8vh, 4.4rem);
+    background: linear-gradient(180deg, rgba(212,168,67,.42), rgba(212,168,67,0));
+  }
+  section.thread::after{
+    bottom: 0;
+    height: clamp(3rem, 10vh, 6rem);
+    background: linear-gradient(180deg, rgba(212,168,67,0), rgba(212,168,67,.42));
+  }
+  section.thread-start::before{
+    background: linear-gradient(180deg, rgba(212,168,67,0), rgba(212,168,67,.38), rgba(212,168,67,0));
+  }
+  section.thread-end::after{ display: none; }
+
+  /* ---- 2. WE ARE MARRIED — a quiet chapter marker ---- */
+  #married{
+    padding: clamp(4rem, 11vh, 6.5rem) 1.5rem;
+    contain-intrinsic-size: auto 460px;
+    text-align: center;
+  }
+  .married-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ring-mark{
+    position: relative;
+    width: 58px;
+    height: 58px;
+    margin: 6px 0 1.3rem;
+  }
+  .ring-mark::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    border: 1.5px solid rgba(240,208,128,.85);
+    box-shadow: 0 0 16px rgba(212,168,67,.4), inset 0 0 10px rgba(212,168,67,.22);
+    animation: ringBreath 5s ease-in-out infinite;
+  }
+  .ring-mark::after{
+    content:'';
+    position:absolute;
+    inset:-1px;
+    border-radius:50%;
+    background: conic-gradient(from 0deg, rgba(248,232,138,0) 0 76%, rgba(255,246,200,.95) 86%, rgba(248,232,138,0) 95%);
+    -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+            mask: radial-gradient(closest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+    animation: ringSpin 9s linear infinite;
+  }
+  .ring-gem{
+    position:absolute;
+    top: -6px;
+    left: 50%;
+    width: 11px;
+    height: 11px;
+    transform: translateX(-50%) rotate(45deg);
+    border-radius: 1.5px;
+    background: linear-gradient(135deg, #fffbe8 0%, var(--gold-pale) 40%, var(--gold) 100%);
+    box-shadow: 0 0 12px rgba(248,232,138,.85);
+    z-index: 1;
+  }
+  @keyframes ringBreath{
+    0%,100%{ box-shadow: 0 0 12px rgba(212,168,67,.32), inset 0 0 8px rgba(212,168,67,.18); }
+    50%{     box-shadow: 0 0 26px rgba(212,168,67,.65), inset 0 0 14px rgba(212,168,67,.32); }
+  }
+
+  .married-date{
+    margin: 0;
+    padding-left: .14em;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.55rem, 6.6vw, 2.35rem);
+    letter-spacing: .14em;
+    line-height: 1.2;
+    background: linear-gradient(160deg, var(--gold-pale) 0%, var(--gold-soft) 45%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 12px rgba(212,168,67,.42));
+  }
+  .married-date .dot{
+    font-size: .55em;
+    vertical-align: .3em;
+    letter-spacing: .1em;
+  }
+  .married-title{
+    margin: .95rem 0 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(1.35rem, 5.4vw, 2rem);
+    line-height: 1.35;
+    color: var(--cream);
+    text-shadow: 0 0 22px rgba(179,156,208,.45);
+  }
+  .married-sub{
+    margin: .45rem 0 0;
+    font-size: clamp(.86rem, 3.4vw, .98rem);
+    line-height: 1.7;
+    color: var(--cream-dim);
+    letter-spacing: .02em;
+  }
+  .married-bn{
+    margin: 1.2rem 0 0;
+    font-family: var(--font-bn);
+    font-size: .92rem;
+    color: rgba(240,208,128,.78);
+    letter-spacing: .04em;
+  }
+
+  /* ---- Forever Began: a small line under the clock ---- */
+  .forever-foot{
+    display: block;
+    max-width: 36ch;
+    margin: clamp(1rem,3vh,1.4rem) auto 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.82rem, 3.3vw, .95rem);
+    color: var(--cream-dim);
+  }
+
+  /* ---- 4. A NEW CHAPTER ---- */
+  #new-chapter{ padding-top: clamp(4rem,12vh,7rem); }
+
+  .chapter-card{
+    position: relative;
+    border-color: rgba(212,168,67,.3);
+    box-shadow:
+      0 20px 60px rgba(0,0,0,.42),
+      0 0 54px rgba(212,168,67,.07),
+      inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  .chapter-card::before{
+    content:'';
+    position:absolute;
+    top:-1px;
+    left:50%;
+    transform: translateX(-50%);
+    width: 42%;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(240,208,128,0), rgba(240,208,128,.75), rgba(240,208,128,0));
+  }
+  .chapter-bn{
+    font-family: var(--font-bn);
+    font-weight: 600;
+    font-size: clamp(1.15rem, 4.2vw, 1.5rem);
+    line-height: 1.85;
+    text-align: center;
+    margin: 0 auto 2.1rem;
+    max-width: 24ch;
+    background: linear-gradient(135deg, var(--cream) 15%, var(--gold-soft) 58%, var(--lavender) 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .chapter-body p{
+    font-size: .98rem;
+    line-height: 1.95;
+    color: var(--cream-dim);
+    margin: 0 0 1.3rem;
+  }
+  .chapter-body p:last-child{ margin-bottom: 0; }
+  .chapter-body .gold-em{
+    color: var(--gold-soft);
+    font-style: italic;
+  }
+  .chapter-body .pet-name{
+    color: var(--blush);
+    font-style: italic;
+  }
+  .chapter-sign{
+    margin-top: 2.2rem;
+    text-align: right;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--cream);
+  }
+  .chapter-sign small{
+    display: block;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: .66rem;
+    letter-spacing: .1em;
+    color: var(--gold-soft);
+    text-transform: uppercase;
+    margin-top: .3rem;
+    opacity: .85;
+  }
+
+  /* ---- 7. YOUR PLACE IN OUR SHANTIR GHOR ---- */
+  #your-place{ padding-top: clamp(4rem,12vh,7rem); }
+
+  .place-grid{
+    max-width: var(--container);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(.75rem, 2.5vw, 1rem);
+  }
+  @media (min-width: 560px){
+    .place-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  .place-item{
+    position: relative;
+    margin: 0;
+    padding: 1.1rem 1.2rem 1.15rem 2.6rem;
+    border-radius: 18px;
+    background: linear-gradient(165deg, rgba(107,76,154,.18), rgba(24,17,38,.46));
+    border: 1px solid rgba(179,156,208,.2);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 12px 34px rgba(0,0,0,.32);
+    transition: border-color .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  .place-item:hover{
+    border-color: rgba(212,168,67,.42);
+    box-shadow: 0 16px 40px rgba(0,0,0,.4), 0 0 28px rgba(212,168,67,.12);
+  }
+  .place-item::before{
+    content:'';
+    position: absolute;
+    left: 1.15rem;
+    top: 1.5rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--gold-pale), var(--gold));
+    box-shadow: 0 0 10px rgba(212,168,67,.75);
+  }
+  .place-item h3{
+    margin: 0 0 .3rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--gold-soft);
+  }
+  .place-item p{
+    margin: 0;
+    font-size: .86rem;
+    line-height: 1.7;
+    color: var(--cream-dim);
+  }
+  .place-close{
+    max-width: 36ch;
+    margin: clamp(2.2rem,6vh,3rem) auto 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    line-height: 1.75;
+    color: var(--cream);
+    text-shadow: 0 0 18px rgba(179,156,208,.3);
+  }
+  .place-home{ margin-top: 1.5rem; }
+
+  /* ---- 8. THE LITTLE THINGS ---- */
+  #little-things{ padding-top: clamp(4rem,12vh,7rem); }
+
+  .little-grid{
+    max-width: 660px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .65rem;
+    align-items: start;
+  }
+  @media (min-width: 540px){
+    .little-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  .little-item{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: .8rem;
+    padding: .85rem 1rem;
+    text-align: left;
+    font: inherit;
+    color: var(--cream);
+    cursor: pointer;
+    border-radius: 14px;
+    border: 1px solid rgba(179,156,208,.2);
+    background: rgba(24,17,38,.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: border-color .4s var(--ease), background .4s var(--ease), box-shadow .4s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .little-item:hover{ border-color: rgba(179,156,208,.4); }
+  .little-item:focus-visible{ outline: 2px solid var(--gold-soft); outline-offset: 3px; }
+
+  .little-mark{
+    position: relative;
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    margin-top: .18rem;
+    border-radius: 50%;
+    border: 1px solid rgba(212,168,67,.55);
+    transition: background .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  .little-mark::after{
+    content:'';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 9px;
+    border: solid var(--void);
+    border-width: 0 1.6px 1.6px 0;
+    transform: rotate(45deg) scale(0);
+    transition: transform .35s var(--ease);
+  }
+  .little-copy{ display: block; min-width: 0; }
+  .little-title{
+    display: block;
+    font-size: .88rem;
+    line-height: 1.55;
+    color: var(--cream);
+  }
+  .little-detail{
+    display: block;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: .86rem;
+    line-height: 1.6;
+    color: rgba(240,208,128,.88);
+    transition: max-height .5s var(--ease), opacity .5s var(--ease), margin-top .5s var(--ease);
+  }
+  .little-item.lit{
+    border-color: rgba(212,168,67,.5);
+    background: linear-gradient(165deg, rgba(140,105,30,.14), rgba(24,17,38,.52));
+    box-shadow: 0 0 22px rgba(212,168,67,.12);
+  }
+  .little-item.lit .little-mark{
+    background: radial-gradient(circle, var(--gold-pale), var(--gold));
+    box-shadow: 0 0 10px rgba(212,168,67,.7);
+  }
+  .little-item.lit .little-mark::after{ transform: rotate(45deg) scale(1); }
+  .little-item.lit .little-detail{
+    max-height: 7em;
+    opacity: 1;
+    margin-top: .25rem;
+  }
+  .little-hint{
+    display: block;
+    text-align: center;
+    margin-top: 1.3rem;
+    font-size: .61rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    opacity: .65;
+  }
+  .little-done{
+    min-height: 1.7em;
+    margin: .8rem auto 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: .98rem;
+    color: var(--gold-soft);
+    opacity: 0;
+    transition: opacity .9s var(--ease);
+  }
+  .little-done.visible{ opacity: 1; }
+
+  /* ---- 9. the letter, now a letter to my wife ---- */
+  .letter-ps{
+    position: relative;
+    margin-top: 2.4rem;
+    padding-top: 1.9rem;
+  }
+  .letter-ps::before{
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(212,168,67,0), rgba(212,168,67,.75), rgba(212,168,67,0));
+  }
+  .letter-ps-label{
+    display: block;
+    text-align: center;
+    margin-bottom: .9rem;
+    font-size: .62rem;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    opacity: .88;
+  }
+  .letter-ps p{
+    margin: 0 auto;
+    max-width: 46ch;
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: .98rem;
+    line-height: 1.9;
+    color: var(--cream);
+  }
+  .letter-ps .ps-sign{
+    display: block;
+    margin-top: .9rem;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: .66rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(240,208,128,.78);
+  }
+
+  /* ---- 12. gallery: the typographic marriage memory ---- */
+  .polaroid.memory-type .frame{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .3rem;
+    padding: .45rem;
+    text-align: center;
+    background:
+      radial-gradient(120% 90% at 50% 32%, rgba(212,168,67,.24), transparent 62%),
+      linear-gradient(160deg, #2a1d40, var(--deep) 72%);
+  }
+  .memory-type-ring{
+    font-size: clamp(1.15rem, 5vw, 1.6rem);
+    line-height: 1;
+    filter: drop-shadow(0 0 10px rgba(212,168,67,.8));
+  }
+  .memory-type-date{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(.7rem, 3vw, 1rem);
+    letter-spacing: .06em;
+    color: var(--gold-soft);
+    text-shadow: 0 0 12px rgba(212,168,67,.5);
+  }
+  .memory-type-line{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.64rem, 2.7vw, .82rem);
+    line-height: 1.4;
+    color: var(--cream-dim);
+  }
+  .polaroid.memory-type{
+    box-shadow:
+      0 10px 26px rgba(0,0,0,.45),
+      0 0 0 1px rgba(212,168,67,.55),
+      0 0 22px rgba(212,168,67,.25);
+  }
+  .polaroid.memory-type:hover,
+  .polaroid.memory-type.active{
+    box-shadow:
+      0 26px 50px rgba(0,0,0,.55),
+      0 0 0 1.5px rgba(212,168,67,.9),
+      0 0 44px rgba(212,168,67,.5);
+  }
+
+  /* ---- 11. CHAPTER II — OUR MARRIED LIFE ---- */
+  #chapter-two{ padding-top: clamp(4rem,12vh,7rem); }
+
+  .chapter-badge{
+    display: block;
+    width: max-content;
+    margin: 0 auto 1rem;
+    padding: .3rem 1rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: .82rem;
+    letter-spacing: .1em;
+    color: var(--gold-soft);
+    border: 1px solid rgba(212,168,67,.42);
+    border-radius: 999px;
+    box-shadow: 0 0 18px rgba(212,168,67,.12);
+  }
+  .married-timeline{
+    position: relative;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 0 0 0 2rem;
+    list-style: none;
+  }
+  .married-timeline::before{
+    content:'';
+    position: absolute;
+    left: .55rem;
+    top: .5rem;
+    bottom: .5rem;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(212,168,67,.7), rgba(212,168,67,.28) 70%, rgba(212,168,67,0));
+  }
+  .mm-entry{
+    position: relative;
+    margin: 0 0 1.2rem;
+  }
+  .mm-entry:last-child{ margin-bottom: 0; }
+  .mm-entry::before{
+    content:'';
+    position: absolute;
+    left: calc(-2rem + .55rem - 4.5px);
+    top: 1.3rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--gold-pale), var(--gold));
+    box-shadow: 0 0 12px rgba(212,168,67,.8);
+  }
+  .mm-card{
+    padding: 1.1rem 1.25rem 1.2rem;
+    border-radius: 18px;
+    background: linear-gradient(165deg, rgba(107,76,154,.2), rgba(24,17,38,.5));
+    border: 1px solid rgba(212,168,67,.3);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 14px 38px rgba(0,0,0,.36);
+  }
+  .mm-date{
+    display: block;
+    margin-bottom: .35rem;
+    font-size: .62rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+  .mm-title{
+    margin: 0 0 .35rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--cream);
+  }
+  .mm-note{
+    margin: 0;
+    font-size: .88rem;
+    line-height: 1.75;
+    color: var(--cream-dim);
+  }
+  .mm-photo{
+    position: relative;
+    margin: .9rem 0 0;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(150deg, var(--purple), var(--deep));
+  }
+  .mm-photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .mm-photo .fallback{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: .8rem;
+    color: rgba(246,241,251,.55);
+  }
+  .mm-entry.is-future::before{
+    background: var(--void);
+    border: 1px solid rgba(212,168,67,.65);
+    box-shadow: none;
+  }
+  .mm-entry.is-future .mm-card{
+    background: rgba(11,12,16,.25);
+    border-style: dashed;
+    border-color: rgba(212,168,67,.32);
+    box-shadow: none;
+  }
+  .mm-entry.is-future .mm-title{ color: var(--cream-dim); }
+  .chapter-two-home{ margin-top: clamp(2rem,6vh,2.8rem); }
+
+  /* ---- 16. footer additions ---- */
+  .footer-home{ margin: 0 0 1.1rem; }
+  .footer-home .home-motif{
+    margin: 0 auto;
+    width: 34px;
+    height: 34px;
+    animation: homeGlow 4.5s ease-in-out infinite;
+  }
+  @keyframes homeGlow{
+    0%,100%{ filter: drop-shadow(0 0 5px rgba(212,168,67,.42)); }
+    50%{     filter: drop-shadow(0 0 14px rgba(212,168,67,.85)); }
+  }
+  .footer-est{
+    margin: 0 0 1.1rem;
+    font-size: .64rem;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    opacity: .88;
+  }
+  .footer-begin{
+    margin: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1rem, 4vw, 1.15rem);
+    color: var(--cream);
+  }
+  .footer-sign{
+    margin: .8rem 0 0;
+    font-size: .74rem;
+    letter-spacing: .05em;
+    color: var(--cream-dim);
+  }
 </style>
 </head>
 <body class="locked">
+
+<!-- the Shantir Ghor home motif, defined once and reused -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="homeMotif" viewBox="0 0 32 32">
+    <path d="M4.5 15.5 L16 5.5 L27.5 15.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M8 13.2 V26.5 H24 V13.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 26.5 V21.6 a2.6 2.6 0 0 1 5.2 0 V26.5 Z" fill="currentColor" opacity=".9"/>
+    <circle cx="16" cy="13.8" r="1.3" fill="currentColor" opacity=".75"/>
+  </symbol>
+</svg>
 
 <!-- ============================================================
      PRIVATE GATE — shown first, hides main + canvas behind it
@@ -2222,7 +3028,7 @@
 <main>
 
   <!-- ============================================================
-       HERO
+       HERO — Welcome home
        ============================================================ -->
   <section id="hero">
     <div class="hero-inner">
@@ -2257,17 +3063,298 @@
       </div>
     </div>
 
-    <a href="#letter" class="scroll-cue" aria-label="Scroll down">
+    <a href="#married" class="scroll-cue" aria-label="Scroll down">
       <span>keep going</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
     </a>
   </section>
 
   <!-- ============================================================
+       WE ARE MARRIED — a quiet chapter marker
+       ============================================================ -->
+  <section id="married" class="thread thread-start" aria-label="We became husband and wife on 11 September 2026">
+    <div class="married-inner reveal">
+      <div class="ring-mark" aria-hidden="true"><span class="ring-gem"></span></div>
+      <p class="married-date">11<span class="dot"> • </span>09<span class="dot"> • </span>2026</p>
+      <h2 class="married-title">We became husband &amp; wife.</h2>
+      <p class="married-sub">And Shantir Ghor became our home.</p>
+      <p class="married-bn">আলহামদুলিল্লাহ</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOREVER BEGAN — a live elapsed timer since 11.09.2026
+       (formerly "Countdown to Qubool" — the wedding already
+       happened, so this card now counts up, not down)
+       ============================================================ -->
+  <section id="forever-began" class="thread">
+    <span class="eyebrow reveal">the beginning of forever</span>
+    <h2 class="section-title reveal">Forever Began</h2>
+    <p class="section-sub reveal">every second since I got to call you my wife</p>
+
+    <div class="countdown-card reveal" id="foreverCard" role="button" tabindex="0" aria-label="Tap to reveal a message">
+      <p class="countdown-title-inner" aria-hidden="true">since 11 • 09 • 2026 &nbsp;💍&nbsp; and counting</p>
+
+      <div class="countdown-units" role="timer" aria-label="Time elapsed since our marriage">
+        <div class="countdown-unit">
+          <span class="countdown-number" id="fbDays">000</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <span class="countdown-sep" aria-hidden="true">:</span>
+        <div class="countdown-unit">
+          <span class="countdown-number" id="fbHours">00</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <span class="countdown-sep" aria-hidden="true">:</span>
+        <div class="countdown-unit">
+          <span class="countdown-number" id="fbMins">00</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+        <span class="countdown-sep" aria-hidden="true">:</span>
+        <div class="countdown-unit">
+          <span class="countdown-number" id="fbSecs">00</span>
+          <span class="countdown-label">Seconds</span>
+        </div>
+      </div>
+
+      <div class="countdown-divider" aria-hidden="true"></div>
+      <span class="qubool-tap-hint">tap for a message 💜</span>
+
+      <p class="qubool-msg" id="foreverMsg" aria-live="polite">
+        আমরা এখন একসাথে, ধর্ম আর সমাজের সাক্ষীতে, চিরদিনের জন্য। তুমি এখন আমার স্ত্রী। 💜
+      </p>
+    </div>
+    <span class="forever-foot reveal">a clock that never counts down again — only forward, with you.</span>
+  </section>
+
+  <!-- ============================================================
+       A NEW CHAPTER — from waiting to building a life
+       ============================================================ -->
+  <section id="new-chapter" class="thread">
+    <span class="eyebrow reveal">our marriage</span>
+    <h2 class="section-title reveal">A New Chapter</h2>
+    <p class="section-sub reveal">not the end of our story — the beginning of our life</p>
+
+    <div class="glass-card chapter-card reveal">
+      <p class="chapter-bn">অপেক্ষার গল্পটা শেষ হলো। এবার শুরু আমাদের সংসারের গল্প।</p>
+      <div class="divider"></div>
+
+      <div class="chapter-body">
+        <p>For so long, we loved each other in the future tense. <span class="gold-em">One day.</span> After the exams. After graduation. When we're finally together. I counted days without knowing where the counting would end, and you waited through every single one of them with a patience I'll spend my whole life trying to deserve.</p>
+
+        <p>I imagined this day more times than I'll ever admit — how it would feel, whether my voice would hold, what it would be like to hear you say <span class="gold-em">qubool</span>. And then, almost quietly, it simply happened. On the 11th of September, the waiting ended.</p>
+
+        <p>Something changed that day. "Us" stopped being a plan and became a fact. You are not the girl I'm waiting to marry anymore, <span class="pet-name">Babui Pakhi</span> — you are my wife. I'm not inviting you into my heart; you already live here. This is our home.</p>
+
+        <p>The wedding was one day. The marriage is every day after it — slow mornings, tired evenings, small repairs, learning each other all over again. That's the part I'm most looking forward to. Let's build it gently, and let's build it well.</p>
+      </div>
+
+      <div class="chapter-sign">
+        Yours, in this life and the next
+        <small>Mehrab · your husband</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THE ULTIMATE MILESTONE — September 11, 2026: The Kolma
+       ============================================================ -->
+  <section id="milestone" class="thread">
+    <span class="eyebrow reveal">the ultimate milestone</span>
+    <h2 class="section-title reveal">Qubool</h2>
+    <p class="section-sub reveal">the chapter every other chapter was leading to</p>
+
+    <div class="milestone-wrap">
+      <div class="milestone-halo" aria-hidden="true"></div>
+      <div
+        class="milestone-card reveal"
+        id="milestoneCard"
+        tabindex="0"
+        role="button"
+        aria-pressed="false"
+        aria-label="September 11, 2026: The Kolma. Tap to remember"
+      >
+        <div class="milestone-inner">
+          <div class="milestone-front">
+            <span class="milestone-ring-emoji" aria-hidden="true">✨💍✨</span>
+            <p class="milestone-date">September 11, 2026: <span class="milestone-title">The Kolma</span></p>
+            <span class="milestone-hint">tap to remember</span>
+          </div>
+          <div class="milestone-back">
+            <p class="milestone-back-text">যেদিন থেকে তুমি ধর্ম এবং সমাজের সামনে চিরকালের জন্য আমার হয়ে গেলে।</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THE VOWS OF SHANTIR GHOR — ten promises from your husband
+       (formerly "Why October 16th?" — same tap-to-cycle card)
+       ============================================================ -->
+  <section id="reasons-to-marry" class="thread">
+    <span class="eyebrow reveal">my vows to you</span>
+    <h2 class="section-title reveal">The Vows of Shantir Ghor</h2>
+    <p class="section-sub reveal">ten promises from your husband</p>
+
+    <div class="reasons-card reveal" id="reasonsCard" role="button" tabindex="0" aria-label="Tap to read another vow">
+      <div class="quote-mark">"</div>
+      <span class="vow-count" id="vowCount">vow 1 of 10</span>
+      <div class="reasons-body" id="reasonsBody" aria-live="polite">
+        <p class="reason-text" id="reasonText"></p>
+      </div>
+      <div class="reasons-divider" aria-hidden="true"></div>
+      <span class="reasons-hint" id="reasonsHint">tap for another vow ✧</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       YOUR PLACE IN OUR SHANTIR GHOR — things you never ask for
+       ============================================================ -->
+  <section id="your-place" class="thread thread-end">
+    <span class="eyebrow reveal">in our home</span>
+    <h2 class="section-title reveal">Your Place in Our Shantir Ghor</h2>
+    <p class="section-sub reveal">things you will never have to ask for</p>
+
+    <div class="place-grid reveal">
+      <article class="place-item">
+        <h3>Respect</h3>
+        <p>Not earned, not negotiated. It is already yours — on the easy days and on the hard ones.</p>
+      </article>
+      <article class="place-item">
+        <h3>A voice</h3>
+        <p>Your opinion shapes this home. Decisions here are made by two people, never by one.</p>
+      </article>
+      <article class="place-item">
+        <h3>Emotional safety</h3>
+        <p>You can be upset, unsure or unhappy here without ever being afraid of how I'll react.</p>
+      </article>
+      <article class="place-item">
+        <h3>Privacy</h3>
+        <p>Your thoughts, your phone, your friendships, your quiet corners — they stay yours.</p>
+      </article>
+      <article class="place-item">
+        <h3>Affection</h3>
+        <p>Not saved for special occasions. On ordinary Tuesdays, too.</p>
+      </article>
+      <article class="place-item">
+        <h3>Support</h3>
+        <p>Whatever you're carrying, you will never have to carry it alone.</p>
+      </article>
+      <article class="place-item">
+        <h3>Rest</h3>
+        <p>You don't have to be busy to be valued here. You're allowed to be tired.</p>
+      </article>
+      <article class="place-item">
+        <h3>Laughter</h3>
+        <p>A home that takes life seriously, but never takes itself too seriously.</p>
+      </article>
+      <article class="place-item">
+        <h3>Space to grow</h3>
+        <p>Who you are becoming matters to me as much as who you already are.</p>
+      </article>
+      <article class="place-item">
+        <h3>Belonging</h3>
+        <p>You are not a guest here, and you never have to earn your place. This is your home.</p>
+      </article>
+    </div>
+
+    <p class="place-close reveal">You are my wife — but more than that, you are my partner. Nothing in this home is mine that isn't also yours.</p>
+    <div class="home-divider place-home reveal" aria-hidden="true">
+      <svg class="home-motif" focusable="false"><use href="#homeMotif"/></svg>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THE LITTLE THINGS — forever is built from ordinary days
+       ============================================================ -->
+  <section id="little-things">
+    <span class="eyebrow reveal">the everyday promises</span>
+    <h2 class="section-title reveal">The Little Things</h2>
+    <p class="section-sub reveal">because forever is built from ordinary days</p>
+
+    <div class="little-grid reveal">
+      <button type="button" class="little-item" aria-pressed="false">
+        <span class="little-mark" aria-hidden="true"></span>
+        <span class="little-copy">
+          <span class="little-title">Your tea, just the way you like it</span>
+          <span class="little-detail">Even when the way you like it changes. I'll keep learning.</span>
+        </span>
+      </button>
+      <button type="button" class="little-item" aria-pressed="false">
+        <span class="little-mark" aria-hidden="true"></span>
+        <span class="little-copy">
+          <span class="little-title">Noticing when you're tired</span>
+          <span class="little-detail">Before you have to say it — and taking something off your plate.</span>
+        </span>
+      </button>
+      <button type="button" class="little-item" aria-pressed="false">
+        <span class="little-mark" aria-hidden="true"></span>
+        <span class="little-copy">
+          <span class="little-title">Asking about your day</span>
+          <span class="little-detail">And actually waiting for the whole answer.</span>
+        </span>
+      </button>
+      <button type="button" class="little-item" aria-pressed="false">
+        <span class="little-mark" aria-hidden="true"></span>
+        <span class="little-copy">
+          <span class="little-title">Making you laugh after a hard one</span>
+          <span class="little-detail">Silly voices, terrible jokes — whatever it takes.</span>
+        </span>
+      </button>
+      <button type="button" class="little-item" aria-pressed="false">
+        <span class="little-mark" aria-hidden="true"></span>
+        <span class="little-copy">
+          <span class="little-title">Remembering the dates that matter</span>
+          <span class="little-detail">Not just ours — yours too. The small anniversaries included.</span>
+        </span>
+      </button>
+      <button type="button" class="little-item" aria-pressed="false">
+        <span class="little-mark" aria-hidden="true"></span>
+        <span class="little-copy">
+          <span class="little-title">Quiet, when you need quiet</span>
+          <span class="little-detail">Sometimes love is simply giving you room to breathe.</span>
+        </span>
+      </button>
+      <button type="button" class="little-item" aria-pressed="false">
+        <span class="little-mark" aria-hidden="true"></span>
+        <span class="little-copy">
+          <span class="little-title">Celebrating the small wins</span>
+          <span class="little-detail">In this house, a finished task is a reason to celebrate.</span>
+        </span>
+      </button>
+      <button type="button" class="little-item" aria-pressed="false">
+        <span class="little-mark" aria-hidden="true"></span>
+        <span class="little-copy">
+          <span class="little-title">Sitting beside you without words</span>
+          <span class="little-detail">Some of our best conversations won't need any.</span>
+        </span>
+      </button>
+      <button type="button" class="little-item" aria-pressed="false">
+        <span class="little-mark" aria-hidden="true"></span>
+        <span class="little-copy">
+          <span class="little-title">Checking whether you've eaten</span>
+          <span class="little-detail">Every single day. You'll pretend it's annoying.</span>
+        </span>
+      </button>
+      <button type="button" class="little-item" aria-pressed="false">
+        <span class="little-mark" aria-hidden="true"></span>
+        <span class="little-copy">
+          <span class="little-title">Making home feel peaceful</span>
+          <span class="little-detail">So that walking through our door always feels like exhaling.</span>
+        </span>
+      </button>
+    </div>
+
+    <span class="little-hint reveal">tap each one I promise to remember</span>
+    <p class="little-done" id="littleDone" aria-live="polite">every one of them, on every ordinary day. 💛</p>
+  </section>
+
+  <!-- ============================================================
        DAILY PITU BOX — Good Morning, Babui Pakhi
        ============================================================ -->
   <section id="daily">
-    <span class="eyebrow reveal">a reason to smile</span>
+    <span class="eyebrow reveal">a little something for my wife</span>
     <h2 class="section-title reveal" id="dailyGreeting">Good Morning, Babui Pakhi 💜</h2>
     <p class="section-sub reveal">a message from Pitu, just for today</p>
 
@@ -2292,12 +3379,12 @@
   </section>
 
   <!-- ============================================================
-       THE CANVAS OF LIFE — letter section
+       THE CANVAS OF LIFE — letter section (now a letter to my wife)
        ============================================================ -->
   <section id="letter">
-    <span class="eyebrow reveal">a letter, written slowly</span>
+    <span class="eyebrow reveal">a letter to my wife</span>
     <h2 class="section-title reveal">The Canvas of Life</h2>
-    <p class="section-sub reveal">every brushstroke of it, painted with you in mind</p>
+    <p class="section-sub reveal">written while we were still waiting — every word of it still stands</p>
 
     <div class="glass-card reveal">
       <span class="quote-mark">"</span>
@@ -2318,25 +3405,13 @@
         Always & only yours
         <small>Mehrab · your Pitun</small>
       </div>
-    </div>
-  </section>
 
-  <!-- ============================================================
-       THE VOWS OF SHANTIR GHOR — ten promises from your husband
-       (formerly "Why October 16th?" — same tap-to-cycle card)
-       ============================================================ -->
-  <section id="reasons-to-marry">
-    <span class="eyebrow reveal">my vows to you</span>
-    <h2 class="section-title reveal">The Vows of Shantir Ghor</h2>
-    <p class="section-sub reveal">ten promises from your husband</p>
-
-    <div class="reasons-card reveal" id="reasonsCard" role="button" tabindex="0" aria-label="Tap to read another vow">
-      <div class="quote-mark">"</div>
-      <div class="reasons-body" id="reasonsBody" aria-live="polite">
-        <p class="reason-text" id="reasonText"></p>
+      <div class="letter-ps">
+        <span class="letter-ps-label">P.S. — added after 11 • 09 • 2026</span>
+        <p>I once asked you to wait a little longer. You did. The shantir ghor I promised in this letter isn't a plan anymore — it's where we live now. I kept my word, and I'm still not going anywhere.
+          <span class="ps-sign">your husband</span>
+        </p>
       </div>
-      <div class="reasons-divider" aria-hidden="true"></div>
-      <span class="reasons-hint" id="reasonsHint">tap for another vow ✧</span>
     </div>
   </section>
 
@@ -2344,7 +3419,7 @@
        THE FOREVER CLOCK — Since Our Promise
        ============================================================ -->
   <section id="clock">
-    <span class="eyebrow reveal">since our promise</span>
+    <span class="eyebrow reveal">the first clock we ever kept</span>
     <h2 class="section-title reveal">Since Our Promise</h2>
     <p class="section-sub reveal">every second of it, held tightly</p>
 
@@ -2412,7 +3487,7 @@
   <section id="openwhen">
     <span class="eyebrow reveal">just in case</span>
     <h2 class="section-title reveal">Open When...</h2>
-    <p class="section-sub reveal">tap a card whenever you need it</p>
+    <p class="section-sub reveal">written back when miles sat between us — tap one whenever you need it</p>
 
     <div class="openwhen-grid">
 
@@ -2481,46 +3556,15 @@
   </section>
 
   <!-- ============================================================
-       THE MILESTONE CARD — The Ultimate Milestone
-       ============================================================ -->
-  <section id="milestone">
-    <span class="eyebrow reveal">chapter 3</span>
-    <h2 class="section-title reveal">The Promise</h2>
-    <p class="section-sub reveal">a chapter I will never forget</p>
-
-    <div class="milestone-wrap">
-      <div
-        class="milestone-card reveal"
-        id="milestoneCard"
-        tabindex="0"
-        role="button"
-        aria-pressed="false"
-        aria-label="Tap to remember the promise"
-      >
-        <div class="milestone-inner">
-          <div class="milestone-front">
-            <span class="milestone-ring-emoji" aria-hidden="true">✨💍✨</span>
-            <p class="milestone-date">September 11, 2026: The Kolma</p>
-            <span class="milestone-hint">tap to remember</span>
-          </div>
-          <div class="milestone-back">
-            <p class="milestone-back-text">যেদিন থেকে তুমি ধর্ম এবং সমাজের সামনে চিরকালের জন্য আমার হয়ে গেলে।</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       INFINITE MEMORIES — gallery
+       INFINITE MEMORIES — gallery (chapter one of us)
        ============================================================ -->
   <section id="gallery">
     <span class="eyebrow reveal">infinite memories</span>
     <h2 class="section-title reveal">A Gallery of Us</h2>
-    <p class="section-sub reveal">tap a memory to bring it closer</p>
+    <p class="section-sub reveal">chapter one of our story — tap a memory to bring it closer</p>
 
     <div class="gallery-grid" id="galleryGrid">
-      <!-- 10 polaroid items, generated by script.js for clean markup -->
+      <!-- ring-moment + 10 photos + the Chapter II memory card, generated by the script -->
     </div>
   </section>
 
@@ -2566,50 +3610,6 @@
   </section>
 
   <!-- ============================================================
-       FOREVER BEGAN — a live elapsed timer since 11.09.2026
-       (formerly "Countdown to Qubool" — the wedding already
-       happened, so this card now counts up, not down)
-       ============================================================ -->
-  <section id="forever-began">
-    <span class="eyebrow reveal">the beginning of forever</span>
-    <h2 class="section-title reveal">Forever Began</h2>
-    <p class="section-sub reveal">every second since I got to call you my wife</p>
-
-    <div class="countdown-card reveal" id="foreverCard" role="button" tabindex="0" aria-label="Tap to reveal a message">
-      <p class="countdown-title-inner" aria-hidden="true">September 11, 2026 &nbsp;💍&nbsp; Forever Began</p>
-
-      <div class="countdown-units" aria-live="polite" aria-label="Time elapsed since our marriage">
-        <div class="countdown-unit">
-          <span class="countdown-number" id="fbDays">000</span>
-          <span class="countdown-label">Days</span>
-        </div>
-        <span class="countdown-sep" aria-hidden="true">:</span>
-        <div class="countdown-unit">
-          <span class="countdown-number" id="fbHours">00</span>
-          <span class="countdown-label">Hours</span>
-        </div>
-        <span class="countdown-sep" aria-hidden="true">:</span>
-        <div class="countdown-unit">
-          <span class="countdown-number" id="fbMins">00</span>
-          <span class="countdown-label">Minutes</span>
-        </div>
-        <span class="countdown-sep" aria-hidden="true">:</span>
-        <div class="countdown-unit">
-          <span class="countdown-number" id="fbSecs">00</span>
-          <span class="countdown-label">Seconds</span>
-        </div>
-      </div>
-
-      <div class="countdown-divider" aria-hidden="true"></div>
-      <span class="qubool-tap-hint">tap for a message 💜</span>
-
-      <p class="qubool-msg" id="foreverMsg" aria-live="polite">
-        আমরা এখন একসাথে, ধর্ম আর সমাজের সাক্ষীতে, চিরদিনের জন্য। তুমি এখন আমার স্ত্রী। 💜
-      </p>
-    </div>
-  </section>
-
-  <!-- ============================================================
        YA'ABURNEE — my final wish
        ============================================================ -->
   <section id="yaaburnee">
@@ -2631,12 +3631,34 @@
   </section>
 
   <!-- ============================================================
-       FOOTER
+       CHAPTER II — OUR MARRIED LIFE (a place for memories to come)
+       ============================================================ -->
+  <section id="chapter-two">
+    <span class="chapter-badge reveal">Chapter II</span>
+    <h2 class="section-title reveal">Our Married Life</h2>
+    <p class="section-sub reveal">from the day we became us, officially</p>
+
+    <ol class="married-timeline reveal" id="marriedTimeline" aria-label="Memories from our married life">
+      <!-- entries generated from MARRIED_MEMORIES in the script -->
+    </ol>
+
+    <div class="home-divider chapter-two-home reveal" aria-hidden="true">
+      <svg class="home-motif" focusable="false"><use href="#homeMotif"/></svg>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER — the quiet end of our first married chapter
        ============================================================ -->
   <footer>
     <div class="footer-stars reveal">✦ ✧ ✦</div>
-    <p class="footer-title reveal">Forever your Pitun.</p>
-    <p class="footer-sub reveal">See you at the finish line.</p>
+    <div class="footer-home reveal" aria-hidden="true">
+      <svg class="home-motif" focusable="false"><use href="#homeMotif"/></svg>
+    </div>
+    <p class="footer-title reveal">Our Shantir Ghor</p>
+    <p class="footer-est reveal">Established • 11 September 2026</p>
+    <p class="footer-begin reveal">And now, we begin.</p>
+    <p class="footer-sign reveal">Forever your Pitun — now, your husband.</p>
     <a href="#hero" class="back-top reveal">back to the top</a>
   </footer>
 
@@ -3103,7 +4125,8 @@
   })();
 
   /* ============================================================
-     2. GALLERY — build 11 polaroids: ring-moment first, then photo1–10
+     2. GALLERY — ring-moment first, then photo1–10,
+        then the Chapter II marriage memory card
      ============================================================ */
   const captions = [
     "us, mid-laugh", "a quiet evening", "your favourite smile",
@@ -3186,6 +4209,117 @@
     addPolaroidClick(fig);
   }
 
+  // --- the Chapter II memory: a typographic card (no image needed) ---
+  (function(){
+    const fig = document.createElement('figure');
+    fig.className = 'polaroid memory-type';
+    fig.tabIndex = 0;
+    fig.setAttribute('aria-label', 'Chapter II begins — the Kolma, 11 September 2026');
+
+    const frame = document.createElement('div');
+    frame.className = 'frame';
+
+    const ring = document.createElement('span');
+    ring.className = 'memory-type-ring';
+    ring.setAttribute('aria-hidden', 'true');
+    ring.textContent = '💍';
+
+    const date = document.createElement('span');
+    date.className = 'memory-type-date';
+    date.textContent = '11 • 09 • 2026';
+
+    const line = document.createElement('span');
+    line.className = 'memory-type-line';
+    line.textContent = 'the day we became us, officially';
+
+    frame.appendChild(ring);
+    frame.appendChild(date);
+    frame.appendChild(line);
+
+    const cap = document.createElement('figcaption');
+    cap.textContent = 'Chapter II begins';
+
+    fig.appendChild(frame);
+    fig.appendChild(cap);
+    grid.appendChild(fig);
+    addPolaroidClick(fig);
+  })();
+
+  /* ============================================================
+     2b. CHAPTER II — OUR MARRIED LIFE
+     A growing timeline. To add a memory, append an object:
+       { date: '14 • 02 • 2027',
+         title: 'Our first ...',
+         note: 'One or two sentences.',
+         img: 'married1.jpg' }   ← img is optional
+     ============================================================ */
+  const MARRIED_MEMORIES = [
+    {
+      date:  '11 • 09 • 2026',
+      title: 'The Kolma',
+      note:  'The day the waiting ended and the first page of the rest of our lives was written. Alhamdulillah.'
+    }
+  ];
+
+  (function initChapterTwo(){
+    const list = document.getElementById('marriedTimeline');
+    if (!list) return;
+
+    function buildEntry(m, isFuture){
+      const li = document.createElement('li');
+      li.className = 'mm-entry' + (isFuture ? ' is-future' : '');
+
+      const card = document.createElement('div');
+      card.className = 'mm-card';
+
+      const date = document.createElement('span');
+      date.className = 'mm-date';
+      date.textContent = m.date;
+
+      const title = document.createElement('h3');
+      title.className = 'mm-title';
+      title.textContent = m.title;
+
+      const note = document.createElement('p');
+      note.className = 'mm-note';
+      note.textContent = m.note;
+
+      card.appendChild(date);
+      card.appendChild(title);
+      card.appendChild(note);
+
+      if (m.img){
+        const photo = document.createElement('div');
+        photo.className = 'mm-photo';
+        const img = document.createElement('img');
+        img.src = m.img;
+        img.alt = 'Mehrab and Ruhana — ' + m.title;
+        img.loading = 'lazy';
+        img.onerror = function(){
+          this.remove();
+          const fb = document.createElement('div');
+          fb.className = 'fallback';
+          fb.textContent = m.img;
+          photo.appendChild(fb);
+        };
+        photo.appendChild(img);
+        card.appendChild(photo);
+      }
+
+      li.appendChild(card);
+      return li;
+    }
+
+    MARRIED_MEMORIES.forEach(m => list.appendChild(buildEntry(m, false)));
+
+    // the blank page, always last — where the next memory will go
+    list.appendChild(buildEntry({
+      date:  'still to come',
+      title: 'Our next memory',
+      note:  'This page is still blank. We\'ll fill it together — one ordinary, beautiful day at a time.'
+    }, true));
+  })();
+
   // --- milestone card flip (The Ultimate Milestone) ---
   const milestoneCard = document.getElementById('milestoneCard');
   milestoneCard.addEventListener('click', () => {
@@ -3199,6 +4333,24 @@
       milestoneCard.setAttribute('aria-pressed', flipped ? 'true' : 'false');
     }
   });
+
+  /* ============================================================
+     2c. THE LITTLE THINGS — tap each promise to light it gold
+     ============================================================ */
+  (function initLittleThings(){
+    const items = document.querySelectorAll('.little-item');
+    const done  = document.getElementById('littleDone');
+    if (!items.length) return;
+
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        const lit = item.classList.toggle('lit');
+        item.setAttribute('aria-pressed', lit ? 'true' : 'false');
+        const allLit = Array.prototype.every.call(items, el => el.classList.contains('lit'));
+        if (done) done.classList.toggle('visible', allLit);
+      });
+    });
+  })();
 
   /* ============================================================
      3. OPEN WHEN — flip cards
@@ -3417,22 +4569,23 @@
      the array now holds vows instead of reasons)
      ============================================================ */
   const MARRIAGE_REASONS = [
-    'আমি কথা দিচ্ছি, তোমার সম্মান হবে আমার কাছে সবচেয়ে পবিত্র জিনিস — কখনো কোনো পরিস্থিতিতে সেটা আমি আঘাত করতে দেবো না।',
-    'তুমি শুধু আমার স্ত্রী নও, তুমি একজন সম্পূর্ণ মানুষ — নিজের ইচ্ছা, নিজের অধিকার, নিজের কণ্ঠস্বর নিয়ে। আমি সবসময় সেটার পাশে দাঁড়াবো।',
-    'আমার কাছে এসে তুমি কখনো ভয় পাবে না। আমি এমন একটা জায়গা হয়ে থাকতে চাই, যেখানে তোমার মন সবচেয়ে নিরাপদ বোধ করে।',
-    'তুমি যখন কথা বলবে, আমি শুধু শুনবো না — মন দিয়ে বুঝতে চেষ্টা করবো। তোমার অনুভূতি আমার কাছে কখনো তুচ্ছ হবে না।',
-    'রাগ হোক বা মতের অমিল, আমি কখনো তোমাকে ছোট করে কথা বলবো না, কখনো তোমাকে অপমান করবো না। এটা আমার প্রতিজ্ঞা।',
-    'তোমার স্বপ্নগুলো আমার স্বপ্নের মতোই গুরুত্বপূর্ণ। তুমি যা হতে চাও, যা করতে চাও — আমি তোমার পাশে থেকে সাহস জোগাবো।',
-    'জীবন যখন কঠিন হয়ে উঠবে, আমি পালাবো না। ভালো সময়ে যেমন থাকি, খারাপ সময়েও ঠিক তেমনই তোমার হাত শক্ত করে ধরে থাকবো।',
-    'আমাদের এই শান্তির ঘরের শান্তি রক্ষা করা হবে আমার দায়িত্ব — বাইরের কোনো ঝড়ই যেন আমাদের ঘরের ভেতরে ঢুকতে না পারে।',
-    'আমি তোমাকে নিয়ন্ত্রণ করতে চাই না, আমি তোমার সাথে বড় হতে চাই — একসাথে শিখে, একসাথে ভুল করে, একসাথে এগিয়ে গিয়ে।',
-    'আজ থেকে প্রতিটা দিন আমি নতুন করে তোমাকে বেছে নেবো, সম্মান করবো, যত্ন নেবো, আর ভালোবাসবো — ঠিক যেমন প্রথম দিন বেসেছিলাম, বরং তার চেয়েও বেশি।'
+    'তোমার সম্মান সবসময় আমার কাছে সবার আগে থাকবে — কারো সামনে, কোনো পরিস্থিতিতেই সেটা আমি ছোট হতে দেবো না।',
+    'আমাদের মত না মিললেও তোমাকে সম্মান করা আমি থামাবো না। তর্ক হতে পারে, কিন্তু অসম্মান কখনো হবে না।',
+    'তুমি যখন কিছু বলবে, আমি আগে উত্তর খুঁজবো না — আগে পুরোটা শুনবো, তারপর বোঝার চেষ্টা করবো।',
+    'রাগের মাথাতেও আমি কখনো জেনে-বুঝে তোমাকে অপমান করবো না, তোমাকে ছোট করে কথা বলবো না।',
+    'তোমার স্বপ্নগুলো আমার স্বপ্নের মতোই জরুরি। তুমি যতদূর যেতে চাও, আমি পাশে থেকে সাহস দেবো।',
+    'জীবন যখন কঠিন হবে, আমি সরে দাঁড়াবো না। ভালো দিনের মতো খারাপ দিনেও তোমার হাত ধরে থাকবো।',
+    'শুধু এই ঘরের দেয়াল নয়, এর শান্তিটুকুও আমি আগলে রাখবো — যেন ঘরে ফিরে তুমি সত্যিই শান্তি পাও।',
+    'ভালোবাসার নামে আমি কখনো তোমাকে নিয়ন্ত্রণ করবো না। তুমি আমার স্ত্রী, কিন্তু তুমি তোমার নিজেরও।',
+    'প্রতিদিন আমি জেদের বদলে বোঝাপড়া, নীরবতার বদলে কথা, আর দূরত্বের বদলে সঙ্গ বেছে নেবো।',
+    'আল্লাহ যতদিন আমাদের হায়াত রাখেন, ততদিন তোমাকে ভালোবাসবো, সম্মান করবো, আর এই সংসারটাকে যত্নে আগলে রাখবো।'
   ];
 
   const reasonsCard = document.getElementById('reasonsCard');
   const reasonsBody = document.getElementById('reasonsBody');
   const reasonText  = document.getElementById('reasonText');
   const reasonsHint = document.getElementById('reasonsHint');
+  const vowCount    = document.getElementById('vowCount');
 
   let reasonIdx  = 0;
   let reasonBusy = false;
@@ -3440,14 +4593,17 @@
   function showReason(idx, animate){
     const text = MARRIAGE_REASONS[idx];
     reasonsHint.textContent = `tap for another vow ✧`;
+    const countText = `vow ${idx + 1} of ${MARRIAGE_REASONS.length}`;
     if (!animate){
       reasonText.textContent = text;
+      if (vowCount) vowCount.textContent = countText;
       return;
     }
     reasonBusy = true;
     reasonsBody.classList.add('fade');
     setTimeout(() => {
       reasonText.textContent = text;
+      if (vowCount) vowCount.textContent = countText;
       reasonsBody.classList.remove('fade');
       setTimeout(() => { reasonBusy = false; }, 420);
     }, 400);
@@ -3713,7 +4869,7 @@
     const CONFETTI_COLORS = ['#6B4C9A','#B39CD0','#d4a843','#f1c9dc','#f0d080','#9b7fd4'];
 
     function spawnConfetti(){
-      const rect   = card.getBoundingClientRect();
+      if (reduceMotion) return;
       const count  = 38;
       for (let i = 0; i < count; i++){
         const el = document.createElement('div');
@@ -3733,7 +4889,7 @@
         el.style.setProperty('--cw', size + 'px');
         el.style.setProperty('--ch', (size * (0.45 + Math.random() * 0.8)).toFixed(1) + 'px');
         el.style.setProperty('--cr', radius);
-        el.style.setProperty('--cx', driftX * 0 + 'px');    // initial: no horizontal shift
+        el.style.setProperty('--cx', '0px');                 // initial: no horizontal shift
         el.style.setProperty('--cy', '-20px');               // start above spawn point
         el.style.setProperty('--cdx', driftX + 'px');
         el.style.setProperty('--cr2', rot + 'deg');
@@ -3777,7 +4933,7 @@
     const closeBtn  = document.getElementById('secretEggClose');
 
     const EGG_MSG =
-      'You told the world you were lucky. But the truth is, all the 10²⁸ electrons in my body know that I am the luckiest man alive. I just secured the Queen of my kingdom. See you on October 16th, Mrs. Mehrab.';
+      'You told the world you were lucky. But the truth is, all the 10²⁸ electrons in my body know that I am the luckiest man alive. I didn\'t just secure the Queen of my kingdom — on the 11th of September, I married her. Welcome home, Mrs. Mehrab.';
 
     const TRIPLE_TAP_THRESHOLD = 3;   // taps needed
     const TAP_WINDOW_MS        = 2000; // within this many ms
@@ -3964,7 +5120,8 @@
   }
 
   /* ============================================================
-     6. AMBIENT SKY — twinkling stars + falling cherry blossoms
+     6. AMBIENT SKY — twinkling stars, falling cherry blossoms,
+        and a few slow golden motes of wedding light
      ============================================================ */
   const canvas = document.getElementById('sky');
   const ctx = canvas.getContext('2d');
@@ -3993,7 +5150,8 @@
       y: Math.random() * H,
       r: Math.random() * 1.3 + .3,
       phase: Math.random() * Math.PI * 2,
-      speed: Math.random() * .015 + .006
+      speed: Math.random() * .015 + .006,
+      gold: Math.random() < .08            // a few golden stars for the marriage
     }));
   }
   makeStars();
@@ -4041,29 +5199,81 @@
     ctx.restore();
   }
 
+  /* ── golden motes: pre-rendered glow sprite, very few, very slow ── */
+  const moteSprite = document.createElement('canvas');
+  moteSprite.width = moteSprite.height = 32;
+  (function paintMote(){
+    const mctx = moteSprite.getContext('2d');
+    const mg = mctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+    mg.addColorStop(0,   'rgba(255,246,200,1)');
+    mg.addColorStop(.18, 'rgba(248,232,138,.85)');
+    mg.addColorStop(.45, 'rgba(240,208,128,.28)');
+    mg.addColorStop(1,   'rgba(212,168,67,0)');
+    mctx.fillStyle = mg;
+    mctx.fillRect(0, 0, 32, 32);
+  })();
+
+  let motes = [];
+  function makeMote(initial){
+    return {
+      x: Math.random() * W,
+      y: initial ? Math.random() * H : H + 16 + Math.random() * 40,
+      size: Math.random() * 5 + 5,
+      vy: -(Math.random() * .12 + .05),
+      vx: (Math.random() - .5) * .06,
+      sway: Math.random() * Math.PI * 2,
+      swaySpeed: Math.random() * .006 + .003,
+      phase: Math.random() * Math.PI * 2,
+      pSpeed: Math.random() * .012 + .006,
+      maxA: Math.random() * .22 + .26
+    };
+  }
+  function makeMotes(){
+    const count = isSmall() ? 7 : 12;
+    motes = Array.from({ length: count }, () => makeMote(true));
+  }
+  makeMotes();
+  window.addEventListener('resize', makeMotes);
+
   let lastT = performance.now();
   function tick(t){
     const dt = Math.min(32, t - lastT);
     lastT = t;
+    const k = dt / 16.6;
     ctx.clearRect(0, 0, W, H);
 
     for (const s of stars){
-      s.phase += s.speed * (dt / 16.6);
+      s.phase += s.speed * k;
       const tw = (Math.sin(s.phase) + 1) / 2;
       ctx.globalAlpha = .25 + tw * .65;
-      ctx.fillStyle = '#f6f1fb';
+      ctx.fillStyle = s.gold ? '#f0d080' : '#f6f1fb';
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.globalAlpha = 1;
 
+    for (const m of motes){
+      if (!reduceMotion){
+        m.sway  += m.swaySpeed * k;
+        m.phase += m.pSpeed * k;
+        m.y += m.vy * k;
+        m.x += m.vx * k + Math.sin(m.sway) * .12;
+        if (m.y < -20 || m.x < -20 || m.x > W + 20){
+          Object.assign(m, makeMote(false));
+        }
+      }
+      ctx.globalAlpha = m.maxA * (.55 + .45 * (Math.sin(m.phase) + 1) / 2);
+      ctx.drawImage(moteSprite, m.x - m.size, m.y - m.size, m.size * 2, m.size * 2);
+    }
+    ctx.globalAlpha = 1;
+
     if (!reduceMotion){
       for (const p of petals){
-        p.sway += p.swaySpeed * (dt / 16.6);
-        p.y += p.speedY * (dt / 16.6);
-        p.x += p.speedX * (dt / 16.6) + Math.sin(p.sway) * .5;
-        p.rotation += p.rotSpeed * (dt / 16.6);
+        p.sway += p.swaySpeed * k;
+        p.y += p.speedY * k;
+        p.x += p.speedX * k + Math.sin(p.sway) * .5;
+        p.rotation += p.rotSpeed * k;
         if (p.y > H + 20 || p.x < -30 || p.x > W + 30){
           Object.assign(p, makePetal(false));
         }
