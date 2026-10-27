@@ -36,6 +36,11 @@
   CHAPTER II — OUR MARRIED LIFE grows over time: add new memories
   to the MARRIED_MEMORIES array in the script (an image is
   optional; a missing image shows a soft placeholder).
+
+  ANNIVERSARY UPDATE (29 October 2026): the "Words That Started
+  Our Forever" section (#proposal-anniversary) sits after the
+  Qubool milestone. Its styles use the .pa-* prefix (end of the
+  stylesheet) and its script is section 7 (end of the script).
   ============================================================
 -->
 
@@ -2985,6 +2990,726 @@
     letter-spacing: .05em;
     color: var(--cream-dim);
   }
+
+  /* ============================================================
+     ============================================================
+     OUR FIRST PROPOSAL ANNIVERSARY · 29 October 2025 → 2026
+     Everything below is new and scoped to .pa-* / #proposal-anniversary,
+     so nothing above this line is affected.
+     ============================================================
+     ============================================================ */
+
+  /* ---- a quiet link from the hero down to the anniversary ---- */
+  .pa-hero-link{
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .1rem .55rem;
+    max-width: min(88vw, 360px);
+    padding: .55rem 1.15rem;
+    border-radius: 999px;
+    border: 1px solid rgba(212,168,67,.42);
+    background: rgba(24,17,38,.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 0 22px rgba(212,168,67,.12);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: .78rem;
+    line-height: 1.5;
+    transition: border-color .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pa-hero-link:hover{
+    border-color: rgba(240,208,128,.75);
+    background: rgba(24,17,38,.6);
+    box-shadow: 0 0 30px rgba(212,168,67,.24);
+  }
+  .pa-hero-link:focus-visible{ outline: 2px solid var(--gold-soft); outline-offset: 4px; }
+  .pa-hero-link-date{
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: .12em;
+    color: var(--gold-soft);
+  }
+  .pa-hero-link-text{
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--cream-dim);
+  }
+
+  /* ---- the section ---- */
+  #proposal-anniversary{
+    padding-top: clamp(4rem,12vh,7rem);
+    contain-intrinsic-size: auto 2200px;
+  }
+
+  .pa-years{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: .15rem .7rem;
+    margin: 0 auto clamp(2.4rem, 7vh, 3.6rem);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(.92rem, 3.7vw, 1.15rem);
+    letter-spacing: .08em;
+    color: var(--gold-soft);
+    text-shadow: 0 0 14px rgba(212,168,67,.35);
+  }
+  .pa-years-sep{ color: rgba(212,168,67,.6); }
+
+  /* ---- the words card ---- */
+  .pa-words-card{
+    position: relative;
+    max-width: var(--container);
+    margin: 0 auto;
+    text-align: center;
+    background: linear-gradient(165deg, rgba(107,76,154,.22), rgba(24,17,38,.5));
+    border: 1px solid rgba(212,168,67,.34);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 26px;
+    padding: clamp(2rem, 6vw, 3.2rem) clamp(1.25rem, 5vw, 2.6rem);
+    box-shadow:
+      0 20px 60px rgba(0,0,0,.42),
+      0 0 54px rgba(212,168,67,.08),
+      inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  .pa-words-card::before{
+    content:'';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 42%;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(240,208,128,0), rgba(240,208,128,.8), rgba(240,208,128,0));
+  }
+
+  .pa-tagline{
+    max-width: 30ch;
+    margin: 0 auto 1.7rem;
+    font-family: var(--font-bn);
+    font-weight: 500;
+    font-size: clamp(.95rem, 3.9vw, 1.12rem);
+    line-height: 1.95;
+    color: rgba(240,208,128,.9);
+  }
+
+  .pa-quote-mark{
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 9vw, 3.4rem);
+    line-height: .8;
+    color: var(--gold-soft);
+    opacity: .45;
+  }
+
+  .pa-words{
+    margin: .2rem auto 0;
+    max-width: 16ch;
+    font-family: var(--font-bn);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 7.6vw, 3rem);
+    line-height: 1.6;
+    text-wrap: balance;
+    background: linear-gradient(135deg, var(--cream) 8%, var(--gold-pale) 42%, var(--blush) 78%, var(--lavender) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 12px rgba(212,168,67,.3));
+    animation: paWordsGlow 5s ease-in-out infinite;
+  }
+  @keyframes paWordsGlow{
+    0%,100%{ filter: drop-shadow(0 0 9px rgba(212,168,67,.26)); }
+    50%{     filter: drop-shadow(0 0 22px rgba(212,168,67,.58)); }
+  }
+
+  .pa-words-by{
+    display: block;
+    margin-top: .9rem;
+    font-size: .62rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    opacity: .8;
+  }
+
+  .pa-divider{
+    width: 52px;
+    height: 1px;
+    margin: clamp(1.6rem, 5vh, 2.2rem) auto;
+    background: linear-gradient(90deg, transparent, rgba(212,168,67,.6), rgba(179,156,208,.5), transparent);
+  }
+
+  .pa-then-now{
+    max-width: 32ch;
+    margin: 0 auto;
+    font-family: var(--font-bn);
+    font-weight: 500;
+    font-size: clamp(1rem, 4.2vw, 1.2rem);
+    line-height: 2;
+    color: var(--cream);
+  }
+  .pa-then-now,
+  .pa-letter-msg p,
+  .pa-gift-msg p,
+  .pa-closing-bn{ text-wrap: pretty; }
+  .pa-then-now .pa-em{ color: var(--blush); }
+  .pa-then-now .pa-gold{ color: var(--gold-soft); white-space: nowrap; }
+  .pa-then-now-en{
+    max-width: 40ch;
+    margin: 1rem auto 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.88rem, 3.5vw, 1rem);
+    line-height: 1.8;
+    color: var(--cream-dim);
+  }
+
+  /* ---- the sealed letter ---- */
+  .pa-letter{
+    max-width: 560px;
+    margin: clamp(2.8rem, 8vh, 4rem) auto 0;
+  }
+
+  .pa-envelope{
+    -webkit-appearance: none;
+    appearance: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 1.1rem 1.2rem 1.5rem;
+    font: inherit;
+    color: var(--cream);
+    text-align: center;
+    background: linear-gradient(165deg, rgba(107,76,154,.22), rgba(24,17,38,.52));
+    border: 1px solid rgba(212,168,67,.4);
+    border-radius: 24px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 16px 44px rgba(0,0,0,.4), 0 0 36px rgba(212,168,67,.1);
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+  }
+  .pa-envelope:hover{
+    transform: translateY(-3px);
+    border-color: rgba(240,208,128,.7);
+    box-shadow: 0 22px 52px rgba(0,0,0,.48), 0 0 46px rgba(212,168,67,.2);
+  }
+  .pa-envelope:active{ transform: scale(.98); }
+  .pa-envelope:focus-visible{ outline: 2px solid var(--gold-soft); outline-offset: 6px; }
+
+  /* the little envelope drawing */
+  .pa-env-art{
+    position: relative;
+    display: block;
+    width: 132px;
+    height: 88px;
+    margin: 1.9rem auto 1.1rem;
+    perspective: 600px;
+  }
+  .pa-env-back,
+  .pa-env-paper,
+  .pa-env-pocket,
+  .pa-env-flap{
+    position: absolute;
+    display: block;
+  }
+  .pa-env-back{
+    inset: 0;
+    border-radius: 8px;
+    background: linear-gradient(165deg, #3a2858, #221634);
+    border: 1px solid rgba(212,168,67,.6);
+    box-shadow: 0 10px 26px rgba(0,0,0,.45), 0 0 22px rgba(212,168,67,.18);
+  }
+  .pa-env-paper{
+    left: 11px;
+    right: 11px;
+    top: 7px;
+    height: 72px;
+    z-index: 1;
+    border-radius: 4px;
+    background:
+      repeating-linear-gradient(180deg, transparent 0 11px, rgba(107,76,154,.16) 11px 12px) 10px 18px / calc(100% - 20px) 40px no-repeat,
+      linear-gradient(180deg, #fbf6ee, #efe3d2);
+    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    transition: transform .5s var(--ease);
+  }
+  .pa-env-pocket{
+    inset: 0;
+    z-index: 2;
+    border-radius: 8px;
+    background: linear-gradient(165deg, #4b3572, #2b1c42);
+    /* starts just below the flap's edge, so only a fine sliver of the letter peeks out */
+    -webkit-clip-path: polygon(0 5%, 50% 69%, 100% 5%, 100% 100%, 0 100%);
+            clip-path: polygon(0 5%, 50% 69%, 100% 5%, 100% 100%, 0 100%);
+  }
+  .pa-env-flap{
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 64%;
+    z-index: 3;
+    border-radius: 8px 8px 0 0;
+    transform-origin: 50% 0;
+    background: linear-gradient(180deg, #5c4189, #3b2959);
+    -webkit-clip-path: polygon(0 0, 100% 0, 50% 100%);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+    /* closing: the paper slips back in first, then the flap folds down */
+    transition: transform .6s var(--ease) .3s, z-index 0s .6s;
+  }
+  .pa-env-seal{
+    position: absolute;
+    left: 50%;
+    top: calc(64% - 13px);
+    z-index: 4;
+    width: 26px;
+    height: 26px;
+    margin-left: -13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #5a2e48;
+    background: radial-gradient(circle at 35% 30%, #fff6d6, var(--gold-soft) 45%, var(--gold) 100%);
+    box-shadow: 0 0 14px rgba(212,168,67,.75), 0 2px 5px rgba(0,0,0,.35);
+    transition: opacity .35s var(--ease) .45s, transform .35s var(--ease) .45s;
+  }
+  .pa-env-seal svg{ width: 12px; height: 12px; display: block; }
+
+  .pa-letter.is-open .pa-env-flap{
+    transform: rotateX(180deg);
+    z-index: 0;
+    transition: transform .6s var(--ease), z-index 0s .3s;
+  }
+  .pa-letter.is-open .pa-env-paper{
+    transform: translateY(-30px);
+    transition: transform .7s var(--ease) .4s;
+  }
+  .pa-letter.is-open .pa-env-seal{
+    opacity: 0;
+    transform: scale(.6);
+    transition: opacity .3s var(--ease), transform .3s var(--ease);
+  }
+
+  .pa-env-label{
+    display: block;
+    font-family: var(--font-bn);
+    font-weight: 600;
+    font-size: clamp(1.05rem, 4.4vw, 1.3rem);
+    line-height: 1.7;
+    color: var(--cream);
+    text-shadow: 0 0 18px rgba(179,156,208,.35);
+  }
+  .pa-env-hint{
+    display: block;
+    margin-top: .45rem;
+    font-size: .6rem;
+    line-height: 1.7;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(240,208,128,.72);
+  }
+
+  /* the letter itself — warm paper, the same cream as the envelope's sheet */
+  .pa-letter-body{
+    position: relative;
+    margin: 1.6rem auto 0;
+    padding: clamp(2.1rem, 7vw, 2.8rem) clamp(1.25rem, 5.5vw, 2.4rem) clamp(1.6rem, 5vw, 2.2rem);
+    border-radius: 18px;
+    background: linear-gradient(172deg, #fbf6ee 0%, #f3e8d9 100%);
+    color: #3d2c52;
+    text-align: center;
+    box-shadow:
+      0 24px 60px rgba(0,0,0,.5),
+      0 0 0 1px rgba(212,168,67,.45),
+      0 0 44px rgba(212,168,67,.16);
+    transform-origin: 50% 0;
+  }
+  .pa-letter-body[hidden]{ display: none; }
+  .pa-letter-body::before{
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 64px;
+    height: 3px;
+    transform: translateX(-50%);
+    border-radius: 0 0 3px 3px;
+    background: linear-gradient(90deg, rgba(212,168,67,0), var(--gold), rgba(212,168,67,0));
+  }
+  .pa-letter.is-open .pa-letter-body{
+    animation: paLetterUnfold .8s var(--ease) .25s both;
+  }
+  .pa-letter-body.is-closing{
+    animation: paLetterFold .45s ease forwards;
+  }
+  @keyframes paLetterUnfold{
+    from{ opacity: 0; transform: translateY(-16px) scaleY(.92); }
+    to{   opacity: 1; transform: none; }
+  }
+  @keyframes paLetterFold{
+    from{ opacity: 1; transform: none; }
+    to{   opacity: 0; transform: translateY(-10px) scaleY(.95); }
+  }
+
+  /* lines arrive one after another */
+  .pa-letter.is-open .pa-letter-body > *{
+    animation: paLineIn .7s var(--ease) both;
+  }
+  .pa-letter.is-open .pa-letter-body > :nth-child(1){ animation-delay: .5s; }
+  .pa-letter.is-open .pa-letter-body > :nth-child(2){ animation-delay: .75s; }
+  .pa-letter.is-open .pa-letter-body > :nth-child(3){ animation-delay: 1.05s; }
+  .pa-letter.is-open .pa-letter-body > :nth-child(4){ animation-delay: 1.35s; }
+  .pa-letter.is-open .pa-letter-body > :nth-child(5){ animation-delay: 1.55s; }
+  .pa-letter.is-open .pa-letter-body > :nth-child(6){ animation-delay: 1.7s; }
+  @keyframes paLineIn{
+    from{ opacity: 0; transform: translateY(8px); }
+    to{   opacity: 1; transform: none; }
+  }
+
+  .pa-letter-date{
+    display: block;
+    font-family: var(--font-bn);
+    font-weight: 600;
+    font-size: .92rem;
+    letter-spacing: .04em;
+    color: #8a6420;
+  }
+  .pa-letter-words{
+    margin: .7rem auto 1.4rem;
+    max-width: 17ch;
+    font-family: var(--font-bn);
+    font-weight: 700;
+    font-size: clamp(1.45rem, 6.4vw, 2.1rem);
+    line-height: 1.6;
+    text-wrap: balance;
+    color: #5a3a86;
+  }
+  .pa-letter-msg p{
+    max-width: 34ch;
+    margin: 0 auto 1rem;
+    font-family: var(--font-bn);
+    font-weight: 500;
+    font-size: clamp(.98rem, 4.1vw, 1.1rem);
+    line-height: 2;
+    color: #3d2c52;
+  }
+  .pa-letter-msg p:last-child{ margin-bottom: 0; }
+  .pa-letter-en{
+    max-width: 38ch;
+    margin: 1.3rem auto 0;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(138,100,32,.25);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.9rem, 3.6vw, 1.02rem);
+    line-height: 1.8;
+    color: #5b4870;
+  }
+  .pa-letter-sign{
+    margin: 1.4rem 0 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #3d2c52;
+  }
+  .pa-letter-sign small{
+    display: block;
+    margin-top: .3rem;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: .64rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #8a6420;
+  }
+  .pa-letter-close{
+    margin-top: 1.5rem;
+    border: 1px solid rgba(90,58,134,.35);
+    border-radius: 999px;
+    padding: .65rem 1.5rem;
+    font-family: var(--font-body);
+    font-size: .7rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #5a3a86;
+    background: rgba(107,76,154,.08);
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .3s var(--ease), transform .2s var(--ease);
+  }
+  .pa-letter-close:hover{ background: rgba(107,76,154,.16); }
+  .pa-letter-close:active{ transform: scale(.96); }
+  .pa-letter-close:focus-visible{ outline: 2px solid var(--purple); outline-offset: 3px; }
+
+  /* ---- three dates, one story: vertical on phones, horizontal on wider screens ---- */
+  .pa-timeline{
+    position: relative;
+    max-width: 560px;
+    margin: clamp(3.2rem, 9vh, 4.6rem) auto 0;
+    padding: 0 0 0 2rem;
+    list-style: none;
+  }
+  .pa-timeline::before{
+    content:'';
+    position: absolute;
+    left: .55rem;
+    top: .6rem;
+    bottom: .6rem;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(179,156,208,.65), rgba(212,168,67,.7));
+  }
+  .pa-ms{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 1.1rem;
+  }
+  .pa-ms:last-child{ margin-bottom: 0; }
+  .pa-ms-node{
+    position: absolute;
+    left: calc(-2rem + .55rem - 5px);
+    top: 1.25rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--blush), var(--lavender));
+    box-shadow: 0 0 12px rgba(179,156,208,.85);
+  }
+  .pa-ms-kolma .pa-ms-node,
+  .pa-ms-anniv .pa-ms-node{
+    background: radial-gradient(circle, var(--gold-pale), var(--gold));
+    box-shadow: 0 0 12px rgba(212,168,67,.85);
+  }
+  .pa-ms-anniv .pa-ms-node{ animation: paNodePulse 3.2s ease-in-out infinite; }
+  @keyframes paNodePulse{
+    0%,100%{ box-shadow: 0 0 8px rgba(212,168,67,.6), 0 0 0 0 rgba(212,168,67,.35); }
+    50%{     box-shadow: 0 0 16px rgba(212,168,67,1), 0 0 0 6px rgba(212,168,67,0); }
+  }
+  .pa-ms-card{
+    flex: 1;
+    padding: 1.05rem 1.2rem 1.15rem;
+    border-radius: 18px;
+    background: linear-gradient(165deg, rgba(107,76,154,.2), rgba(24,17,38,.5));
+    border: 1px solid rgba(179,156,208,.26);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 14px 38px rgba(0,0,0,.36);
+  }
+  .pa-ms-kolma .pa-ms-card{ border-color: rgba(212,168,67,.32); }
+  .pa-ms-anniv .pa-ms-card{
+    border-color: rgba(212,168,67,.55);
+    box-shadow: 0 14px 38px rgba(0,0,0,.36), 0 0 30px rgba(212,168,67,.14);
+  }
+  .pa-ms-date{
+    display: block;
+    margin-bottom: .3rem;
+    font-size: .62rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--lavender);
+  }
+  .pa-ms-kolma .pa-ms-date,
+  .pa-ms-anniv .pa-ms-date{ color: var(--gold-soft); }
+  .pa-ms-today{
+    display: inline-block;
+    margin-left: .4rem;
+    padding: .1rem .55rem;
+    border-radius: 999px;
+    font-size: .58rem;
+    letter-spacing: .14em;
+    color: var(--void);
+    background: linear-gradient(135deg, var(--gold-pale), var(--gold));
+    vertical-align: .05em;
+  }
+  .pa-ms-today[hidden]{ display: none; }
+  .pa-ms.is-today .pa-ms-card{
+    border-color: rgba(240,208,128,.85);
+    box-shadow: 0 14px 38px rgba(0,0,0,.36), 0 0 40px rgba(212,168,67,.24);
+  }
+  .pa-ms-title{
+    margin: 0 0 .35rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.12rem;
+    line-height: 1.4;
+    color: var(--cream);
+  }
+  .pa-ms-sub{
+    display: block;
+    margin: -.1rem 0 .45rem;
+    font-size: .6rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(240,208,128,.75);
+  }
+  .pa-ms-text{
+    margin: 0;
+    font-size: .88rem;
+    line-height: 1.75;
+    color: var(--cream-dim);
+  }
+  .pa-ms-bn{
+    font-family: var(--font-bn);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--blush);
+  }
+
+  @media (min-width: 760px){
+    .pa-timeline{
+      max-width: var(--container);
+      padding: 2.2rem 0 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .pa-timeline::before{
+      left: 16.66%;
+      right: 16.66%;
+      top: .55rem;
+      bottom: auto;
+      width: auto;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(179,156,208,.65), rgba(212,168,67,.7));
+    }
+    .pa-ms{ margin: 0; text-align: center; }
+    .pa-ms-node{
+      left: 50%;
+      top: calc(-2.2rem + .55rem - 5px);
+      margin-left: -5px;
+    }
+  }
+
+  /* ---- the Dream Cake gift card ---- */
+  .pa-gift{
+    position: relative;
+    max-width: 480px;
+    margin: clamp(4rem, 10vh, 5rem) auto 0;
+    padding: 2.6rem clamp(1.3rem, 5.5vw, 2.2rem) clamp(1.7rem, 5vw, 2.1rem);
+    text-align: center;
+    border-radius: 24px;
+    background:
+      radial-gradient(120% 70% at 50% 0%, rgba(212,168,67,.12), transparent 60%),
+      linear-gradient(165deg, rgba(107,76,154,.2), rgba(24,17,38,.55));
+    border: 1px solid rgba(212,168,67,.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 18px 50px rgba(0,0,0,.42), 0 0 40px rgba(212,168,67,.1);
+  }
+  .pa-gift-icon{
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    margin-left: -24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    line-height: 1;
+    border-radius: 50%;
+    background: linear-gradient(160deg, #2c1f44, var(--deep));
+    border: 1px solid rgba(212,168,67,.65);
+    box-shadow: 0 0 20px rgba(212,168,67,.3);
+  }
+  .pa-gift-kicker{
+    display: block;
+    font-size: .6rem;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    opacity: .85;
+  }
+  .pa-gift-title{
+    margin: .45rem 0 1.1rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(1.25rem, 5vw, 1.55rem);
+    line-height: 1.35;
+    color: var(--gold-soft);
+    text-shadow: 0 0 18px rgba(212,168,67,.3);
+  }
+  .pa-gift-msg p{
+    margin: 0 auto .9rem;
+    max-width: 34ch;
+    font-family: var(--font-bn);
+    font-weight: 500;
+    font-size: clamp(.95rem, 4vw, 1.06rem);
+    line-height: 2;
+    color: var(--cream);
+  }
+  .pa-gift-msg p:last-child{ margin-bottom: 0; }
+  .pa-gift-orbit{
+    max-width: 38ch;
+    margin: 1.2rem auto 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.84rem, 3.4vw, .95rem);
+    line-height: 1.75;
+    color: var(--cream-dim);
+  }
+  .pa-gift-sign{
+    display: block;
+    margin-top: 1.1rem;
+    font-size: .62rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: rgba(240,208,128,.8);
+  }
+
+  /* ---- closing lines ---- */
+  .pa-closing{
+    max-width: 40ch;
+    margin: clamp(2.8rem, 8vh, 3.8rem) auto 0;
+    text-align: center;
+  }
+  .pa-closing-bn{
+    margin: 0;
+    font-family: var(--font-bn);
+    font-weight: 600;
+    font-size: clamp(1.02rem, 4.2vw, 1.22rem);
+    line-height: 1.95;
+    color: var(--cream);
+    text-shadow: 0 0 18px rgba(179,156,208,.3);
+  }
+  .pa-closing-en{
+    margin: .7rem 0 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.9rem, 3.6vw, 1.02rem);
+    color: var(--gold-soft);
+  }
+
+  /* ---- reduced motion: no flap/paper movement, no staggered delays ---- */
+  @media (prefers-reduced-motion: reduce){
+    .pa-words,
+    .pa-ms-anniv .pa-ms-node,
+    .pa-letter.is-open .pa-letter-body,
+    .pa-letter.is-open .pa-letter-body > *,
+    .pa-letter-body.is-closing{ animation: none !important; }
+    .pa-env-flap,
+    .pa-env-paper,
+    .pa-env-seal,
+    .pa-letter.is-open .pa-env-flap,
+    .pa-letter.is-open .pa-env-paper,
+    .pa-letter.is-open .pa-env-seal,
+    .pa-envelope{ transition: none !important; }
+  }
 </style>
 </head>
 <body class="locked">
@@ -3061,6 +3786,12 @@
           <source src="Mehrab-and-Ruhana.mp3" type="audio/mpeg">
         </audio>
       </div>
+
+      <!-- anniversary addition: a quiet way down to 29 October -->
+      <a href="#proposal-anniversary" class="pa-hero-link">
+        <span class="pa-hero-link-date">29 • 10</span>
+        <span class="pa-hero-link-text">the words that started our forever ♡</span>
+      </a>
     </div>
 
     <a href="#married" class="scroll-cue" aria-label="Scroll down">
@@ -3185,6 +3916,110 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       OUR FIRST PROPOSAL ANNIVERSARY — 29 October 2025 → 29 October 2026
+       (added for the anniversary; self-contained, all classes use the
+       .pa-* prefix, behaviour lives in section 7 of the script)
+       ============================================================ -->
+  <section id="proposal-anniversary" class="thread" aria-labelledby="paTitle">
+    <span class="eyebrow reveal">our first proposal anniversary</span>
+    <h2 class="section-title reveal" id="paTitle">The Words That Started Our Forever</h2>
+    <p class="pa-years reveal">
+      <span>29 October 2025</span>
+      <span class="pa-years-sep" aria-hidden="true">—</span>
+      <span>29 October 2026</span>
+    </p>
+
+    <!-- the words themselves -->
+    <div class="pa-words-card reveal">
+      <p class="pa-tagline" lang="bn">এক বছর আগে ভালোবাসার স্বীকারোক্তি, আজীবনের জন্য ভালোবাসার ঠিকানা।</p>
+      <span class="pa-quote-mark" aria-hidden="true">“</span>
+      <p class="pa-words" lang="bn">আমি তোমাকে ভালোবাসি কন্যু।</p>
+      <span class="pa-words-by">what Pitu told you · 29 • 10 • 2025</span>
+
+      <div class="pa-divider" aria-hidden="true"></div>
+
+      <p class="pa-then-now" lang="bn">তখন তুমি ছিলে আমার <span class="pa-em">আদরের কন্যা</span>। আজ তুমি আমার বাবুই পাখি, আমার স্ত্রী, <span class="pa-gold">আমার Mrs. Mehrab</span>।</p>
+      <p class="pa-then-now-en">The girl I said it to then is the woman I am married to now — and every word still holds.</p>
+    </div>
+
+    <!-- the sealed letter — tap to open, tap again (or the button inside) to fold it back -->
+    <div class="pa-letter reveal" id="paLetter">
+      <button type="button" class="pa-envelope" id="paEnvelope" aria-expanded="false" aria-controls="paLetterBody">
+        <span class="pa-env-art" aria-hidden="true">
+          <span class="pa-env-back"></span>
+          <span class="pa-env-paper"></span>
+          <span class="pa-env-pocket"></span>
+          <span class="pa-env-flap"></span>
+          <span class="pa-env-seal">
+            <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
+          </span>
+        </span>
+        <span class="pa-env-label" lang="bn">পাখিন, একটা কথা মনে আছে?</span>
+        <span class="pa-env-hint" id="paEnvHint">tap to open the words that started our forever ♡</span>
+      </button>
+
+      <div class="pa-letter-body" id="paLetterBody" role="region" aria-label="A letter from Pitu" hidden>
+        <span class="pa-letter-date" lang="bn">২৯ অক্টোবর, ২০২৫</span>
+        <p class="pa-letter-words" lang="bn">“আমি তোমাকে ভালোবাসি কন্যু।”</p>
+        <div class="pa-letter-msg" lang="bn">
+          <p>সেদিন ঠিক এই কথাটাই তোমাকে বলেছিলাম। তখন জানতাম না, একদিন সেই কন্যাই আমার স্ত্রী হবে।</p>
+          <p>আজ এক বছর পর, তোমাকে একই কথাটা আবার বলছি — আমি তোমাকে ভালোবাসি, পাখিন। আজও, আগামীতেও।</p>
+        </div>
+        <p class="pa-letter-en">One year ago, I told you I loved you, Konna. Today, you are my wife — and I still choose you.</p>
+        <p class="pa-letter-sign">Always yours<small>Pitu · your husband</small></p>
+        <button type="button" class="pa-letter-close" id="paLetterClose">fold the letter back</button>
+      </div>
+    </div>
+
+    <!-- from Konna to Mrs. Mehrab — three dates, one story -->
+    <ol class="pa-timeline reveal" aria-label="From the proposal to our first proposal anniversary">
+      <li class="pa-ms pa-ms-proposal">
+        <span class="pa-ms-node" aria-hidden="true"></span>
+        <div class="pa-ms-card">
+          <span class="pa-ms-date">29 October 2025</span>
+          <h3 class="pa-ms-title">The Proposal</h3>
+          <p class="pa-ms-text pa-ms-bn" lang="bn">“আমি তোমাকে ভালোবাসি কন্যু।”</p>
+        </div>
+      </li>
+      <li class="pa-ms pa-ms-kolma">
+        <span class="pa-ms-node" aria-hidden="true"></span>
+        <div class="pa-ms-card">
+          <span class="pa-ms-date">11 September 2026</span>
+          <h3 class="pa-ms-title">The Kolma</h3>
+          <p class="pa-ms-text">We became husband and wife.</p>
+        </div>
+      </li>
+      <li class="pa-ms pa-ms-anniv">
+        <span class="pa-ms-node" aria-hidden="true"></span>
+        <div class="pa-ms-card">
+          <span class="pa-ms-date">29 October 2026 <span class="pa-ms-today" id="paTodayBadge" hidden>today ♡</span></span>
+          <h3 class="pa-ms-title">Our First Proposal Anniversary</h3>
+          <span class="pa-ms-sub">as a married couple</span>
+          <p class="pa-ms-text">The words are a year old. Our life together has just begun.</p>
+        </div>
+      </li>
+    </ol>
+
+    <!-- the Dream Cake — a small gift from Pitu, chosen by her -->
+    <aside class="pa-gift reveal" aria-labelledby="paGiftTitle">
+      <span class="pa-gift-icon" aria-hidden="true">🎂</span>
+      <span class="pa-gift-kicker">a little gift from Pitu</span>
+      <h3 class="pa-gift-title" id="paGiftTitle">A Little Cake, A Lot of Love</h3>
+      <div class="pa-gift-msg" lang="bn">
+        <p>তোমার Dream Cake-এর জন্য ৳500 — আমার তরফ থেকে তোমার জন্য ছোট্ট একটা মিষ্টি উপহার। নিজের পছন্দের কেকটা কিনে নিও, বাবুই পাখি।</p>
+        <p>আমি ঢাকায় পরীক্ষার বইয়ের মাঝে, তুমি খুলনায় — কিন্তু দূরে আছি বলে তোমার বিশেষ দিনটা মিষ্টি করে তোলার ইচ্ছেটা তো আর দূরে রাখতে পারি না। ♡</p>
+      </div>
+      <p class="pa-gift-orbit">Even between my 4-1 finals in Dhaka, every one of my ~10²⁸ electrons still finds its order in a single orbit — around you.</p>
+      <span class="pa-gift-sign">your Pitu · from Dhaka to Khulna</span>
+    </aside>
+
+    <div class="pa-closing reveal">
+      <p class="pa-closing-bn" lang="bn">এক বছর আগের সেই কথাটা আজও সত্যি। শুধু আজ বলছি তোমার স্বামী হয়ে।</p>
+      <p class="pa-closing-en">Happy first Proposal Anniversary, Mrs. Mehrab. ♡</p>
     </div>
   </section>
 
@@ -4258,6 +5093,11 @@
       date:  '11 • 09 • 2026',
       title: 'The Kolma',
       note:  'The day the waiting ended and the first page of the rest of our lives was written. Alhamdulillah.'
+    },
+    {
+      date:  '29 • 10 • 2026',
+      title: 'Our first Proposal Anniversary',
+      note:  'One year since I first told you I loved you, Konna — and the first time we celebrated those words as husband and wife. Me in Dhaka, you in Khulna, and a Dream Cake of your own choosing.'
     }
   ];
 
@@ -5286,6 +6126,136 @@
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
+
+  /* ============================================================
+     7. OUR FIRST PROPOSAL ANNIVERSARY — 29 October 2025 → 2026
+        The sealed letter (tap to open, tap again or "fold the
+        letter back" to close) and a small "today ♡" badge that
+        appears only on 29 October 2026, Bangladesh time.
+        Self-contained: it only touches #proposal-anniversary and
+        is placed last so nothing above can be affected by it.
+     ============================================================ */
+  (function initProposalAnniversary(){
+    const paLetter   = document.getElementById('paLetter');
+    const paEnvelope = document.getElementById('paEnvelope');
+    const paBody     = document.getElementById('paLetterBody');
+    const paClose    = document.getElementById('paLetterClose');
+    const paHint     = document.getElementById('paEnvHint');
+    const paToday    = document.getElementById('paTodayBadge');
+
+    // "today ♡" on the anniversary itself (UTC+6, same as the Forever Began clock)
+    if (paToday){
+      const bd = new Date(Date.now() + 6 * 3600 * 1000);
+      if (bd.getUTCFullYear() === 2026 && bd.getUTCMonth() === 9 && bd.getUTCDate() === 29){
+        paToday.hidden = false;
+        const item = paToday.closest('.pa-ms');
+        if (item) item.classList.add('is-today');
+      }
+    }
+
+    // the hero's "29 • 10" link — the sections above use content-visibility:auto,
+    // so their true heights only appear while scrolling past them; when the
+    // scroll ends, settle exactly on the section (unless she scrolled herself)
+    const paHeroLink = document.querySelector('.pa-hero-link');
+    const paSection  = document.getElementById('proposal-anniversary');
+    if (paHeroLink && paSection){
+      paHeroLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        const behavior  = reduceMotion ? 'auto' : 'smooth';
+        const hasEndEvt = 'onscrollend' in window;
+        const USER_EVTS = ['wheel', 'touchstart', 'keydown'];
+        let passes = 0;
+        let userMoved = false;
+        let done = false;
+        const onUser = () => { userMoved = true; };
+
+        function finish(){
+          if (done) return;
+          done = true;
+          window.removeEventListener('scrollend', settle);
+          USER_EVTS.forEach(t => window.removeEventListener(t, onUser));
+        }
+        function go(){
+          paSection.scrollIntoView({ behavior, block: 'start' });
+          if (!hasEndEvt) setTimeout(settle, 1400);   // browsers without 'scrollend'
+        }
+        function settle(){
+          if (done) return;
+          const off = paSection.getBoundingClientRect().top;
+          if (userMoved || passes >= 4 || Math.abs(off) <= 4){ finish(); return; }
+          passes++;
+          go();
+        }
+
+        USER_EVTS.forEach(t => window.addEventListener(t, onUser, { passive: true }));
+        if (hasEndEvt) window.addEventListener('scrollend', settle);
+        setTimeout(finish, 8000);   // never leave listeners behind
+        go();
+      });
+    }
+
+    if (!paLetter || !paEnvelope || !paBody) return;
+
+    const HINT_CLOSED = paHint ? paHint.textContent : '';
+    const HINT_OPEN   = 'tap again to fold it back';
+    const SETTLE_MS   = reduceMotion ? 0 : 450;  // let the flap open before nudging the scroll
+    const FOLD_MS     = reduceMotion ? 0 : 460;  // matches paLetterFold
+
+    let paIsOpen   = false;
+    let paFoldTimer = null;
+
+    function openLetter(){
+      if (paIsOpen) return;
+      paIsOpen = true;
+      clearTimeout(paFoldTimer);
+      paBody.classList.remove('is-closing');
+      paBody.hidden = false;
+      paLetter.classList.add('is-open');
+      paEnvelope.setAttribute('aria-expanded', 'true');
+      if (paHint) paHint.textContent = HINT_OPEN;
+
+      // on a phone the letter unfolds below the fold — bring it gently into view
+      setTimeout(() => {
+        if (!paIsOpen) return;
+        const bodyTop = paBody.getBoundingClientRect().top;
+        if (bodyTop > window.innerHeight * 0.72){
+          const envTop = paEnvelope.getBoundingClientRect().top;
+          window.scrollBy({ top: envTop - window.innerHeight * 0.08, behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
+      }, SETTLE_MS);
+    }
+
+    function closeLetter(returnFocus){
+      if (!paIsOpen) return;
+      paIsOpen = false;
+      paLetter.classList.remove('is-open');
+      paBody.classList.add('is-closing');
+      paEnvelope.setAttribute('aria-expanded', 'false');
+      if (paHint) paHint.textContent = HINT_CLOSED;
+
+      paFoldTimer = setTimeout(() => {
+        paBody.hidden = true;
+        paBody.classList.remove('is-closing');
+      }, FOLD_MS);
+
+      if (returnFocus){
+        const r = paEnvelope.getBoundingClientRect();
+        if (r.top < 0 || r.bottom > window.innerHeight){
+          paEnvelope.scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
+        paEnvelope.focus({ preventScroll: true });
+      }
+    }
+
+    // a native <button>: Enter / Space / tap / click all arrive as 'click'
+    paEnvelope.addEventListener('click', () => {
+      if (paIsOpen) closeLetter(false); else openLetter();
+    });
+    if (paClose) paClose.addEventListener('click', () => closeLetter(true));
+    paLetter.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && paIsOpen) closeLetter(true);
+    });
+  })();
 
 })();
 </script>
