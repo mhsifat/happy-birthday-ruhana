@@ -5070,6 +5070,14 @@
     frame.appendChild(ring);
     frame.appendChild(date);
     frame.appendChild(line);
+    // the wedding photo sits on top of the typographic card;
+    // if wedding.jpg is missing, the 💍 / date design shows instead
+    const img = document.createElement('img');
+    img.src = 'wedding.jpg';
+    img.alt = 'Mehrab and Ruhana — our Kolma, 11 September 2026';
+    img.loading = 'lazy';
+    img.onerror = function(){ this.remove(); };
+    frame.appendChild(img);
 
     const cap = document.createElement('figcaption');
     cap.textContent = 'Chapter II begins';
