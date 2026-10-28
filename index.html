@@ -44,7 +44,10 @@
   "One Ordinary Night" inside it retells the night of 29 October
   2025 around the 04:43 to 04:46 AM moment. Its styles use the
   .pa-nt-*, .pa-moment-*, .pa-clock-* and .pa-journey-* prefixes
-  and its script is section 7b.
+  and its script is section 7b. Near the end of the section, the
+  gift card ("A Little Sweetness at Midnight") stays sealed until
+  12:00 AM on 29 October 2026, Bangladesh time; its styles use
+  the .pa-gift-* prefix and its script is section 7c.
   ============================================================
 -->
 
@@ -3603,7 +3606,7 @@
     }
   }
 
-  /* ---- the Dream Cake gift card ---- */
+  /* ---- the gift card: a little sweetness at midnight ---- */
   .pa-gift{
     position: relative;
     max-width: 480px;
@@ -3682,6 +3685,53 @@
     color: rgba(240,208,128,.8);
   }
 
+  /* midnight additions: a faint star layer (the .pa-moment-sky pattern,
+     kept behind the text), the sealed side and its quiet fallback link */
+  .pa-gift .pa-gift-sky{
+    z-index: -1;
+    border-radius: inherit;
+    opacity: .8;
+  }
+  .pa-gift-title:focus{ outline: none; }
+  .pa-gift-when{
+    display: block;
+    margin-top: 1.15rem;
+    font-size: .6rem;
+    line-height: 1.8;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--lavender);
+  }
+  .pa-gift-when > span{ display: block; }
+  .pa-gift-early{
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: .7rem;
+    padding: .45rem .8rem;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: .8rem;
+    line-height: 1.6;
+    color: var(--cream-dim);
+    opacity: .7;
+    text-decoration: underline;
+    text-decoration-color: rgba(179,156,208,.45);
+    text-underline-offset: 3px;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity .3s var(--ease), color .3s var(--ease);
+  }
+  .pa-gift-early:hover{ opacity: 1; color: var(--cream); }
+  .pa-gift-early:focus-visible{ outline: 2px solid var(--lavender); outline-offset: 3px; }
+  /* when midnight arrives while the page is open, the note settles in line by line */
+  .pa-gift.is-opening .pa-gift-open > *{ animation: paLineIn .8s var(--ease) both; }
+  .pa-gift.is-opening .pa-gift-open > :nth-child(2){ animation-delay: .3s; }
+  .pa-gift.is-opening .pa-gift-open > :nth-child(3){ animation-delay: .6s; }
+
   /* ---- closing lines ---- */
   .pa-closing{
     max-width: 40ch;
@@ -3711,7 +3761,8 @@
     .pa-ms-anniv .pa-ms-node,
     .pa-letter.is-open .pa-letter-body,
     .pa-letter.is-open .pa-letter-body > *,
-    .pa-letter-body.is-closing{ animation: none !important; }
+    .pa-letter-body.is-closing,
+    .pa-gift.is-opening .pa-gift-open > *{ animation: none !important; }
     .pa-env-flap,
     .pa-env-paper,
     .pa-env-seal,
@@ -4607,17 +4658,39 @@
       </li>
     </ol>
 
-    <!-- the Dream Cake: a small gift from Pitu, chosen by her -->
-    <aside class="pa-gift reveal" aria-labelledby="paGiftTitle">
-      <span class="pa-gift-icon" aria-hidden="true">🎂</span>
-      <span class="pa-gift-kicker">a little gift from Pitu</span>
-      <h3 class="pa-gift-title" id="paGiftTitle">A Little Sweetness for Babui Pakhi</h3>
-      <div class="pa-gift-msg" lang="bn">
-        <p>তোমার Dream Cake-এর জন্য বিকাশে ৳500, আমার তরফ থেকে ছোট্ট একটা মিষ্টি উপহার। নিজের পছন্দের কেকটা কিনে নিও, বাবুই পাখি।</p>
-        <p>মনে আছে, একবার আমার জন্য একটা কেক রেখে এসেছিলে, তখনো আমাদের সামনাসামনি দেখাই হয়নি? এবার কেকটা তোমার, বেছে নেওয়ার ভারটাও তোমার।</p>
-        <p>আমি ঢাকায় পরীক্ষার বইয়ের মাঝে, তুমি খুলনায়। কিন্তু দূরে আছি বলে তোমার বিশেষ দিনটা মিষ্টি করে তোলার ইচ্ছেটা তো আর দূরে রাখতে পারি না। ♡</p>
+    <!-- a little sweetness at midnight: a note from Pitu, sealed until
+         12:00 AM on 29 October 2026, Bangladesh time (behaviour is 7c).
+         The open note is the default, so it never stays locked if the
+         script cannot run; before midnight the script shows the sealed side. -->
+    <aside class="pa-gift reveal" id="paGift" aria-labelledby="paGiftTitle">
+      <span class="pa-moment-sky pa-gift-sky" aria-hidden="true"></span>
+      <span class="pa-gift-icon" aria-hidden="true">🌙</span>
+      <span class="pa-gift-kicker">a little something from Pitu</span>
+
+      <!-- before midnight: nothing is given away, only a promise of words -->
+      <div class="pa-gift-sealed" id="paGiftSealed" hidden>
+        <h3 class="pa-gift-title" id="paGiftSealedTitle">Saved for Midnight</h3>
+        <div class="pa-gift-msg" lang="bn">
+          <p>এই কথাটুকু ২৯ অক্টোবরের জন্য তুলে রেখেছি, বাবুই পাখি। রাত ঠিক বারোটায় নিজে থেকেই খুলে যাবে, ততক্ষণ একটু অপেক্ষা করো। ♡</p>
+        </div>
+        <span class="pa-gift-when">
+          <span id="paGiftWhen">opens at midnight</span>
+          <span>12:00 AM · Bangladesh time</span>
+        </span>
+        <button type="button" class="pa-gift-early" id="paGiftEarly">already midnight in Bangladesh? open it here</button>
       </div>
-      <p class="pa-gift-orbit">Even between my 4-1 finals in Dhaka, every one of my ~10²⁸ electrons still finds its order in a single orbit: around you.</p>
+
+      <!-- from midnight on: the note itself -->
+      <div class="pa-gift-open" id="paGiftOpen">
+        <h3 class="pa-gift-title" id="paGiftTitle" tabindex="-1">A Little Sweetness at Midnight ♡</h3>
+        <div class="pa-gift-msg" lang="bn">
+          <p>আমার বাবুই পাখির জন্য ২৯ অক্টোবরের শুরুতেই একটু মিষ্টি ভালোবাসা অপেক্ষা করছে।</p>
+          <p>আমি ঢাকায় পরীক্ষার বইয়ের মাঝে, তুমি খুলনায়। পাশে বসে তোমার হাসিটা দেখতে পারছি না, কিন্তু দূরে আছি বলে তোমার বিশেষ দিনটা একটু সুন্দর করে তোলার ইচ্ছেটা তো আর দূরে রাখতে পারি না।</p>
+          <p>শুভ Proposal Anniversary, পাখিন। তোমার পিতুর অফুরন্ত ভালোবাসা রইল। ♡</p>
+        </div>
+        <p class="pa-gift-orbit">Even between my 4-1 finals in Dhaka, every one of my ~10²⁸ electrons still finds its order in a single orbit: around you.</p>
+      </div>
+
       <span class="pa-gift-sign">your Pitu · from Dhaka to Khulna</span>
     </aside>
 
@@ -5709,7 +5782,7 @@
     {
       date:  '29 • 10 • 2026',
       title: 'Our first Proposal Anniversary',
-      note:  'One year since that long night when, a little before five in the morning, I first told you I loved you, Konna, and the first time we celebrated those words as husband and wife. Me in Dhaka, you in Khulna, and a Dream Cake of your own choosing.'
+      note:  'One year since that long night when, a little before five in the morning, I first told you I loved you, Konna, and the first time we celebrated those words as husband and wife. Me in Dhaka, you in Khulna, and my love still finding its way to you.'
     }
   ];
 
@@ -6935,6 +7008,87 @@
     moment.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isOpen) closeMoment(true);
     });
+  })();
+
+  /* ============================================================
+     7c. A LITTLE SWEETNESS AT MIDNIGHT: the gift card
+        Sealed until 12:00 AM on 29 October 2026, Bangladesh time
+        (UTC+6), then it opens by itself, also while the page is
+        already open. The check compares absolute moments, so the
+        visitor's own timezone setting never matters. A clock that
+        reads earlier than the day this note was written is clearly
+        wrong, so the card just opens; for a clock that is only a
+        little off, the quiet link opens it after a second tap.
+        Self-contained: it only touches #paGift.
+     ============================================================ */
+  (function initMidnightSweetness(){
+    const gift   = document.getElementById('paGift');
+    const sealed = document.getElementById('paGiftSealed');
+    const opened = document.getElementById('paGiftOpen');
+    const title  = document.getElementById('paGiftTitle');
+    const whenEl = document.getElementById('paGiftWhen');
+    const early  = document.getElementById('paGiftEarly');
+    if (!gift || !sealed || !opened) return;
+
+    // 29 October 2026, 00:00:00 Bangladesh time (UTC+6)
+    const OPENS_AT = new Date('2026-10-29T00:00:00+06:00').getTime();
+    // no correct clock can read earlier than the day this note was written
+    const WRITTEN  = new Date('2026-10-28T00:00:00+06:00').getTime();
+
+    const isTime = () => {
+      const now = Date.now();
+      return now >= OPENS_AT || now < WRITTEN;
+    };
+
+    let timer = null;
+    let lastWhen = '';
+
+    function showOpen(animate, moveFocus){
+      if (timer){ clearInterval(timer); timer = null; }
+      document.removeEventListener('visibilitychange', check);
+      sealed.hidden = true;
+      opened.hidden = false;
+      gift.setAttribute('aria-labelledby', 'paGiftTitle');
+      if (animate && !reduceMotion) gift.classList.add('is-opening');
+      if (moveFocus && title) title.focus({ preventScroll: true });
+    }
+
+    function timeLeft(ms){
+      const s = Math.max(1, Math.ceil(ms / 1000));
+      if (s >= 3600){
+        const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60);
+        return m ? `${h} h ${m} min` : `${h} h`;
+      }
+      if (s >= 60)   return `${Math.ceil(s / 60)} min`;
+      return `${s} s`;
+    }
+
+    function check(){
+      if (isTime()){ showOpen(true, false); return; }
+      if (!whenEl) return;
+      const text = `opens in ${timeLeft(OPENS_AT - Date.now())}`;
+      if (text !== lastWhen){ whenEl.textContent = text; lastWhen = text; }
+    }
+
+    if (isTime()) return;   // from midnight on, the open note (the default) simply stays
+
+    // before midnight: show the sealed side and wait for 12:00 AM
+    opened.hidden = true;
+    sealed.hidden = false;
+    gift.setAttribute('aria-labelledby', 'paGiftSealedTitle');
+    check();
+    timer = setInterval(check, 1000);
+    document.addEventListener('visibilitychange', check);
+
+    // a clock that is a little off: first tap asks her to wait, second tap opens
+    if (early){
+      let asked = false;
+      early.addEventListener('click', () => {
+        if (asked || isTime()){ showOpen(true, true); return; }
+        asked = true;
+        early.textContent = 'Pitu hoped you would wait for midnight. If your clock is wrong, tap once more ♡';
+      });
+    }
   })();
 
 })();
