@@ -48,6 +48,25 @@
   gift card ("A Little Sweetness at Midnight") stays sealed until
   12:00 AM on 29 October 2026, Bangladesh time; its styles use
   the .pa-gift-* prefix and its script is section 7c.
+
+  TWO MONTHS UPDATE (11 November 2026): two new sections sit
+  right after Forever Began and stay open:
+    "Two Months of Us" (#two-months, .tm-* styles) and
+    "A Little Magic for My Babui Pakhi" (#little-magic, .lm-* and
+    .pk-* styles). Their script is section 8 (8, 8b and 8c).
+  New files, in the SAME FOLDER as this index.html:
+    wedding-anniversary.jpg          → the wedding photo in Two Months
+                                        of Us (if it is missing the page
+                                        tries wedding.jpg, then shows a
+                                        soft placeholder)
+    doraemon-ruhana-anniversary.mp4  → the little magic video
+    doraemon-ruhana-poster.jpg       → optional still shown until the
+                                        video has loaded
+  Every older section now lives in one of three collapsible groups
+  (<details class="grp">, .grp-* styles, script section 9). Nothing
+  inside them was removed or rewritten, every section keeps its id,
+  and any link to a section inside a folded group opens that group
+  first.
   ============================================================
 -->
 
@@ -4242,6 +4261,1345 @@
     .pa-clock-arc,
     .pa-moment-toggle{ transition: none !important; }
   }
+
+  /* ============================================================
+     ============================================================
+     TWO MONTHS OF US · 11 September 2026 → 11 November 2026
+     Everything below is new and scoped to .tm-* (Two Months of Us),
+     .lm-* (A Little Magic), .pk-* (Pitu's Pocket of Love) and
+     .grp-* (the collapsible chapter groups), so nothing above this
+     line is affected. Pastel blue is borrowed from the gift; purple,
+     lavender and gold are still the colours of home.
+     ============================================================
+     ============================================================ */
+  :root{
+    --sky:      #c4e3fa;
+    --sky-mid:  #93c9ef;
+    --sky-deep: #5f9fd3;
+    /* pastel-blue gingham, used on light paper */
+    --gingham:
+      linear-gradient(90deg, rgba(147,201,239,.5) 50%, transparent 50%),
+      linear-gradient(rgba(147,201,239,.5) 50%, transparent 50%);
+  }
+
+  #two-months [hidden],
+  #little-magic [hidden],
+  .tm-lightbox [hidden]{ display: none !important; }
+
+  .tm-sr{
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* ---- hero: two small paths down the page ---- */
+  .hero-links{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .55rem;
+  }
+  .tm-hero-link{
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .1rem .55rem;
+    max-width: min(88vw, 360px);
+    padding: .55rem 1.15rem;
+    border-radius: 999px;
+    border: 1px solid rgba(196,227,250,.5);
+    background: rgba(24,17,38,.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 0 22px rgba(147,201,239,.16), 0 0 18px rgba(212,168,67,.08);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: .78rem;
+    line-height: 1.5;
+    transition: border-color .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tm-hero-link:hover{
+    border-color: rgba(196,227,250,.85);
+    background: rgba(24,17,38,.6);
+    box-shadow: 0 0 30px rgba(147,201,239,.28);
+  }
+  .tm-hero-link:focus-visible{ outline: 2px solid var(--sky); outline-offset: 4px; }
+  .tm-hero-link-date{
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: .12em;
+    color: var(--sky);
+  }
+  .tm-hero-link-text{
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--cream);
+  }
+
+  /* ============================================================
+     TWO MONTHS OF US
+     ============================================================ */
+  #two-months{
+    padding-top: clamp(4rem,12vh,7rem);
+    contain-intrinsic-size: auto 1900px;
+  }
+  #two-months > :not(.tm-sky){ position: relative; z-index: 1; }
+
+  /* a pale sky behind the section: three slow clouds, a few stars */
+  .tm-sky{
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .tm-cloud{
+    position: absolute;
+    color: var(--sky);
+    opacity: .06;
+    filter: blur(2px);
+    width: clamp(96px, 24vw, 190px);
+    height: auto;
+    aspect-ratio: 64 / 40;
+    animation: tmDrift 26s ease-in-out infinite alternate;
+  }
+  .tm-cloud.c1{ top: 7%;  left: -3%; }
+  .tm-cloud.c2{ top: 34%; right: -5%; width: clamp(76px, 18vw, 140px); animation-duration: 32s; animation-delay: -9s; }
+  .tm-cloud.c3{ bottom: 12%; left: 2%; width: clamp(64px, 15vw, 118px); animation-duration: 29s; animation-delay: -15s; }
+  .tm-star{
+    position: absolute;
+    font-size: .8rem;
+    color: var(--sky);
+    opacity: .4;
+    animation: tmTwinkle 4.4s ease-in-out infinite;
+  }
+  .tm-star.s1{ top: 10%; right: 14%; }
+  .tm-star.s2{ top: 22%; left: 10%; animation-delay: -1.4s; font-size: .7rem; }
+  .tm-star.s3{ top: 58%; right: 7%;  animation-delay: -2.6s; }
+  .tm-star.s4{ bottom: 22%; left: 12%; animation-delay: -.8s; font-size: .66rem; }
+  @keyframes tmDrift{
+    from{ transform: translateX(0); }
+    to{   transform: translateX(30px); }
+  }
+  @keyframes tmTwinkle{
+    0%,100%{ opacity: .16; transform: scale(.85); }
+    50%{     opacity: .7;  transform: scale(1.12); }
+  }
+
+  /* 11.09.2026 → 11.11.2026 */
+  .tm-dates{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: .35rem .75rem;
+    margin: 0 auto clamp(2.4rem, 7vh, 3.4rem);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1rem, 4.2vw, 1.25rem);
+    letter-spacing: .12em;
+    color: var(--gold-soft);
+    text-shadow: 0 0 14px rgba(212,168,67,.35);
+  }
+  .tm-dates-arrow{
+    font-family: var(--font-body);
+    font-weight: 300;
+    letter-spacing: 0;
+    color: var(--sky);
+    text-shadow: 0 0 12px rgba(147,201,239,.6);
+  }
+  .tm-today{
+    padding: .2rem .65rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: .6rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--void);
+    text-shadow: none;
+    background: linear-gradient(135deg, var(--gold-pale), var(--gold));
+    box-shadow: 0 0 16px rgba(212,168,67,.55);
+  }
+
+  /* the photograph, in a soft arch like the doorway of a home */
+  .tm-figure{
+    width: min(100%, 620px);
+    margin: 0 auto;
+  }
+  .tm-figure::before{
+    content: '';
+    position: absolute;
+    inset: -7% -9% 4%;
+    z-index: -1;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(212,168,67,.22), rgba(147,201,239,.07) 58%, rgba(0,0,0,0) 78%);
+    animation: tmHalo 6.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes tmHalo{
+    0%,100%{ opacity: .6; transform: scale(.98); }
+    50%{     opacity: 1;  transform: scale(1.03); }
+  }
+
+  .tm-photo{
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    aspect-ratio: 4 / 5;
+    border-radius: 50% 50% 26px 26px / 30% 30% 26px 26px;
+    overflow: hidden;
+    cursor: zoom-in;
+    font: inherit;
+    color: inherit;
+    background: linear-gradient(150deg, var(--purple), var(--deep));
+    box-shadow:
+      0 0 0 1px rgba(240,208,128,.6),
+      0 0 0 7px rgba(24,17,38,.62),
+      0 0 0 8px rgba(196,227,250,.3),
+      0 30px 80px rgba(0,0,0,.55),
+      0 0 70px rgba(212,168,67,.2);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tm-photo:focus-visible{ outline: 2px solid var(--gold-soft); outline-offset: 12px; }
+  .tm-photo img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 58% 50%;
+    transition: transform 1.4s var(--ease);
+  }
+  .tm-photo:hover img{ transform: scale(1.03); }
+  /* a gold hairline inside the arch */
+  .tm-photo::after{
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border-radius: inherit;
+    border: 1px solid rgba(248,232,138,.5);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .tm-photo-shade{
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 32%;
+    background: linear-gradient(180deg, rgba(11,12,16,0), rgba(11,12,16,.5));
+    pointer-events: none;
+    z-index: 1;
+  }
+  .tm-photo-hint{
+    position: absolute;
+    left: 22px;
+    bottom: 22px;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .38rem .8rem .38rem .6rem;
+    border-radius: 999px;
+    background: rgba(11,12,16,.5);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(246,241,251,.18);
+    font-size: .6rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--cream);
+    white-space: nowrap;
+    opacity: .9;
+    transition: opacity .4s var(--ease);
+  }
+  .tm-photo-hint svg{ width: 14px; height: 14px; }
+  .tm-photo.is-missing{ cursor: default; }
+  .tm-photo.is-missing .tm-photo-hint,
+  .tm-photo.is-missing .tm-photo-shade{ display: none; }
+
+  .tm-photo-fallback{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .7rem;
+    padding: 2rem;
+    text-align: center;
+    background:
+      radial-gradient(70% 55% at 50% 40%, rgba(212,168,67,.16), rgba(212,168,67,0)),
+      radial-gradient(60% 50% at 50% 100%, rgba(147,201,239,.12), rgba(147,201,239,0)),
+      linear-gradient(160deg, rgba(107,76,154,.55), rgba(24,17,38,.95));
+  }
+  .tm-photo-fallback .home-motif{ width: 42px; height: 42px; }
+  .tm-fb-line{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    color: var(--cream);
+  }
+  .tm-fb-file{
+    font-size: .64rem;
+    letter-spacing: .08em;
+    color: rgba(240,208,128,.72);
+  }
+
+  /* little hearts and a star drifting up beside the photo */
+  .tm-float{
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+    font-size: 1rem;
+    line-height: 1;
+    opacity: 0;
+    animation: tmFloat 7s ease-in-out infinite;
+  }
+  .tm-float.f1{ left: -4%;  top: 46%; color: var(--blush); }
+  .tm-float.f2{ right: -3%; top: 22%; color: var(--sky);   font-size: .85rem; animation-delay: -2.2s; }
+  .tm-float.f3{ left: 6%;   top: 14%; color: var(--gold-soft); font-size: .7rem; animation-delay: -4.1s; }
+  .tm-float.f4{ right: 9%;  top: 64%; color: var(--blush); font-size: .8rem; animation-delay: -5.4s; }
+  @keyframes tmFloat{
+    0%{   opacity: 0;   transform: translateY(14px) scale(.8); }
+    25%{  opacity: .85; }
+    70%{  opacity: .55; }
+    100%{ opacity: 0;   transform: translateY(-46px) scale(1.05); }
+  }
+
+  /* the two-month badge, a small rosette with gingham ribbon tails */
+  .tm-badge{
+    position: absolute;
+    right: -6px;
+    bottom: 6px;
+    z-index: 5;
+    width: clamp(86px, 24vw, 116px);
+    aspect-ratio: 1;
+    transform: rotate(-8deg);
+  }
+  .tm-badge-tails{
+    position: absolute;
+    left: 50%;
+    top: 62%;
+    width: 72%;
+    height: 56%;
+    transform: translateX(-50%);
+    z-index: 0;
+  }
+  .tm-badge-tails::before,
+  .tm-badge-tails::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 36%;
+    height: 100%;
+    background-color: #eaf5ff;
+    background-image: var(--gingham);
+    background-size: 8px 8px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
+    transform-origin: 50% 0;
+  }
+  .tm-badge-tails::before{ left: 10%;  transform: rotate(16deg); }
+  .tm-badge-tails::after{  right: 10%; transform: rotate(-16deg); }
+  .tm-badge-disc{
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-align: center;
+    background: radial-gradient(circle at 50% 30%, #2c1e44, #130d1f 72%);
+    box-shadow:
+      0 0 0 2px rgba(240,208,128,.92),
+      0 0 0 6px rgba(24,17,38,.88),
+      0 0 0 7px rgba(196,227,250,.5),
+      0 14px 30px rgba(0,0,0,.55),
+      0 0 32px rgba(212,168,67,.45);
+    animation: tmBadgeGlow 4.6s ease-in-out infinite;
+  }
+  .tm-badge-disc::before{
+    content: '';
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    border: 1px dashed rgba(240,208,128,.5);
+    animation: ringSpin 48s linear infinite;
+  }
+  @keyframes tmBadgeGlow{
+    0%,100%{ filter: drop-shadow(0 0 0 rgba(212,168,67,0)); }
+    50%{     filter: drop-shadow(0 0 10px rgba(212,168,67,.45)); }
+  }
+  .tm-badge-num{
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 7vw, 2.75rem);
+    line-height: .92;
+    background: linear-gradient(160deg, var(--gold-pale) 0%, var(--gold-soft) 45%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .tm-badge-word{
+    margin-top: .2rem;
+    padding-left: .26em;
+    font-size: clamp(.5rem, 1.9vw, .6rem);
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--cream);
+  }
+  .tm-badge-sub{
+    margin-top: .05rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.62rem, 2.3vw, .74rem);
+    color: var(--sky);
+  }
+  #two-months.is-today .tm-badge-disc{
+    box-shadow:
+      0 0 0 2px rgba(248,232,138,1),
+      0 0 0 6px rgba(24,17,38,.88),
+      0 0 0 7px rgba(196,227,250,.65),
+      0 14px 30px rgba(0,0,0,.55),
+      0 0 46px rgba(212,168,67,.7);
+  }
+
+  .tm-figcap{
+    margin: 1.5rem 3.5rem 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.84rem, 3.4vw, .96rem);
+    color: var(--cream-dim);
+  }
+
+  /* the message */
+  .tm-message{
+    width: min(100%, 620px);
+    margin: clamp(2.8rem, 8vh, 3.8rem) auto 0;
+    text-align: center;
+    padding: clamp(2.3rem, 6vw, 3rem) clamp(1.3rem, 5vw, 2.6rem) clamp(1.9rem, 5vw, 2.4rem);
+    border-radius: 26px;
+    background: linear-gradient(165deg, rgba(107,76,154,.24), rgba(24,17,38,.56));
+    border: 1px solid rgba(212,168,67,.36);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow:
+      0 20px 60px rgba(0,0,0,.45),
+      0 0 54px rgba(212,168,67,.08),
+      0 0 90px rgba(147,201,239,.06),
+      inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  .tm-message::before{
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 42%;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(240,208,128,0), rgba(240,208,128,.8), rgba(240,208,128,0));
+  }
+  /* a strip of gingham ribbon pinning the note, like tape */
+  .tm-message::after{
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    width: 76px;
+    height: 22px;
+    transform: translateX(-50%) rotate(-2.5deg);
+    background-color: #eaf5ff;
+    background-image: var(--gingham);
+    background-size: 8px 8px;
+    border-radius: 2px;
+    opacity: .92;
+    box-shadow: 0 4px 10px rgba(0,0,0,.3);
+  }
+  .tm-msg-lead{
+    max-width: 21ch;
+    margin: 0 auto 1.15rem;
+    font-family: var(--font-bn);
+    font-weight: 600;
+    font-size: clamp(1.22rem, 4.9vw, 1.62rem);
+    line-height: 1.85;
+    text-wrap: balance;
+    background: linear-gradient(135deg, var(--cream) 10%, var(--gold-soft) 62%, var(--sky) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .tm-msg-body{
+    max-width: 30ch;
+    margin: 0 auto;
+    font-family: var(--font-bn);
+    font-weight: 500;
+    font-size: clamp(1rem, 4vw, 1.14rem);
+    line-height: 2.05;
+    color: var(--cream);
+    text-wrap: pretty;
+  }
+  .tm-msg-divider{
+    width: 56px;
+    height: 1px;
+    margin: 1.6rem auto 1.35rem;
+    background: linear-gradient(90deg, transparent, var(--gold-soft), var(--sky), transparent);
+  }
+  .tm-msg-en{
+    margin: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(1.14rem, 4.6vw, 1.45rem);
+    line-height: 1.5;
+    color: var(--gold-soft);
+    text-shadow: 0 0 18px rgba(212,168,67,.35);
+  }
+  .tm-msg-sign{
+    display: block;
+    margin-top: 1.1rem;
+    font-size: .62rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--lavender);
+  }
+
+  .tm-closing{
+    max-width: 30ch;
+    margin: clamp(2.6rem, 7vh, 3.4rem) auto 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.12rem, 4.4vw, 1.42rem);
+    line-height: 1.6;
+    color: var(--cream);
+    text-shadow: 0 0 22px rgba(179,156,208,.45), 0 0 30px rgba(212,168,67,.15);
+  }
+  .tm-home{ margin-top: 1.3rem; }
+
+  @media (min-width: 640px){
+    .tm-photo{
+      aspect-ratio: 4 / 3;
+      border-radius: 50% 50% 28px 28px / 34% 34% 28px 28px;
+    }
+    .tm-photo img{ object-position: 50% 50%; }
+    .tm-badge{ right: -26px; bottom: -14px; }
+  }
+
+  /* the photograph, larger */
+  .tm-lightbox{
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--cream);
+    max-width: 96vw;
+    max-height: 96vh;
+    overflow: visible;
+  }
+  .tm-lightbox[open]{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .9rem;
+    animation: tmLbIn .45s var(--ease) both;
+  }
+  .tm-lightbox::backdrop{
+    background: rgba(6,5,12,.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  @keyframes tmLbIn{
+    from{ opacity: 0; transform: scale(.96); }
+    to{   opacity: 1; transform: none; }
+  }
+  .tm-lightbox-fig{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .8rem;
+  }
+  .tm-lightbox-fig img{
+    width: auto;
+    height: auto;
+    max-width: min(94vw, 1300px);
+    max-height: 78vh;
+    max-height: 78svh;
+    border-radius: 14px;
+    box-shadow:
+      0 0 0 1px rgba(240,208,128,.5),
+      0 30px 90px rgba(0,0,0,.6),
+      0 0 60px rgba(212,168,67,.18);
+  }
+  .tm-lightbox-fig figcaption{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: .92rem;
+    color: var(--cream-dim);
+    text-align: center;
+  }
+  .tm-lightbox-close{
+    padding: .55rem 1.4rem;
+    border-radius: 999px;
+    border: 1px solid rgba(179,156,208,.45);
+    background: rgba(24,17,38,.7);
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-size: .74rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .tm-lightbox-close:hover{ border-color: var(--gold-soft); }
+  .tm-lightbox-close:focus-visible{ outline: 2px solid var(--gold-soft); outline-offset: 3px; }
+
+  /* ============================================================
+     A LITTLE MAGIC FOR MY BABUI PAKHI
+     ============================================================ */
+  #little-magic{
+    padding-top: clamp(4rem,12vh,7rem);
+    contain-intrinsic-size: auto 1800px;
+  }
+  .lm-title{ max-width: 17ch; margin-left: auto; margin-right: auto; }
+  .lm-sub{
+    margin: 0 auto clamp(2.4rem, 7vh, 3.2rem);
+    text-align: center;
+    font-family: var(--font-bn);
+    font-weight: 500;
+    font-size: clamp(1.04rem, 4.2vw, 1.22rem);
+    line-height: 1.9;
+    color: var(--sky);
+    text-shadow: 0 0 18px rgba(147,201,239,.35);
+  }
+
+  .lm-stage{
+    position: relative;
+    width: min(100%, 760px);
+    margin: 0 auto;
+    padding: 0 clamp(0rem, 3vw, 1.6rem);
+  }
+  .lm-frame-wrap{
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+  }
+  /* if the video is ever swapped for a portrait one, the frame follows it */
+  .lm-frame-wrap.is-portrait{ width: min(100%, 360px, calc(78vh * 9 / 16)); }
+  @media (max-width: 520px){
+    .lm-stage{ padding: 0; }
+  }
+
+  /* pastel decorations peeking out from behind the frame */
+  .lm-deco{
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    color: var(--sky);
+  }
+  svg.lm-deco{ height: auto; }
+  .lm-cloud-a{
+    width: clamp(78px, 17vw, 132px);
+    aspect-ratio: 64 / 40;
+    left: clamp(-34px, -4%, -14px);
+    top: clamp(-30px, -9%, -16px);
+    opacity: .9;
+    filter: drop-shadow(0 0 14px rgba(147,201,239,.35));
+    animation: tmDrift 16s ease-in-out infinite alternate;
+  }
+  .lm-cloud-b{
+    width: clamp(64px, 13vw, 104px);
+    aspect-ratio: 64 / 40;
+    right: clamp(-30px, -4%, -12px);
+    bottom: clamp(-24px, -7%, -12px);
+    opacity: .8;
+    filter: drop-shadow(0 0 12px rgba(147,201,239,.3));
+    animation: tmDrift 20s ease-in-out infinite alternate-reverse;
+  }
+  .lm-heart-a{
+    width: 22px;
+    aspect-ratio: 1;
+    right: 6%;
+    top: -26px;
+    color: var(--sky-mid);
+    filter: drop-shadow(0 0 8px rgba(147,201,239,.6));
+    animation: tmTwinkle 3.8s ease-in-out infinite;
+  }
+  .lm-star-a, .lm-star-b, .lm-star-c{
+    font-size: .95rem;
+    text-shadow: 0 0 10px rgba(196,227,250,.8);
+    animation: tmTwinkle 4s ease-in-out infinite;
+  }
+  .lm-star-a{ left: -18px; bottom: 22%; animation-delay: -1.2s; }
+  .lm-star-b{ right: 16%; top: -24px; font-size: .8rem; animation-delay: -2.4s; color: var(--gold-soft); }
+  .lm-star-c{ left: 44%;  top: -26px; font-size: .7rem; animation-delay: -.6s; }
+
+  .lm-frame{
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    margin: 0 auto;
+    aspect-ratio: var(--lm-ar, 16 / 9);
+    border-radius: 26px;
+    overflow: hidden;
+    isolation: isolate;
+    background: linear-gradient(160deg, #d3eafb, #eef7ff 60%, #e7dcf7);
+    box-shadow:
+      0 0 0 1px rgba(196,227,250,.55),
+      0 0 0 6px rgba(24,17,38,.66),
+      0 0 0 7px rgba(179,156,208,.42),
+      0 26px 70px rgba(0,0,0,.55),
+      0 0 60px rgba(147,201,239,.3),
+      0 0 120px rgba(179,156,208,.24);
+    animation: lmGlow 6s ease-in-out infinite;
+  }
+  @keyframes lmGlow{
+    0%,100%{ box-shadow: 0 0 0 1px rgba(196,227,250,.55), 0 0 0 6px rgba(24,17,38,.66), 0 0 0 7px rgba(179,156,208,.42), 0 26px 70px rgba(0,0,0,.55), 0 0 50px rgba(147,201,239,.24), 0 0 110px rgba(179,156,208,.2); }
+    50%{     box-shadow: 0 0 0 1px rgba(196,227,250,.75), 0 0 0 6px rgba(24,17,38,.66), 0 0 0 7px rgba(179,156,208,.6),  0 26px 70px rgba(0,0,0,.55), 0 0 72px rgba(147,201,239,.4),  0 0 140px rgba(179,156,208,.3); }
+  }
+  .lm-video{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    background: transparent;
+    border-radius: inherit;
+  }
+
+  /* the wrapping paper */
+  .lm-wrap{
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: inherit;
+    font: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .lm-wrap:focus-visible{ outline: 3px solid var(--gold-soft); outline-offset: -8px; }
+  .lm-wrap-half{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50.5%;
+    background-color: #eef7ff;
+    background-image: var(--gingham);
+    background-size: 22px 22px;
+    transition: transform 1.15s cubic-bezier(.7,0,.2,1);
+  }
+  .lm-wrap-half.l{ left: 0;  box-shadow: inset -14px 0 22px rgba(95,159,211,.16); }
+  .lm-wrap-half.r{ right: 0; box-shadow: inset 14px 0 22px rgba(95,159,211,.16); }
+  /* each half carries its own piece of ribbon, so the ribbon parts with the paper */
+  .lm-wrap-half::before,
+  .lm-wrap-half::after{
+    content: '';
+    position: absolute;
+    background: linear-gradient(180deg, #a68bd0, #cdbcec 38%, #ebe2f9 50%, #b8a2dc 62%, #8f71c2);
+    box-shadow: 0 0 0 1px rgba(240,208,128,.5);
+  }
+  .lm-wrap-half::before{
+    left: 0; right: 0;
+    top: 50%;
+    height: clamp(20px, 8%, 32px);
+    transform: translateY(-50%);
+  }
+  .lm-wrap-half::after{
+    top: 0; bottom: 0;
+    width: clamp(10px, 2.2%, 17px);
+    background: linear-gradient(90deg, #8f71c2, #cdbcec 45%, #ebe2f9 60%, #b8a2dc);
+  }
+  .lm-wrap-half.l::after{ right: 0; }
+  .lm-wrap-half.r::after{ left: 0; transform: scaleX(-1); }
+
+  .lm-bow{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: clamp(104px, 25%, 170px);
+    height: auto;
+    aspect-ratio: 120 / 84;
+    transform: translate(-50%, -54%);
+    filter: drop-shadow(0 6px 10px rgba(40,20,70,.35));
+    transition: transform .9s var(--ease), opacity .55s var(--ease);
+  }
+  .lm-tag{
+    position: absolute;
+    left: calc(50% + clamp(46px, 11%, 80px));
+    top: calc(50% + clamp(14px, 6%, 30px));
+    padding: .32rem .7rem .32rem .9rem;
+    border-radius: 4px 12px 12px 4px;
+    background: #fffdf8;
+    color: #5b3f86;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.66rem, 2.2vw, .82rem);
+    white-space: nowrap;
+    transform: rotate(-7deg);
+    transform-origin: 0 50%;
+    box-shadow: 0 6px 14px rgba(60,40,100,.22), 0 0 0 1px rgba(212,168,67,.4);
+    transition: opacity .4s var(--ease);
+  }
+  .lm-tag::before{
+    content: '';
+    position: absolute;
+    left: .35rem;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    background: #b39cd0;
+  }
+  .lm-wrap-hint{
+    position: absolute;
+    left: 50%;
+    bottom: clamp(10px, 6%, 24px);
+    transform: translateX(-50%);
+    padding: .45rem 1rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,.9);
+    color: #5b3f86;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(.6rem, 2vw, .7rem);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: 0 6px 16px rgba(60,40,100,.2);
+    animation: lmHint 2.6s ease-in-out infinite;
+    transition: opacity .4s var(--ease);
+  }
+  @keyframes lmHint{
+    0%,100%{ transform: translateX(-50%) translateY(0); }
+    50%{     transform: translateX(-50%) translateY(-3px); }
+  }
+  .lm-frame.is-unwrapped .lm-wrap{ pointer-events: none; }
+  .lm-frame.is-unwrapped .lm-wrap-half.l{ transform: translateX(-104%) rotate(-2deg); }
+  .lm-frame.is-unwrapped .lm-wrap-half.r{ transform: translateX(104%) rotate(2deg); }
+  .lm-frame.is-unwrapped .lm-bow{ opacity: 0; transform: translate(-50%, -150%) scale(1.25) rotate(-8deg); }
+  .lm-frame.is-unwrapped .lm-tag,
+  .lm-frame.is-unwrapped .lm-wrap-hint{ opacity: 0; }
+
+  .lm-bigplay{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    width: 66px;
+    height: 66px;
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.75);
+    background: rgba(91,63,134,.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 0 0 8px rgba(255,255,255,.14), 0 10px 30px rgba(40,20,70,.4);
+    transition: transform .25s var(--ease), background .3s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .lm-bigplay:hover{ background: rgba(107,76,154,.75); }
+  .lm-bigplay:active{ transform: translate(-50%, -50%) scale(.94); }
+  .lm-bigplay:focus-visible{ outline: 2px solid var(--gold-soft); outline-offset: 4px; }
+  .lm-bigplay svg{ width: 26px; height: 26px; margin-left: 3px; }
+
+  .lm-missing{
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem;
+    background-color: #eef7ff;
+    background-image: var(--gingham);
+    background-size: 22px 22px;
+  }
+  .lm-missing-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .2rem;
+    max-width: 300px;
+    padding: 1rem 1.4rem 1.1rem;
+    border-radius: 18px;
+    text-align: center;
+    background: rgba(255,255,255,.9);
+    color: #4a3a66;
+    box-shadow: 0 10px 30px rgba(60,40,100,.18), 0 0 0 1px rgba(179,156,208,.35);
+  }
+  .lm-missing-cloud{ width: 46px; height: auto; aspect-ratio: 64 / 40; color: var(--sky-mid); }
+  .lm-missing-line{
+    margin: .2rem 0 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.92rem, 3.6vw, 1.06rem);
+  }
+  .lm-missing-file{
+    margin: 0;
+    font-size: .62rem;
+    letter-spacing: .05em;
+    color: #7a6a96;
+    word-break: break-all;
+  }
+
+  .lm-controls{
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .55rem;
+    margin: 1.35rem auto 0;
+  }
+  .lm-ctl{
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    min-height: 40px;
+    padding: .5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(196,227,250,.34);
+    background: rgba(24,17,38,.58);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-transform: lowercase;
+    cursor: pointer;
+    transition: border-color .3s var(--ease), background .3s var(--ease), transform .2s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .lm-ctl:hover{ border-color: rgba(196,227,250,.7); }
+  .lm-ctl:active{ transform: scale(.96); }
+  .lm-ctl:focus-visible{ outline: 2px solid var(--sky); outline-offset: 3px; }
+  .lm-ctl:disabled{ opacity: .4; cursor: default; }
+  .lm-ctl svg{ width: 15px; height: 15px; flex: 0 0 auto; }
+  .lm-ctl .lm-i-pause,
+  .lm-ctl .lm-i-sound{ display: none; }
+  .lm-stage.is-playing .lm-controls .lm-i-play{ display: none; }
+  .lm-stage.is-playing .lm-controls .lm-i-pause{ display: block; }
+  #lmSound[aria-pressed="true"]{
+    border-color: rgba(196,227,250,.75);
+    background: rgba(95,159,211,.28);
+  }
+  #lmSound[aria-pressed="true"] .lm-i-muted{ display: none; }
+  #lmSound[aria-pressed="true"] .lm-i-sound{ display: block; }
+
+  .lm-caption{
+    position: relative;
+    z-index: 1;
+    max-width: 34ch;
+    margin: 1.2rem auto 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.92rem, 3.7vw, 1.06rem);
+    line-height: 1.7;
+    color: var(--cream-dim);
+  }
+
+  /* ============================================================
+     PITU'S POCKET OF LOVE
+     ============================================================ */
+  .pk{
+    position: relative;
+    width: min(100%, 560px);
+    margin: clamp(3.6rem, 10vh, 5rem) auto 0;
+    padding: clamp(1.9rem, 6vw, 2.6rem) clamp(1.1rem, 5vw, 2.2rem) clamp(1.6rem, 5vw, 2.1rem);
+    border-radius: 26px;
+    text-align: center;
+    background: linear-gradient(165deg, rgba(107,76,154,.2), rgba(24,17,38,.54));
+    border: 1px solid rgba(196,227,250,.28);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 20px 60px rgba(0,0,0,.42), 0 0 60px rgba(147,201,239,.07), inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .pk-kicker{
+    display: block;
+    font-size: .6rem;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--sky);
+    opacity: .9;
+  }
+  .pk-title{
+    margin: .45rem 0 .35rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(1.3rem, 5vw, 1.6rem);
+    color: var(--cream);
+  }
+  .pk-sub{
+    max-width: 34ch;
+    margin: 0 auto;
+    font-size: .84rem;
+    line-height: 1.7;
+    color: var(--cream-dim);
+  }
+
+  .pk-stage{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.3rem;
+  }
+  .pk-slot{
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 9.6rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .pk-note{
+    position: relative;
+    width: min(100%, 360px);
+    margin-bottom: -26px;
+    padding: 1.35rem 1.25rem 2.2rem;
+    border-radius: 6px 6px 2px 2px;
+    background: linear-gradient(180deg, #fffdf8, #f5effd);
+    color: #3d2e55;
+    box-shadow: 0 14px 30px rgba(0,0,0,.35), 0 0 0 1px rgba(212,168,67,.35);
+    transform: rotate(-1.2deg);
+  }
+  .pk-note-heart{
+    position: absolute;
+    top: -.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1.5rem;
+    height: 1.5rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-pale), var(--gold));
+    color: #4a2f12;
+    font-size: .8rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+  }
+  .pk-note-text{
+    margin: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(.95rem, 3.8vw, 1.05rem);
+    line-height: 1.65;
+  }
+  .pk-note-text.is-bn{
+    font-family: var(--font-bn);
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(.98rem, 3.9vw, 1.06rem);
+    line-height: 1.95;
+  }
+  .pk-note.is-intro .pk-note-text{ color: #6b5a86; }
+  .pk-note.is-rising{ animation: pkRise .8s var(--ease) both; }
+  @keyframes pkRise{
+    0%{   opacity: 0; transform: translateY(78px) scale(.7) rotate(6deg); }
+    55%{  opacity: 1; }
+    100%{ opacity: 1; transform: translateY(0) scale(1) rotate(-1.2deg); }
+  }
+
+  .pk-pocket{
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: clamp(124px, 36vw, 152px);
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    filter: drop-shadow(0 12px 18px rgba(0,0,0,.4)) drop-shadow(0 0 16px rgba(147,201,239,.22));
+    transition: transform .3s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pk-pocket:hover{ transform: translateY(-2px); }
+  .pk-pocket:focus-visible{ outline: 2px solid var(--sky); outline-offset: 6px; border-radius: 18px; }
+  .pk-svg{ display: block; width: 100%; height: auto; }
+  .pk-pocket.is-wiggling{ animation: pkWiggle .6s ease; }
+  @keyframes pkWiggle{
+    0%,100%{ transform: rotate(0); }
+    20%{ transform: rotate(-5deg) scale(1.04); }
+    45%{ transform: rotate(4deg); }
+    70%{ transform: rotate(-2deg); }
+  }
+  .pk-hint{
+    display: block;
+    margin-top: .9rem;
+    font-size: .66rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(196,227,250,.75);
+  }
+  .pk-count{
+    display: block;
+    min-height: 1.2em;
+    margin-top: .35rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: .8rem;
+    color: rgba(240,208,128,.8);
+  }
+  .pk-spark{
+    position: absolute;
+    left: 50%;
+    top: calc(100% - var(--pk-mouth, 130px));
+    z-index: 3;
+    pointer-events: none;
+    font-size: var(--ss, .8rem);
+    color: var(--sc, var(--sky));
+    text-shadow: 0 0 8px currentColor;
+    animation: pkSpark .9s var(--ease) forwards;
+  }
+  @keyframes pkSpark{
+    0%{   opacity: 0; transform: translate(-50%, 0) scale(.4); }
+    25%{  opacity: 1; }
+    100%{ opacity: 0; transform: translate(calc(-50% + var(--sx, 0px)), var(--sy, -70px)) scale(1); }
+  }
+
+  /* ============================================================
+     EVERY CHAPTER, KEPT SAFE: the collapsible groups
+     ============================================================ */
+  .grp-shelf{
+    position: relative;
+    padding: clamp(4.5rem, 12vh, 7rem) 0 clamp(2.5rem, 7vh, 4rem);
+  }
+  /* the golden thread runs on into the shelf */
+  .grp-shelf::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: clamp(2.2rem, 8vh, 4.4rem);
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, rgba(212,168,67,.42), rgba(212,168,67,0));
+    pointer-events: none;
+  }
+  .grp-intro{ padding: 0 1.5rem; }
+  .grp-intro .section-sub{ margin-bottom: clamp(2rem, 5vh, 2.8rem); }
+
+  .grp{ display: block; }
+  .grp + .grp{ margin-top: 1rem; }
+  .grp[open]{ margin-bottom: 2.2rem; }
+  .grp[open] + .grp{ margin-top: 0; }
+
+  .grp-summary{
+    display: block;
+    list-style: none;
+    width: min(100% - 2.5rem, 720px);
+    margin: 0 auto;
+    border-radius: 22px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .grp-summary::-webkit-details-marker{ display: none; }
+  .grp-summary::marker{ content: ''; }
+  .grp-summary:focus-visible{ outline: 2px solid var(--gold-soft); outline-offset: 4px; }
+
+  .grp-card{
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(.8rem, 3vw, 1.2rem);
+    padding: clamp(1.05rem, 4vw, 1.45rem) clamp(1rem, 4vw, 1.5rem);
+    border-radius: 22px;
+    background: linear-gradient(165deg, rgba(107,76,154,.22), rgba(24,17,38,.56));
+    border: 1px solid rgba(179,156,208,.26);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 16px 44px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.05);
+    transition: border-color .4s var(--ease), box-shadow .4s var(--ease), background .4s var(--ease), opacity .9s var(--ease), transform .9s var(--ease);
+  }
+  .grp-summary:hover .grp-card{
+    border-color: rgba(212,168,67,.45);
+    box-shadow: 0 18px 48px rgba(0,0,0,.42), 0 0 32px rgba(212,168,67,.12), inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .grp[open] > .grp-summary .grp-card{
+    border-color: rgba(212,168,67,.55);
+    background: linear-gradient(165deg, rgba(107,76,154,.3), rgba(24,17,38,.62));
+    box-shadow: 0 18px 48px rgba(0,0,0,.42), 0 0 40px rgba(212,168,67,.14), inset 0 1px 0 rgba(255,255,255,.06);
+  }
+
+  .grp-icon{
+    display: grid;
+    place-items: center;
+    width: clamp(44px, 12vw, 54px);
+    height: clamp(44px, 12vw, 54px);
+    border-radius: 50%;
+    color: var(--gold-soft);
+    border: 1px solid rgba(212,168,67,.45);
+    background: radial-gradient(circle at 50% 35%, rgba(212,168,67,.2), rgba(24,17,38,.6));
+    box-shadow: 0 0 18px rgba(212,168,67,.16);
+  }
+  .grp-icon svg{ width: 55%; height: 55%; }
+
+  .grp-text{ display: block; min-width: 0; text-align: left; }
+  .grp-kicker{
+    display: block;
+    margin-bottom: .2rem;
+    font-size: .58rem;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    opacity: .85;
+  }
+  .grp-title{
+    display: block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(1.1rem, 4.4vw, 1.38rem);
+    line-height: 1.3;
+    color: var(--cream);
+  }
+  .grp-desc{
+    display: block;
+    margin-top: .35rem;
+    font-size: .8rem;
+    line-height: 1.65;
+    color: var(--cream-dim);
+  }
+  .grp-list{
+    display: block;
+    margin-top: .55rem;
+    font-size: .66rem;
+    line-height: 1.75;
+    letter-spacing: .02em;
+    color: rgba(240,208,128,.72);
+  }
+
+  .grp-toggle{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .35rem;
+    align-self: center;
+  }
+  .grp-chev{
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid rgba(179,156,208,.42);
+    color: var(--cream);
+    transition: transform .5s var(--ease), border-color .3s var(--ease), background .3s var(--ease);
+  }
+  .grp-chev svg{ width: 16px; height: 16px; }
+  .grp-summary:hover .grp-chev{ border-color: rgba(212,168,67,.6); }
+  .grp[open] > .grp-summary .grp-chev{
+    transform: rotate(180deg);
+    border-color: rgba(212,168,67,.7);
+    background: rgba(212,168,67,.12);
+  }
+  .grp-state{
+    font-size: .52rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--lavender);
+  }
+  .grp-state::before{ content: 'open'; }
+  .grp[open] > .grp-summary .grp-state::before{ content: 'close'; }
+
+  /* opening: the rooms fade in; closing: a short fade, then it folds */
+  .grp[open] > .grp-body{ animation: grpOpen .65s var(--ease) both; }
+  .grp.is-closing > .grp-body{ animation: grpClose .26s ease forwards; }
+  @keyframes grpOpen{
+    from{ opacity: 0; transform: translateY(-10px); }
+    to{   opacity: 1; transform: none; }
+  }
+  @keyframes grpClose{
+    from{ opacity: 1; }
+    to{   opacity: 0; transform: translateY(-6px); }
+  }
+
+  .grp-end{
+    display: flex;
+    justify-content: center;
+    padding: 0 1.5rem clamp(1rem, 4vh, 2rem);
+  }
+  .grp-fold{
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    min-height: 42px;
+    padding: .6rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid rgba(212,168,67,.42);
+    background: rgba(24,17,38,.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-size: .7rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color .3s var(--ease), box-shadow .3s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .grp-fold:hover{ border-color: rgba(240,208,128,.8); box-shadow: 0 0 22px rgba(212,168,67,.18); }
+  .grp-fold:focus-visible{ outline: 2px solid var(--gold-soft); outline-offset: 3px; }
+  .grp-fold svg{ width: 15px; height: 15px; }
+
+  @media (max-width: 420px){
+    .grp-card{ grid-template-columns: auto minmax(0, 1fr); }
+    .grp-toggle{
+      grid-column: 1 / -1;
+      flex-direction: row;
+      justify-content: center;
+      gap: .5rem;
+      margin-top: -.1rem;
+    }
+    .grp-chev{ width: 28px; height: 28px; }
+    .grp-chev svg{ width: 14px; height: 14px; }
+  }
+
+  /* ---- reduced motion: no drifting, no wrapping animation, no fades ---- */
+  @media (prefers-reduced-motion: reduce){
+    .tm-cloud, .tm-star, .tm-figure::before, .tm-float,
+    .tm-badge-disc, .tm-badge-disc::before,
+    .lm-frame, .lm-deco, .lm-wrap-hint,
+    .pk-note.is-rising, .pk-pocket.is-wiggling,
+    .grp[open] > .grp-body, .grp.is-closing > .grp-body,
+    .tm-lightbox[open]{ animation: none !important; }
+    .tm-float{ display: none; }
+    .lm-wrap-half, .lm-bow, .tm-photo img{ transition: none !important; }
+  }
 </style>
 </head>
 <body class="locked">
@@ -4253,6 +5611,13 @@
     <path d="M8 13.2 V26.5 H24 V13.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M13.4 26.5 V21.6 a2.6 2.6 0 0 1 5.2 0 V26.5 Z" fill="currentColor" opacity=".9"/>
     <circle cx="16" cy="13.8" r="1.3" fill="currentColor" opacity=".75"/>
+  </symbol>
+  <!-- two months update: a soft cloud and a small heart for the pastel-blue touches -->
+  <symbol id="cloudMotif" viewBox="0 0 64 40">
+    <path d="M15 38C7.5 38 2 32.6 2 26.4 2 20 7.2 15.4 13.6 15.4 15.2 8.1 21.6 3 29.2 3c8 0 14.4 5.5 15.9 13 1.2-.4 2.5-.6 3.9-.6C56.6 15.4 62 20.9 62 27.2 62 33.2 57 38 50.6 38Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="heartMotif" viewBox="0 0 24 24">
+    <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" fill="currentColor"/>
   </symbol>
 </svg>
 
@@ -4319,11 +5684,19 @@
         </audio>
       </div>
 
-      <!-- anniversary addition: a quiet way down to 29 October -->
-      <a href="#proposal-anniversary" class="pa-hero-link">
-        <span class="pa-hero-link-date">29 • 10</span>
-        <span class="pa-hero-link-text">the words that started our forever ♡</span>
-      </a>
+      <div class="hero-links">
+        <!-- two months update: a small path down to 11 November -->
+        <a href="#two-months" class="tm-hero-link">
+          <span class="tm-hero-link-date">11 • 11</span>
+          <span class="tm-hero-link-text">two months of us ♡</span>
+        </a>
+
+        <!-- anniversary addition: a quiet way down to 29 October -->
+        <a href="#proposal-anniversary" class="pa-hero-link">
+          <span class="pa-hero-link-date">29 • 10</span>
+          <span class="pa-hero-link-text">the words that started our forever ♡</span>
+        </a>
+      </div>
     </div>
 
     <a href="#married" class="scroll-cue" aria-label="Scroll down">
@@ -4389,6 +5762,247 @@
     </div>
     <span class="forever-foot reveal">a clock that never counts down again. Only forward, with you.</span>
   </section>
+
+  <!-- ============================================================
+       TWO MONTHS OF US · 11 September 2026 → 11 November 2026
+       (two months update; classes use the .tm-* prefix, behaviour
+       lives in section 8 of the script)
+       ============================================================ -->
+  <section id="two-months" class="thread" aria-labelledby="tmTitle">
+    <span class="tm-sky" aria-hidden="true">
+      <svg class="tm-cloud c1" focusable="false"><use href="#cloudMotif"/></svg>
+      <svg class="tm-cloud c2" focusable="false"><use href="#cloudMotif"/></svg>
+      <svg class="tm-cloud c3" focusable="false"><use href="#cloudMotif"/></svg>
+      <span class="tm-star s1">✦</span>
+      <span class="tm-star s2">✧</span>
+      <span class="tm-star s3">✦</span>
+      <span class="tm-star s4">✧</span>
+    </span>
+
+    <span class="eyebrow reveal">two months as husband &amp; wife</span>
+    <h2 class="section-title reveal" id="tmTitle">Two Months of Us</h2>
+    <p class="tm-dates reveal">
+      <time datetime="2026-09-11">11.09.2026</time>
+      <span class="tm-dates-arrow" aria-hidden="true">→</span><span class="tm-sr">to</span>
+      <time datetime="2026-11-11">11.11.2026</time>
+      <span class="tm-today" id="tmToday" hidden>today ♡</span>
+    </p>
+
+    <figure class="tm-figure reveal">
+      <button type="button" class="tm-photo" id="tmPhoto" aria-label="See our photograph larger">
+        <img
+          id="tmPhotoImg"
+          src="wedding-anniversary.jpg"
+          alt="Mehrab and Ruhana sitting close together on the white marble steps of a mosque, he in a maroon panjabi, she in a blush-pink dress and hijab, smiling at each other"
+          width="1300" height="975"
+          loading="lazy" decoding="async">
+        <span class="tm-photo-fallback" id="tmPhotoFallback" hidden>
+          <svg class="home-motif" focusable="false" aria-hidden="true"><use href="#homeMotif"/></svg>
+          <span class="tm-fb-line">our wedding photo rests here</span>
+          <span class="tm-fb-file">wedding-anniversary.jpg</span>
+        </span>
+        <span class="tm-photo-shade" aria-hidden="true"></span>
+        <span class="tm-photo-hint" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" focusable="false"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5M10.5 8v5M8 10.5h5"/></svg>
+          tap to see us closer
+        </span>
+      </button>
+
+      <span class="tm-float f1" aria-hidden="true">♡</span>
+      <span class="tm-float f2" aria-hidden="true">♡</span>
+      <span class="tm-float f3" aria-hidden="true">✦</span>
+      <span class="tm-float f4" aria-hidden="true">♡</span>
+
+      <div class="tm-badge" role="img" aria-label="Two months married">
+        <span class="tm-badge-tails" aria-hidden="true"></span>
+        <span class="tm-badge-disc" aria-hidden="true">
+          <span class="tm-badge-num">2</span>
+          <span class="tm-badge-word">months</span>
+          <span class="tm-badge-sub">married</span>
+        </span>
+      </div>
+
+      <figcaption class="tm-figcap">us, two months into forever</figcaption>
+    </figure>
+
+    <div class="tm-message reveal">
+      <p class="tm-msg-lead" lang="bn">দেখতে দেখতে ৬০টা দিন কেটে গেল তোমার হাত ধরে।</p>
+      <p class="tm-msg-body" lang="bn">যে শান্তির ঘরের জন্য এত রাতজাগা আর প্রতীক্ষা, আজ সেই ঘরে তুমি আমার বিবাহিত স্ত্রী, আমার জীবনের শ্রেষ্ঠ বরকত।</p>
+      <div class="tm-msg-divider" aria-hidden="true"></div>
+      <p class="tm-msg-en">Happy 2 Months Anniversary, my Babui Pakhi!</p>
+      <span class="tm-msg-sign">your Pitu · 11 • 11 • 2026</span>
+    </div>
+
+    <p class="tm-closing reveal">Two months married, a lifetime to go.</p>
+    <div class="home-divider tm-home reveal" aria-hidden="true">
+      <svg class="home-motif" focusable="false"><use href="#homeMotif"/></svg>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       A LITTLE MAGIC FOR MY BABUI PAKHI: the gift video
+       The video is wrapped like a present. It unwraps itself once
+       it is on screen (or when she taps it), then plays muted and
+       looping, only while it is visible. Sound is hers to turn on,
+       and turning it on quietly pauses our song until she turns it
+       off again. Pitu's Pocket of Love sits underneath.
+       (classes use the .lm-* and .pk-* prefixes, behaviour is 8b and 8c)
+       ============================================================ -->
+  <section id="little-magic" class="thread" aria-labelledby="lmTitle">
+    <span class="eyebrow reveal">a gift for my wife</span>
+    <h2 class="section-title lm-title reveal" id="lmTitle">A Little Magic for My Babui Pakhi</h2>
+    <p class="lm-sub reveal" lang="bn">তোমার জন্য ছোট্ট একটা ম্যাজিক। 💙</p>
+
+    <div class="lm-stage reveal" id="lmStage">
+      <div class="lm-frame-wrap" id="lmFrameWrap">
+      <svg class="lm-deco lm-cloud-a" focusable="false" aria-hidden="true"><use href="#cloudMotif"/></svg>
+      <svg class="lm-deco lm-cloud-b" focusable="false" aria-hidden="true"><use href="#cloudMotif"/></svg>
+      <svg class="lm-deco lm-heart-a" focusable="false" aria-hidden="true"><use href="#heartMotif"/></svg>
+      <span class="lm-deco lm-star-a" aria-hidden="true">✦</span>
+      <span class="lm-deco lm-star-b" aria-hidden="true">✧</span>
+      <span class="lm-deco lm-star-c" aria-hidden="true">✦</span>
+
+      <div class="lm-frame" id="lmFrame">
+        <video
+          id="lmVideo"
+          class="lm-video"
+          muted
+          loop
+          playsinline
+          preload="none"
+          poster="doraemon-ruhana-poster.jpg"
+          aria-label="A short animated gift: a magic ribbon unfolds and writes Ruhana's name in sparkles, hearts and stars">
+          <source src="doraemon-ruhana-anniversary.mp4" type="video/mp4">
+        </video>
+
+        <!-- the wrapping paper: pastel-blue gingham, a lavender ribbon and a bow -->
+        <button type="button" class="lm-wrap" id="lmWrap" aria-label="Unwrap your little magic">
+          <span class="lm-wrap-half l" aria-hidden="true"></span>
+          <span class="lm-wrap-half r" aria-hidden="true"></span>
+          <svg class="lm-bow" viewBox="0 0 120 84" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="lmBowGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#d9c8f0"/>
+                <stop offset=".5" stop-color="#b39cd0"/>
+                <stop offset="1" stop-color="#8a6bbd"/>
+              </linearGradient>
+            </defs>
+            <path d="M56 46 42 80l8-4 5 8 7-36Z" fill="#8a6bbd"/>
+            <path d="M64 46l14 34-8-4-5 8-7-36Z" fill="#8a6bbd"/>
+            <path d="M60 42C43 12 9 14 13 36c3 17 31 15 47 6Z" fill="url(#lmBowGrad)" stroke="#f0d080" stroke-width="1.2"/>
+            <path d="M60 42c17-30 51-28 47-6-3 17-31 15-47 6Z" fill="url(#lmBowGrad)" stroke="#f0d080" stroke-width="1.2"/>
+            <path d="M24 30c8-4 20-2 30 8M96 30c-8-4-20-2-30 8" fill="none" stroke="#ffffff" stroke-opacity=".45" stroke-width="1.6" stroke-linecap="round"/>
+            <ellipse cx="60" cy="42" rx="9" ry="8.5" fill="#9d82c9" stroke="#f0d080" stroke-width="1.2"/>
+          </svg>
+          <span class="lm-tag" aria-hidden="true">for my Babui Pakhi ♡</span>
+          <span class="lm-wrap-hint" aria-hidden="true">tap to unwrap ✧</span>
+        </button>
+
+        <button type="button" class="lm-bigplay" id="lmBigPlay" aria-label="Play the little magic" hidden>
+          <svg viewBox="0 0 24 24" fill="currentColor" focusable="false" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+
+        <div class="lm-missing" id="lmMissing" hidden>
+          <div class="lm-missing-card">
+            <svg class="lm-missing-cloud" focusable="false" aria-hidden="true"><use href="#cloudMotif"/></svg>
+            <p class="lm-missing-line">your little magic is on its way ♡</p>
+            <p class="lm-missing-file">doraemon-ruhana-anniversary.mp4</p>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="lm-controls" role="group" aria-label="Video controls">
+        <button type="button" class="lm-ctl" id="lmPlay" aria-label="Play the little magic">
+          <svg class="lm-i-play" viewBox="0 0 24 24" fill="currentColor" focusable="false" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="lm-i-pause" viewBox="0 0 24 24" fill="currentColor" focusable="false" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+          <span class="lm-ctl-text" id="lmPlayText">play</span>
+        </button>
+        <button type="button" class="lm-ctl" id="lmSound" aria-pressed="false" aria-label="Turn the video's sound on">
+          <svg class="lm-i-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+          <svg class="lm-i-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a7.8 7.8 0 0 1 0 11"/></svg>
+          <span class="lm-ctl-text" id="lmSoundText">sound on</span>
+        </button>
+        <button type="button" class="lm-ctl" id="lmFull" aria-label="Watch the little magic full screen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+          <span class="lm-ctl-text">full screen</span>
+        </button>
+      </div>
+
+      <p class="lm-caption">Out of every name in the world, the magic chose yours. So did I. ♡</p>
+    </div>
+
+    <!-- Pitu's Pocket of Love: tap the pocket, a little note rises out of it -->
+    <div class="pk reveal" id="pocketOfLove">
+      <span class="pk-kicker">borrowed a little magic</span>
+      <h3 class="pk-title">Pitu's Pocket of Love</h3>
+      <p class="pk-sub">Reach in as often as you like. There is always another note inside.</p>
+
+      <div class="pk-stage" id="pkStage">
+        <div class="pk-slot">
+          <div class="pk-note is-intro" id="pkNote" aria-live="polite">
+            <span class="pk-note-heart" aria-hidden="true">♡</span>
+            <p class="pk-note-text" id="pkNoteText">Something small is waiting in here for you. Tap the pocket.</p>
+          </div>
+        </div>
+
+        <button type="button" class="pk-pocket" id="pkPocket" aria-label="Reach into the pocket for a little note" aria-controls="pkNote">
+          <svg class="pk-svg" viewBox="0 0 160 150" focusable="false" aria-hidden="true">
+            <defs>
+              <pattern id="pkGingham" width="12" height="12" patternUnits="userSpaceOnUse">
+                <rect width="12" height="12" fill="#eef7ff"/>
+                <rect width="6" height="12" fill="#93c9ef" fill-opacity=".5"/>
+                <rect width="12" height="6" fill="#93c9ef" fill-opacity=".5"/>
+              </pattern>
+            </defs>
+            <path d="M14 24H146V92C146 124 116 144 80 144S14 124 14 92Z" fill="url(#pkGingham)" stroke="#5f9fd3" stroke-width="2"/>
+            <path d="M14 24H146V41H14Z" fill="#93c9ef" stroke="#5f9fd3" stroke-width="2"/>
+            <path d="M21 33H139" fill="none" stroke="#f0d080" stroke-width="1.5" stroke-dasharray="4 4" stroke-linecap="round"/>
+            <path d="M23 48V91C23 117 49 135 80 135S137 117 137 91V48" fill="none" stroke="#f0d080" stroke-width="1.5" stroke-dasharray="4 4" stroke-linecap="round"/>
+            <path transform="translate(66.5 76) scale(1.12)" d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" fill="#c9b6ea" stroke="#ffffff" stroke-width="1.1" stroke-dasharray="2 2"/>
+          </svg>
+        </button>
+
+        <span class="pk-hint" id="pkHint">tap the pocket ✧</span>
+        <span class="pk-count" id="pkCount" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EVERY CHAPTER, KEPT SAFE
+       The older sections, folded into three groups so the page is
+       shorter to travel through. Nothing inside a group was removed
+       or rewritten; every section keeps its id, its observers and
+       its timers. (classes use the .grp-* prefix, behaviour is 9)
+       ============================================================ -->
+  <div class="grp-shelf" id="chapters">
+    <div class="grp-intro">
+      <span class="eyebrow reveal">the rest of our home</span>
+      <h2 class="section-title reveal">Every Chapter, Kept Safe</h2>
+      <p class="section-sub reveal">Nothing is gone, only folded neatly away. Open any of them, whenever you like.</p>
+    </div>
+
+    <!-- ==================== GROUP 1: OUR STORY & PROMISES ==================== -->
+    <details class="grp" id="grp-story">
+      <summary class="grp-summary">
+        <span class="grp-card reveal">
+          <span class="grp-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" focusable="false"><circle cx="9" cy="14.6" r="5.4"/><circle cx="15" cy="14.6" r="5.4"/><path d="M9 4.4l1.7 1.8L9 8 7.3 6.2z" fill="currentColor" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="grp-text">
+            <span class="grp-kicker">six rooms inside</span>
+            <span class="grp-title">Our Story &amp; Promises</span>
+            <span class="grp-desc">From the waiting to qubool, the words of 29 October, and every promise I made for our home.</span>
+            <span class="grp-list">A New Chapter · Qubool · The Words That Started Our Forever · The Vows of Shantir Ghor · Your Place in Our Shantir Ghor · The Little Things</span>
+          </span>
+          <span class="grp-toggle" aria-hidden="true">
+            <span class="grp-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M6 9l6 6 6-6"/></svg></span>
+            <span class="grp-state"></span>
+          </span>
+        </span>
+      </summary>
+      <div class="grp-body">
 
   <!-- ============================================================
        A NEW CHAPTER: from waiting to building a life
@@ -4862,6 +6476,36 @@
     <p class="little-done" id="littleDone" aria-live="polite">every one of them, on every ordinary day. 💛</p>
   </section>
 
+        <div class="grp-end">
+          <button type="button" class="grp-fold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>
+            fold this chapter away
+          </button>
+        </div>
+      </div>
+    </details>
+
+    <!-- ==================== GROUP 2: LITTLE WAYS TO FEEL CLOSE ==================== -->
+    <details class="grp" id="grp-close">
+      <summary class="grp-summary">
+        <span class="grp-card reveal">
+          <span class="grp-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" focusable="false"><path d="M14.2 3.6A8.6 8.6 0 1 0 20.6 17.4 7 7 0 0 1 14.2 3.6Z"/><path d="M17.6 7.3c-.8-.9-2.4-.3-2.2 1 .2 1.1 1.4 1.8 2.2 2.4.8-.6 2-1.3 2.2-2.4.2-1.3-1.4-1.9-2.2-1Z" fill="currentColor" stroke="none"/></svg>
+          </span>
+          <span class="grp-text">
+            <span class="grp-kicker">six rooms inside</span>
+            <span class="grp-title">Little Ways to Feel Close</span>
+            <span class="grp-desc">A message for every day, our stars, a letter, a clock, a breath, and a few envelopes for the hard days.</span>
+            <span class="grp-list">Good Morning, Babui Pakhi · Our Constellation · The Canvas of Life · Since Our Promise · Breathe with Pitu · Open When...</span>
+          </span>
+          <span class="grp-toggle" aria-hidden="true">
+            <span class="grp-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M6 9l6 6 6-6"/></svg></span>
+            <span class="grp-state"></span>
+          </span>
+        </span>
+      </summary>
+      <div class="grp-body">
+
   <!-- ============================================================
        DAILY PITU BOX: Good Morning, Babui Pakhi
        ============================================================ -->
@@ -5067,6 +6711,36 @@
     </div>
   </section>
 
+        <div class="grp-end">
+          <button type="button" class="grp-fold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>
+            fold this chapter away
+          </button>
+        </div>
+      </div>
+    </details>
+
+    <!-- ==================== GROUP 3: MEMORIES, WISHES & LITTLE SURPRISES ==================== -->
+    <details class="grp" id="grp-memories">
+      <summary class="grp-summary">
+        <span class="grp-card reveal">
+          <span class="grp-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" focusable="false"><rect x="4" y="5.5" width="13" height="15.5" rx="1.2"/><rect x="6.3" y="7.8" width="8.4" height="8.2" rx=".5"/><path d="M19.6 2.4l.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7z" fill="currentColor" stroke="none"/></svg>
+          </span>
+          <span class="grp-text">
+            <span class="grp-kicker">five rooms inside</span>
+            <span class="grp-title">Memories, Wishes &amp; Little Surprises</span>
+            <span class="grp-desc">Our photos, a moon full of wishes, a secret to catch, Ya'aburnee, and our married-life timeline that keeps growing.</span>
+            <span class="grp-list">A Gallery of Us · A Sky Full of You · A Secret for You · Ya'aburnee · Our Married Life</span>
+          </span>
+          <span class="grp-toggle" aria-hidden="true">
+            <span class="grp-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M6 9l6 6 6-6"/></svg></span>
+            <span class="grp-state"></span>
+          </span>
+        </span>
+      </summary>
+      <div class="grp-body">
+
   <!-- ============================================================
        INFINITE MEMORIES: gallery (chapter one of us)
        ============================================================ -->
@@ -5159,6 +6833,16 @@
     </div>
   </section>
 
+        <div class="grp-end">
+          <button type="button" class="grp-fold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>
+            fold this chapter away
+          </button>
+        </div>
+      </div>
+    </details>
+  </div>
+
   <!-- ============================================================
        FOOTER: the quiet end of our first married chapter
        ============================================================ -->
@@ -5217,6 +6901,15 @@
     <button type="button" class="hug-close" id="hugClose">close</button>
   </div>
 </div>
+
+<!-- Two Months of Us: the wedding photo, larger (section 8) -->
+<dialog class="tm-lightbox" id="tmLightbox" aria-label="Our photograph, larger">
+  <figure class="tm-lightbox-fig">
+    <img id="tmLightboxImg" alt="Mehrab and Ruhana sitting close together on the white marble steps of a mosque, smiling at each other">
+    <figcaption>Mehrab &amp; Ruhana · two months married</figcaption>
+  </figure>
+  <button type="button" class="tm-lightbox-close" id="tmLightboxClose">close</button>
+</dialog>
 
 <script>
 (() => {
@@ -5783,6 +7476,11 @@
       date:  '29 • 10 • 2026',
       title: 'Our first Proposal Anniversary',
       note:  'One year since that long night when, a little before five in the morning, I first told you I loved you, Konna, and the first time we celebrated those words as husband and wife. Me in Dhaka, you in Khulna, and my love still finding its way to you.'
+    },
+    {
+      date:  '11 • 11 • 2026',
+      title: 'Two Months of Us',
+      note:  'Two months since qubool. Somewhere along the way, "my wife" stopped sounding new and started sounding like home. The Shantir Ghor we waited so long for is real now, and every day in it with you is a barakah. Alhamdulillah.'
     }
   ];
 
@@ -7089,6 +8787,562 @@
         early.textContent = 'Pitu hoped you would wait for midnight. If your clock is wrong, tap once more ♡';
       });
     }
+  })();
+
+  /* ============================================================
+     8. TWO MONTHS OF US · 11 September → 11 November 2026
+        The wedding photo: wedding-anniversary.jpg first, then
+        wedding.jpg if that is the only one on the server, then a
+        soft placeholder. Tap it for a larger view. A small
+        "today ♡" appears on 11 November itself, Bangladesh time
+        (UTC+6), like every other date on this page.
+        Self-contained: it only touches #two-months and #tmLightbox.
+     ============================================================ */
+  (function initTwoMonths(){
+    const today = document.getElementById('tmToday');
+    if (today){
+      const bd = new Date(Date.now() + 6 * 3600 * 1000);
+      if (bd.getUTCFullYear() === 2026 && bd.getUTCMonth() === 10 && bd.getUTCDate() === 11){
+        today.hidden = false;
+        const sec = document.getElementById('two-months');
+        if (sec) sec.classList.add('is-today');
+      }
+    }
+
+    const btn      = document.getElementById('tmPhoto');
+    const img      = document.getElementById('tmPhotoImg');
+    const fallback = document.getElementById('tmPhotoFallback');
+    const dlg      = document.getElementById('tmLightbox');
+    const big      = document.getElementById('tmLightboxImg');
+    const closeBtn = document.getElementById('tmLightboxClose');
+    if (!btn || !img) return;
+
+    const SOURCES = ['wedding-anniversary.jpg', 'wedding.jpg'];
+    let srcIdx  = 0;
+    let photoOk = false;
+
+    function showFallback(){
+      img.hidden = true;
+      if (fallback) fallback.hidden = false;
+      btn.classList.add('is-missing');
+      btn.setAttribute('aria-disabled', 'true');
+      btn.setAttribute('aria-label', 'Our wedding photograph will rest here');
+    }
+    function onPhotoError(){
+      srcIdx++;
+      if (srcIdx < SOURCES.length) img.src = SOURCES[srcIdx];
+      else showFallback();
+    }
+    img.addEventListener('error', onPhotoError);
+    img.addEventListener('load', () => { photoOk = true; });
+    // the first error may have happened before this script ran
+    if (img.complete){
+      if (img.naturalWidth) photoOk = true;
+      else if (img.getAttribute('src')) onPhotoError();
+    }
+
+    function closeLightbox(){
+      if (!dlg) return;
+      if (typeof dlg.close === 'function' && dlg.open) dlg.close();
+      else { dlg.removeAttribute('open'); document.body.style.overflow = ''; }
+    }
+    function openLightbox(){
+      if (!photoOk || !dlg || !big) return;
+      big.src = img.currentSrc || img.src;
+      if (typeof dlg.showModal === 'function') dlg.showModal();
+      else dlg.setAttribute('open', '');
+      document.body.style.overflow = 'hidden';
+    }
+
+    btn.addEventListener('click', openLightbox);
+    if (dlg){
+      dlg.addEventListener('close', () => {
+        document.body.style.overflow = '';
+        btn.focus({ preventScroll: true });
+      });
+      // a tap on the dark backdrop closes it, a tap on the photo does not
+      dlg.addEventListener('click', (e) => { if (e.target === dlg) closeLightbox(); });
+      if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+    }
+  })();
+
+  /* ============================================================
+     8b. A LITTLE MAGIC: the gift video
+        • The file loads only when the section comes near the screen.
+        • The wrapping paper opens by itself a moment after the frame
+          is in view (or straight away when she taps it). Then the
+          video plays muted, looping, inline, and only while at least
+          40% of it is visible; scrolling away pauses it.
+        • Sound is only ever turned on by her. While the video's sound
+          is on, our song and the voice note step aside; when she turns
+          it off (or scrolls away, which mutes it again), the song comes
+          back if it was playing before. Starting the song or the voice
+          note mutes the video, so two sounds never overlap.
+        • Reduced motion: nothing opens or plays by itself. Tapping
+          the gift opens it instantly and starts the video.
+        • A missing file shows a soft placeholder instead.
+        • The frame follows the real shape of the video (16:9 now;
+          a 9:16 file would get a portrait frame automatically).
+        Self-contained: it only touches #little-magic, and listens to
+        (never changes) the song and voice-note players.
+     ============================================================ */
+  (function initLittleMagic(){
+    const frame    = document.getElementById('lmFrame');
+    const stage    = document.getElementById('lmStage');
+    const frameWrap= document.getElementById('lmFrameWrap');
+    const video    = document.getElementById('lmVideo');
+    const wrap     = document.getElementById('lmWrap');
+    const bigPlay  = document.getElementById('lmBigPlay');
+    const missing  = document.getElementById('lmMissing');
+    const btnPlay  = document.getElementById('lmPlay');
+    const btnSound = document.getElementById('lmSound');
+    const btnFull  = document.getElementById('lmFull');
+    const playText = document.getElementById('lmPlayText');
+    const soundText= document.getElementById('lmSoundText');
+    if (!frame || !video) return;
+
+    const source = video.querySelector('source');
+    const UNWRAP_MS = reduceMotion ? 0 : 1150;
+
+    let loaded      = false;
+    let unwrapped   = false;
+    let inView      = false;
+    let userPaused  = false;
+    let broken      = false;
+    let unwrapTimer = null;
+    let songPausedByVideo = false;
+
+    video.muted = true;   // the attribute alone is not always honoured
+
+    function syncUI(){
+      const playing = !video.paused && !video.ended;
+      frame.classList.toggle('is-playing', playing);
+      if (stage) stage.classList.toggle('is-playing', playing);
+      if (btnPlay){
+        btnPlay.setAttribute('aria-label', playing ? 'Pause the little magic' : 'Play the little magic');
+        if (playText) playText.textContent = playing ? 'pause' : 'play';
+      }
+      if (btnSound){
+        const on = !video.muted;
+        btnSound.setAttribute('aria-pressed', on ? 'true' : 'false');
+        btnSound.setAttribute('aria-label', on ? "Turn the video's sound off" : "Turn the video's sound on");
+        if (soundText) soundText.textContent = on ? 'sound off' : 'sound on';
+      }
+      if (bigPlay) bigPlay.hidden = broken || !unwrapped || playing;
+    }
+
+    function markMissing(){
+      if (broken) return;
+      broken = true;
+      clearTimeout(unwrapTimer);
+      frame.classList.add('is-missing');
+      if (missing) missing.hidden = false;
+      if (wrap) wrap.hidden = true;
+      [btnPlay, btnSound, btnFull].forEach(b => { if (b) b.disabled = true; });
+      syncUI();
+    }
+    if (source) source.addEventListener('error', markMissing);
+    video.addEventListener('error', markMissing);
+
+    // the frame takes the video's own proportions, so nothing is cropped or stretched
+    video.addEventListener('loadedmetadata', () => {
+      if (video.videoWidth && video.videoHeight){
+        frame.style.setProperty('--lm-ar', video.videoWidth + ' / ' + video.videoHeight);
+        if (frameWrap) frameWrap.classList.toggle('is-portrait', video.videoHeight > video.videoWidth);
+      }
+    });
+
+    function ensureLoaded(){
+      if (loaded || broken) return;
+      loaded = true;
+      video.preload = 'auto';
+      video.load();
+    }
+
+    function tryPlay(){
+      if (broken || !unwrapped || userPaused || !inView) return;
+      ensureLoaded();
+      const p = video.play();
+      if (p && p.catch) p.catch(() => syncUI());
+    }
+
+    function unwrap(byHand){
+      if (unwrapped || broken) return;
+      unwrapped = true;
+      clearTimeout(unwrapTimer);
+      unwrapTimer = null;
+      ensureLoaded();
+      if (byHand) userPaused = false;
+      frame.classList.add('is-unwrapped');
+      if (wrap){
+        wrap.setAttribute('aria-hidden', 'true');
+        wrap.tabIndex = -1;
+        setTimeout(() => { wrap.hidden = true; syncUI(); }, UNWRAP_MS);
+      }
+      // the magic starts as the paper opens
+      setTimeout(() => {
+        if (byHand) inView = true;   // she is looking at it
+        tryPlay();
+      }, reduceMotion ? 0 : 420);
+      syncUI();
+    }
+
+    if (wrap) wrap.addEventListener('click', () => unwrap(true));
+
+    // reduced motion: no autoplay; she starts it herself
+    if (reduceMotion) userPaused = true;
+
+    /* --- sound: hers to turn on, and never on top of the song --- */
+    function onSoundState(){
+      const soundPlaying = !video.muted && !video.paused;
+      if (soundPlaying){
+        if (!audio.paused){ songPausedByVideo = true; audio.pause(); }
+        if (voiceAudio && !voiceAudio.paused) voiceAudio.pause();
+      } else if (songPausedByVideo){
+        songPausedByVideo = false;
+        audio.play().catch(() => {});
+      }
+      syncUI();
+    }
+    video.addEventListener('volumechange', onSoundState);
+    video.addEventListener('play',  onSoundState);
+    video.addEventListener('pause', onSoundState);
+
+    // if she starts the song or the voice note, the video goes quiet
+    audio.addEventListener('play', () => {
+      if (!video.muted){ songPausedByVideo = false; video.muted = true; }
+    });
+    if (voiceAudio) voiceAudio.addEventListener('play', () => {
+      if (!video.muted){ songPausedByVideo = false; video.muted = true; }
+    });
+
+    /* --- the buttons --- */
+    function playByHand(){
+      userPaused = false;
+      if (!unwrapped){ unwrap(true); return; }
+      inView = true;
+      tryPlay();
+    }
+    if (btnPlay) btnPlay.addEventListener('click', () => {
+      if (video.paused) playByHand();
+      else { userPaused = true; video.pause(); }
+    });
+    if (bigPlay) bigPlay.addEventListener('click', playByHand);
+
+    if (btnSound) btnSound.addEventListener('click', () => {
+      if (video.muted){
+        video.muted = false;
+        if (video.paused) playByHand();
+      } else {
+        video.muted = true;
+      }
+      syncUI();
+    });
+
+    if (btnFull) btnFull.addEventListener('click', () => {
+      if (!unwrapped) unwrap(true);
+      userPaused = false;
+      inView = true;
+      tryPlay();
+      if (video.requestFullscreen){
+        const r = video.requestFullscreen();
+        if (r && r.catch) r.catch(() => {});
+      } else if (video.webkitEnterFullscreen){
+        video.webkitEnterFullscreen();       // iPhone: the native player, with its own controls
+      } else if (video.webkitRequestFullscreen){
+        video.webkitRequestFullscreen();
+      }
+    });
+    // native controls only while full screen, so she can scrub and leave it
+    function onFullscreenChange(){
+      const fs = document.fullscreenElement || document.webkitFullscreenElement;
+      video.controls = fs === video;
+    }
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+
+    /* --- load it when near, play it only while it can be seen --- */
+    if ('IntersectionObserver' in window){
+      const nearIO = new IntersectionObserver((entries) => {
+        if (entries.some(e => e.isIntersecting)){ ensureLoaded(); nearIO.disconnect(); }
+      }, { rootMargin: '700px 0px' });
+      nearIO.observe(frame);
+
+      const seenIO = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          inView = entry.isIntersecting && entry.intersectionRatio >= .4;
+          if (inView){
+            if (!unwrapped && !reduceMotion && !broken && !unwrapTimer){
+              unwrapTimer = setTimeout(() => {
+                unwrapTimer = null;
+                if (inView) unwrap(false);
+              }, 900);
+            }
+            tryPlay();
+          } else {
+            if (unwrapTimer){ clearTimeout(unwrapTimer); unwrapTimer = null; }
+            if (!video.paused){
+              video.muted = true;   // coming back later never starts with sound
+              video.pause();
+            }
+          }
+        });
+      }, { threshold: [0, .4, .75] });
+      seenIO.observe(frame);
+    } else {
+      ensureLoaded();
+    }
+
+    syncUI();
+  })();
+
+  /* ============================================================
+     8c. PITU'S POCKET OF LOVE
+        Tap the pocket and a little note rises out of it. Notes come
+        from a shuffled bag, so none repeats until she has read them
+        all, and a small count shows how many she has found.
+        Self-contained: it only touches #pocketOfLove.
+     ============================================================ */
+  (function initPocketOfLove(){
+    const pocket = document.getElementById('pkPocket');
+    const note   = document.getElementById('pkNote');
+    const text   = document.getElementById('pkNoteText');
+    const hint   = document.getElementById('pkHint');
+    const count  = document.getElementById('pkCount');
+    const stage  = document.getElementById('pkStage');
+    if (!pocket || !note || !text) return;
+
+    const NOTES = [
+      { bn: true,  t: 'তুমি পাশে থাকলে সাধারণ দিনগুলোও কেমন যেন উৎসব হয়ে যায়।' },
+      { bn: false, t: 'Two months in, and my favourite word is still "us".' },
+      { bn: true,  t: 'দুই মাস আগে তুমি ‘কবুল’ বলেছিলে। আমি আজও প্রতিদিন মনে মনে তোমাকেই কবুল করি।' },
+      { bn: false, t: 'If I could pull one thing out of a magic pocket, it would be one more ordinary evening with you.' },
+      { bn: true,  t: 'আমার সব দোয়ার উত্তর একটাই নাম: রুহানা।' },
+      { bn: false, t: 'Every dua I made in the waiting years, I now get to see smiling back at me.' },
+      { bn: true,  t: 'জাদুর পকেট থেকে একটাই জিনিস চাই: সারাজীবন তোমার এই হাসিটা।' },
+      { bn: false, t: 'My magic trick for today: loving you a little more than I did yesterday.' },
+      { bn: true,  t: 'বাবুই পাখি, এই ঘরটা শান্তির হয়েছে, কারণ এখানে তুমি আছো।' },
+      { bn: false, t: 'Two months down, forever to go. I am in no hurry. I am enjoying every page.' },
+      { bn: true,  t: 'তোমার হাত ধরে কাটানো প্রতিটা দিনই আমার কাছে একেকটা বরকত।' },
+      { bn: false, t: 'You are still the first person I want to tell everything to, and now I get to call you my wife.' },
+      { bn: true,  t: 'পৃথিবীর সব ম্যাজিক একদিকে, আর তোমার একটা ‘পিতু’ ডাক আরেকদিকে।' }
+    ];
+
+    const found = new Set();
+    let bag  = [];
+    let last = -1;
+
+    function refillBag(){
+      bag = NOTES.map((_, i) => i);
+      for (let i = bag.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        const tmp = bag[i]; bag[i] = bag[j]; bag[j] = tmp;
+      }
+      // never the same note twice in a row across a refill
+      if (bag.length > 1 && bag[bag.length - 1] === last){
+        const tmp = bag[0]; bag[0] = bag[bag.length - 1]; bag[bag.length - 1] = tmp;
+      }
+    }
+
+    function sparkle(){
+      if (reduceMotion || !stage) return;
+      const GLYPHS = ['✦', '✧', '♡', '✦', '♥'];
+      const COLORS = ['#c4e3fa', '#f0d080', '#f1c9dc', '#b39cd0', '#93c9ef'];
+      const mouth  = stage.offsetHeight - pocket.offsetTop - 6;
+      for (let i = 0; i < 9; i++){
+        const s = document.createElement('span');
+        s.className = 'pk-spark';
+        s.setAttribute('aria-hidden', 'true');
+        s.textContent = GLYPHS[i % GLYPHS.length];
+        s.style.setProperty('--pk-mouth', mouth + 'px');
+        s.style.setProperty('--sx', Math.round((Math.random() - .5) * 190) + 'px');
+        s.style.setProperty('--sy', -Math.round(40 + Math.random() * 70) + 'px');
+        s.style.setProperty('--ss', (.6 + Math.random() * .55).toFixed(2) + 'rem');
+        s.style.setProperty('--sc', COLORS[i % COLORS.length]);
+        s.style.animationDelay = (Math.random() * .15).toFixed(2) + 's';
+        stage.appendChild(s);
+        setTimeout(() => s.remove(), 1200);
+      }
+    }
+
+    pocket.addEventListener('click', () => {
+      if (!bag.length) refillBag();
+      const idx = bag.pop();
+      last = idx;
+      found.add(idx);
+
+      const n = NOTES[idx];
+      text.textContent = n.t;
+      text.lang = n.bn ? 'bn' : 'en';
+      text.classList.toggle('is-bn', n.bn);
+      note.classList.remove('is-intro', 'is-rising');
+      void note.offsetWidth;   // restart the rise
+      note.classList.add('is-rising');
+
+      pocket.classList.remove('is-wiggling');
+      void pocket.offsetWidth;
+      pocket.classList.add('is-wiggling');
+      sparkle();
+
+      if (hint) hint.textContent = 'tap again for another note ✧';
+      if (count){
+        count.textContent = found.size < NOTES.length
+          ? `${found.size} of ${NOTES.length} little notes found`
+          : `all ${NOTES.length} found ♡ the rest I will tell you in person`;
+      }
+    });
+  })();
+
+  /* ============================================================
+     9. EVERY CHAPTER, KEPT SAFE: the three collapsible groups
+        The older sections live inside <details class="grp">. They
+        start folded and open and close independently; closing gets
+        a short fade first. "Fold this chapter away" at the bottom of
+        a group folds it and keeps her place, so the group's card
+        lands about where the button was.
+        Links: a capture-phase listener opens a folded group before
+        any other click handler runs, so the hero's 29 • 10 link (and
+        any future link) still reaches its section. Links nobody else
+        handles are scrolled with the same settle-until-exact approach
+        the 29 • 10 link uses, because the sections use
+        content-visibility:auto and only learn their true height while
+        scrolling past.
+        Everything inside keeps working as before: reveal, the
+        constellation and the heart game all use IntersectionObserver,
+        and a folded group is never on screen, so they simply wait
+        (the game spawns nothing and the sky draws nothing). The two
+        clocks keep counting all the time, so they are right the
+        moment a group opens.
+     ============================================================ */
+  (function initChapterGroups(){
+    const groups = Array.prototype.slice.call(document.querySelectorAll('details.grp'));
+    if (!groups.length) return;
+
+    const CLOSE_MS = reduceMotion ? 0 : 260;
+    const groupOf  = (el) => (el && el.closest) ? el.closest('details.grp') : null;
+
+    function targetOf(a){
+      const href = a.getAttribute('href') || '';
+      if (href.length < 2 || href.charAt(0) !== '#') return null;
+      let id = href.slice(1);
+      try { id = decodeURIComponent(id); } catch (err) { /* keep it as written */ }
+      return document.getElementById(id);
+    }
+
+    function instantScrollBy(dy){
+      const html = document.documentElement;
+      const prev = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
+      window.scrollBy(0, dy);
+      html.style.scrollBehavior = prev;
+    }
+
+    function openGroup(g){
+      if (!g || g.open) return;
+      g.classList.remove('is-closing');
+      g.open = true;
+    }
+
+    function closeGroup(g, holdAt){
+      if (!g || !g.open || g.classList.contains('is-closing')) return;
+      const summary = g.querySelector('summary');
+      function finish(){
+        g.classList.remove('is-closing');
+        g.open = false;
+        if (holdAt != null && summary){
+          const delta = summary.getBoundingClientRect().top - holdAt;
+          if (Math.abs(delta) > 2) instantScrollBy(delta);
+          summary.focus({ preventScroll: true });
+        }
+      }
+      if (!CLOSE_MS){ finish(); return; }
+      g.classList.add('is-closing');
+      setTimeout(finish, CLOSE_MS);
+    }
+
+    groups.forEach(g => {
+      const summary = g.querySelector('summary');
+      const fold    = g.querySelector('.grp-fold');
+      if (!summary) return;
+
+      // opening uses the native toggle; closing fades first
+      summary.addEventListener('click', (e) => {
+        if (g.open){
+          e.preventDefault();
+          closeGroup(g, null);
+        }
+      });
+
+      if (fold) fold.addEventListener('click', () => {
+        const r = fold.getBoundingClientRect();
+        const holdAt = Math.max(16, Math.min(r.top - 60, window.innerHeight * .4));
+        closeGroup(g, holdAt);
+      });
+
+      g.addEventListener('toggle', () => {
+        if (!g.open) g.classList.remove('is-closing');
+      });
+    });
+
+    function settleOn(el){
+      const behavior  = reduceMotion ? 'auto' : 'smooth';
+      const hasEndEvt = 'onscrollend' in window;
+      const USER_EVTS = ['wheel', 'touchstart', 'keydown'];
+      let passes = 0;
+      let userMoved = false;
+      let done = false;
+      const onUser = () => { userMoved = true; };
+
+      function finish(){
+        if (done) return;
+        done = true;
+        window.removeEventListener('scrollend', settle);
+        USER_EVTS.forEach(t => window.removeEventListener(t, onUser));
+      }
+      function go(){
+        el.scrollIntoView({ behavior, block: 'start' });
+        if (!hasEndEvt) setTimeout(settle, 1400);
+      }
+      function settle(){
+        if (done) return;
+        const off = el.getBoundingClientRect().top;
+        if (userMoved || passes >= 4 || Math.abs(off) <= 4){ finish(); return; }
+        passes++;
+        go();
+      }
+
+      USER_EVTS.forEach(t => window.addEventListener(t, onUser, { passive: true }));
+      if (hasEndEvt) window.addEventListener('scrollend', settle);
+      setTimeout(finish, 8000);
+      go();
+    }
+
+    // 1) before anything else: open the folded group that holds the link's target
+    document.addEventListener('click', (e) => {
+      const a = (e.target && e.target.closest) ? e.target.closest('a[href^="#"]') : null;
+      if (!a) return;
+      openGroup(groupOf(targetOf(a)));
+    }, true);
+
+    // 2) after everything else: links nobody handled, into a group or down to the new sections
+    document.addEventListener('click', (e) => {
+      if (e.defaultPrevented) return;
+      const a = (e.target && e.target.closest) ? e.target.closest('a[href^="#"]') : null;
+      if (!a) return;
+      const t = targetOf(a);
+      if (!t || !(groupOf(t) || t.id === 'two-months' || t.id === 'little-magic')) return;
+      e.preventDefault();
+      settleOn(t);
+    });
+
+    // 3) a #hash typed into the address bar
+    window.addEventListener('hashchange', () => {
+      let id = location.hash.slice(1);
+      try { id = decodeURIComponent(id); } catch (err) { /* keep it */ }
+      const t = id ? document.getElementById(id) : null;
+      const g = groupOf(t);
+      if (g && !g.open){ openGroup(g); settleOn(t); }
+    });
   })();
 
 })();
